@@ -137,3 +137,10 @@ http://localhost/web_eco_de/
 | `web_sessions` | Сессии пользователей |
 | `analytics_events_buffer` | Буфер аналитических событий |
 | `local_daily_stats` | Дневная статистика |
+
+---
+## Синхронизация с базой данных
+cd /d/XAMPP/htdocs/web_eco_de
+git add .
+git commit -m "описание что сделал"
+git push
