@@ -1,0 +1,19 @@
+User-agent: *
+Host: relanding.de
+
+# Запрещаем индексацию системных папок
+Disallow: /config/
+Disallow: /database/
+Disallow: /modules/
+Disallow: /scripts/
+Disallow: /logs/
+Disallow: /views/
+Disallow: /*?*
+
+# Разрешаем индексацию публичного контента
+Allow: /legal/
+Allow: /assets/*.css
+Allow: /assets/*.js
+
+# Указываем путь к карте сайта
+Sitemap: https://relanding.de/sitemap.xml

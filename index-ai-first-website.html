@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-First Website Model 2025+</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 80, 80, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(30, 215, 96, 0.2) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #a855f7, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 1;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            z-index: 1;
+            position: relative;
+        }
+
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            z-index: 1;
+            position: relative;
+        }
+
+        .arch-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .arch-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .arch-card:hover::before {
+            left: 100%;
+        }
+
+        .arch-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.2);
+        }
+
+        .arch-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #a855f7;
+        }
+
+        .arch-card ul {
+            list-style: none;
+        }
+
+        .arch-card li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .arch-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #06b6d4;
+        }
+
+        .layers-section {
+            margin: 6rem 0;
+            text-align: center;
+        }
+
+        .layers-section h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #ffffff, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .layers-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .layer {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .layer:hover {
+            transform: scale(1.02);
+            border-color: rgba(168, 85, 247, 0.5);
+        }
+
+        .layer h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #a855f7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tab-container {
+            margin: 4rem 0;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tab {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            border-color: transparent;
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #a855f7;
+            overflow-x: auto;
+        }
+
+        .implementation-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            border-radius: 50%;
+            margin-right: 2rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            flex: 1;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1));
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #a855f7;
+            display: block;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <h1>AI-First Website Model</h1>
+            <p>Архитектура сайтов будущего для взаимодействия с ИИ-агентами</p>
+            
+            <div class="architecture-grid">
+                <div class="arch-card">
+                    <h3>🤖 AI Agent Interface Layer</h3>
+                    <ul>
+                        <li>Structured Data API (JSON-LD)</li>
+                        <li>Machine-readable endpoints</li>
+                        <li>NLWeb protocol support</li>
+                        <li>MCP server integration</li>
+                        <li>Real-time agent communication</li>
+                    </ul>
+                </div>
+                
+                <div class="arch-card">
+                    <h3>🔗 Actionable Web Layer</h3>
+                    <ul>
+                        <li>Direct action APIs (buy, book, order)</li>
+                        <li>Autonomous transaction capabilities</li>
+                        <li>Agent-friendly UI/UX</li>
+                        <li>Voice command integration</li>
+                        <li>Multi-modal interaction support</li>
+                    </ul>
+                </div>
+                
+                <div class="arch-card">
+                    <h3>🛡️ Trust & Verification</h3>
+                    <ul>
+                        <li>Blockchain-based reputation</li>
+                        <li>Smart contract verification</li>
+                        <li>Real-time data validation</li>
+                        <li>Transparent audit trails</li>
+                        <li>AI-readable credentials</li>
+                    </ul>
+                </div>
+                
+                <div class="arch-card">
+                    <h3>📊 Dynamic Knowledge Base</h3>
+                    <ul>
+                        <li>Self-updating content</li>
+                        <li>Contextual metadata</li>
+                        <li>User-generated insights</li>
+                        <li>Semantic relationship mapping</li>
+                        <li>Multi-language support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="layers-section">
+            <h2>Архитектурные Слои</h2>
+            <div class="layers-container">
+                <div class="layer">
+                    <h4>1. Human Experience Layer</h4>
+                    <p>Эмоциональный дизайн, брендинг, визуальная эстетика, пользовательские истории</p>
+                </div>
+                <div class="layer">
+                    <h4>2. AI Agent Interface</h4>
+                    <p>Machine-readable APIs, structured data, agent authentication, protocol handlers</p>
+                </div>
+                <div class="layer">
+                    <h4>3. Action Execution Layer</h4>
+                    <p>Transactional APIs, service integrations, real-time processing, workflow automation</p>
+                </div>
+                <div class="layer">
+                    <h4>4. Knowledge & Data Layer</h4>
+                    <p>Semantic databases, real-time updates, version control, data validation</p>
+                </div>
+                <div class="layer">
+                    <h4>5. Trust & Security Foundation</h4>
+                    <p>Identity verification, reputation systems, audit trails, privacy protection</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-container">
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('implementation')">Реализация</div>
+                <div class="tab" onclick="showTab('examples')">Примеры</div>
+                <div class="tab" onclick="showTab('metrics')">Метрики</div>
+                <div class="tab" onclick="showTab('timeline')">Roadmap</div>
+            </div>
+
+            <div id="implementation" class="tab-content active">
+                <h3>Практическая Реализация</h3>
+                
+                <h4>1. Structured Data Implementation</h4>
+                <div class="code-block">
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "AI-First Business",
+  "url": "https://example.com",
+  "potentialAction": [
+    {
+      "@type": "SearchAction",
+      "target": "https://example.com/api/search?q={search_term}",
+      "query-input": "required name=search_term"
+    },
+    {
+      "@type": "BuyAction",
+      "target": "https://example.com/api/purchase",
+      "result": {
+        "@type": "Order"
+      }
+    }
+  ],
+  "mainEntity": {
+    "@type": "Organization",
+    "trustScore": 95,
+    "verificationMethod": "blockchain",
+    "lastUpdated": "2025-06-06T10:00:00Z"
+  }
+}
+&lt;/script&gt;
+                </div>
+
+                <h4>2. AI Agent API Endpoints</h4>
+                <div class="code-block">
+GET /api/agent/capabilities
+{
+  "actions": ["search", "purchase", "book", "inquiry"],
+  "dataFormats": ["json-ld", "schema.org", "openapi"],
+  "authentication": "oauth2",
+  "rateLimit": "1000/hour",
+  "documentation": "/api/docs"
+}
+
+POST /api/agent/action
+{
+  "action": "purchase",
+  "parameters": {
+    "product_id": "123",
+    "quantity": 1,
+    "delivery_preference": "fast"
+  },
+  "agent_id": "claude-agent-001"
+}
+                </div>
+
+                <h4>3. NLWeb Integration</h4>
+                <div class="code-block">
+&lt;meta name="nlweb-endpoint" content="https://example.com/nlweb"&gt;
+&lt;meta name="mcp-server" content="https://example.com/mcp"&gt;
+&lt;meta name="agent-friendly" content="true"&gt;
+&lt;meta name="real-time-updates" content="websocket:wss://example.com/updates"&gt;
+                </div>
+            </div>
+
+            <div id="examples" class="tab-content">
+                <h3>Реальные Примеры Применения</h3>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🛒</span>
+                        <h4>E-commerce</h4>
+                        <p>AI-агент может сравнить цены, проверить наличие, оформить заказ и отследить доставку без участия человека</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🏠</span>
+                        <h4>Недвижимость</h4>
+                        <p>Поиск жилья по сложным критериям, проверка документов, запись на просмотр, анализ района</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">⚕️</span>
+                        <h4>Медицина</h4>
+                        <p>Запись к врачу, анализ симптомов, получение результатов, рекомендации лечения</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🎓</span>
+                        <h4>Образование</h4>
+                        <p>Персонализированное обучение, проверка знаний, выдача сертификатов, карьерные рекомендации</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🏦</span>
+                        <h4>Финансы</h4>
+                        <p>Автоматические инвестиции, анализ рисков, оформление кредитов, налоговое планирование</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🚗</span>
+                        <h4>Транспорт</h4>
+                        <p>Поиск оптимальных маршрутов, бронирование поездок, интеграция с календарем</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="metrics" class="tab-content">
+                <h3>Ключевые Метрики AI-First Сайта</h3>
+                
+                <div class="features-grid">
+                    <div class="metric-card">
+                        <span class="metric-value">95%</span>
+                        <p>AI Agent Compatibility Score</p>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-value">&lt;200ms</span>
+                        <p>Average API Response Time</p>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-value">99.9%</span>
+                        <p>Machine-Readable Content</p>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-value">24/7</span>
+                        <p>Autonomous Operations</p>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-value">100%</span>
+                        <p>Structured Data Coverage</p>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-value">0</span>
+                        <p>Manual Intervention Required</p>
+                    </div>
+                </div>
+                
+                <h4>Performance Indicators</h4>
+                <ul>
+                    <li><strong>Agent Success Rate:</strong> Процент успешно выполненных агентами задач</li>
+                    <li><strong>Data Freshness Score:</strong> Актуальность информации в режиме реального времени</li>
+                    <li><strong>Trust Verification Time:</strong> Скорость проверки репутации и достоверности</li>
+                    <li><strong>Cross-Agent Compatibility:</strong> Совместимость с различными AI-платформами</li>
+                    <li><strong>Action Completion Rate:</strong> Процент завершенных транзакций через API</li>
+                </ul>
+            </div>
+
+            <div id="timeline" class="tab-content">
+                <h3>Roadmap Внедрения AI-First Website</h3>
+                
+                <div class="implementation-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Фаза 1: Основа (0-3 месяца)</h4>
+                            <p>Внедрение структурированных данных, создание базовых API endpoints, настройка Schema.org разметки</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Фаза 2: AI Interface (3-6 месяцев)</h4>
+                            <p>Разработка agent-friendly интерфейсов, интеграция с MCP протоколом, создание документации для AI</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Фаза 3: Actions Layer (6-9 месяцев)</h4>
+                            <p>Внедрение actionable APIs, интеграция с платежными системами, автоматизация бизнес-процессов</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Фаза 4: Trust Systems (9-12 месяцев)</h4>
+                            <p>Blockchain верификация, системы репутации, audit trails, безопасность данных</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h4>Фаза 5: Optimization (12+ месяцев)</h4>
+                            <p>Машинное обучение для оптимизации взаимодействий, предиктивная аналитика, автономное управление</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2025 AI-First Website Architecture Model. Будущее веб-разработки начинается сегодня.</p>
+        </div>
+    </div>
+
+    <!-- <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and elements that should animate in
+        document.querySelectorAll('.arch-card, .layer, .feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script> -->
+</body>
+</html>

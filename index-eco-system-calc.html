@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>AI-Экосистема — Калькулятор стоимости</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #122c4f;
+      --accent: #5b88b2;
+      --success: #47b87f;
+      --coffee: #ad8b73;
+      --bg: #f7fafd;
+      --white: #fff;
+      --shadow: 0 6px 24px 0 rgba(18,44,79,0.15);
+    }
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0; padding: 0;
+      color: var(--primary);
+    }
+    .calculator-container {
+      max-width: 520px;
+      margin: 48px auto;
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 36px 28px 30px 28px;
+    }
+    .calculator-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    .products-list {
+      margin: 0; padding: 0; list-style: none;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+    .product-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #e7f1fa;
+      border-radius: 14px;
+      padding: 16px 18px;
+      transition: background 0.2s;
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+    }
+    .product-item.selected {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .product-checkbox {
+      accent-color: var(--accent);
+      width: 22px; height: 22px;
+      cursor: pointer;
+    }
+    .product-title {
+      font-weight: 600;
+      font-size: 1.13rem;
+      flex: 1;
+    }
+    .product-price {
+      font-size: 1rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .landing-qty-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 12px;
+      background: rgba(255,255,255,0.8);
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+    .landing-qty-wrap input {
+      width: 50px;
+      font-size: 1rem;
+      padding: 2px 6px;
+      border: 1px solid #bcd;
+      border-radius: 6px;
+      outline: none;
+      background: #f2f8fc;
+      color: var(--primary);
+      text-align: right;
+      transition: border 0.18s;
+    }
+    .options-block {
+      margin: 24px 0 18px 0;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .option-radio {
+      appearance: none;
+      background: #d4e6f5;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 1.04rem;
+      font-family: inherit;
+      font-weight: 500;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: background .18s, border .18s;
+      margin: 0 2px;
+      outline: none;
+    }
+    .option-radio:checked {
+      background: var(--success);
+      border: 2px solid var(--success);
+      color: #fff;
+    }
+    .results-block {
+      margin-top: 24px;
+      background: #f5f6fa;
+      border-radius: 14px;
+      padding: 22px 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px 0 rgba(18,44,79,0.09);
+    }
+    .results-total {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--success);
+    }
+    .results-detail {
+      font-size: 1.04rem;
+      margin-top: 8px;
+      color: var(--primary);
+    }
+    .note {
+      margin-top: 12px;
+      font-size: 0.92rem;
+      color: #789;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .calculator-container {
+        padding: 14px 2vw 20px 2vw;
+        max-width: 99vw;
+      }
+      .calculator-title { font-size: 1.25rem; }
+      .landing-qty-wrap input { width: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-container" id="calculator">
+    <div class="calculator-title">Рассчитайте стоимость AI-экосистемы</div>
+    <form>
+      <ul class="products-list">
+        <li class="product-item" data-product="website">
+          <input type="checkbox" class="product-checkbox" id="website" name="website">
+          <label class="product-title" for="website">AI-Website</label>
+          <span class="product-price">220 000 ₽</span>
+        </li>
+        <li class="product-item" data-product="landing">
+          <input type="checkbox" class="product-checkbox" id="landing" name="landing">
+          <label class="product-title" for="landing">AI-Landing</label>
+          <span class="product-price">160 000 ₽</span>
+          <span class="landing-qty-wrap" id="landing-qty-wrap" style="display:none;">
+            <span>×</span>
+            <input type="number" min="1" max="50" value="1" id="landing-qty" title="Количество лендингов">
+          </span>
+        </li>
+        <li class="product-item" data-product="core">
+          <input type="checkbox" class="product-checkbox" id="core" name="core">
+          <label class="product-title" for="core">AI-Core (Автоматизация, Telegram)</label>
+          <span class="product-price">190 000 ₽</span>
+        </li>
+      </ul>
+      <div class="options-block" id="options-block">
+        <label>
+          <input type="radio" class="option-radio" name="plan" value="once" checked>
+          Разовая оплата
+        </label>
+        <label>
+          <input type="radio" class="option-radio" name="plan" value="subscription">
+          Абонплата в месяц
+        </label>
+      </div>
+    </form>
+    <div class="results-block">
+      <div>Итого:</div>
+      <div class="results-total" id="total">0 ₽</div>
+      <div class="results-detail" id="results-detail"></div>
+    </div>
+    <div class="note">* Можно добавить до 50 AI-лендингов. При покупке двух модулей — скидка 10%, трёх — 15%.</div>
+  </div>
+
+  <script>
+    // Продукты и цены
+    const products = {
+      website: { title: "AI-Website", once: 220000, subscription: 14900 },
+      landing: { title: "AI-Landing", once: 160000, subscription: 9900 },
+      core:    { title: "AI-Core (Автоматизация, Telegram)", once: 190000, subscription: 12900 }
+    };
+
+    // Скидки при пакетах
+    function getDiscount(count) {
+      if (count === 2) return 0.10; // 10% за два
+      if (count === 3) return 0.15; // 15% за три
+      return 0;
+    }
+
+    // Элементы
+    const checkboxes = Array.from(document.querySelectorAll('.product-checkbox'));
+    const planRadios = Array.from(document.querySelectorAll('.option-radio'));
+    const totalEl = document.getElementById('total');
+    const detailEl = document.getElementById('results-detail');
+    const productItems = Array.from(document.querySelectorAll('.product-item'));
+    const landingQtyWrap = document.getElementById('landing-qty-wrap');
+    const landingQtyInput = document.getElementById('landing-qty');
+
+    // Обработка показа количества лендингов
+    document.getElementById('landing').addEventListener('change', function () {
+      landingQtyWrap.style.display = this.checked ? 'flex' : 'none';
+      recalc();
+    });
+
+    landingQtyInput.addEventListener('input', function () {
+      if (+this.value < 1) this.value = 1;
+      if (+this.value > 50) this.value = 50;
+      recalc();
+    });
+
+    function recalc() {
+      const selected = checkboxes.filter(cb => cb.checked).map(cb => cb.name);
+
+      // UI выделение
+      productItems.forEach(item => {
+        const cb = item.querySelector('.product-checkbox');
+        item.classList.toggle('selected', cb.checked);
+      });
+
+      const plan = planRadios.find(r => r.checked).value;
+      let sum = 0;
+      let details = [];
+
+      // AI-Landing — учесть количество
+      let landingCount = 1;
+      if (selected.includes('landing')) {
+        landingCount = parseInt(landingQtyInput.value, 10) || 1;
+      }
+
+      selected.forEach(p => {
+        let itemSum = products[p][plan];
+        let label = products[p].title;
+
+        if (p === 'landing') {
+          itemSum *= landingCount;
+          label += ` × ${landingCount}`;
+        }
+        sum += itemSum;
+        details.push(`${label}: ${itemSum.toLocaleString()} ₽`);
+      });
+
+      // Скидки только если выбран >1 продукт
+      const productCount = selected.length;
+      let discount = getDiscount(productCount);
+      if (discount) {
+        const discountSum = Math.round(sum * discount);
+        sum -= discountSum;
+        details.push(`Скидка: -${discountSum.toLocaleString()} ₽ (${discount * 100}%)`);
+      }
+
+      totalEl.textContent = sum ? sum.toLocaleString() + " ₽" : "0 ₽";
+      detailEl.innerHTML = details.length ? details.join('<br>') : "Выберите продукты";
+    }
+
+    // Event listeners
+    checkboxes.forEach(cb => cb.addEventListener('change', recalc));
+    planRadios.forEach(rb => rb.addEventListener('change', recalc));
+
+    // Инициализация
+    recalc();
+  </script>
+</body>
+</html>

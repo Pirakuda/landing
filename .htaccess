@@ -1,0 +1,51 @@
+# Включаем mod_rewrite для использования правил переписывания
+RewriteEngine On
+
+# Устанавливаем базовый путь
+RewriteBase /
+
+# 🔹 **Запрещаем прямой доступ к критическим файлам и папкам**
+# Из папки /modules/ блокируем всё, кроме /modules/public и /modules/api/website/
+RewriteCond %{REQUEST_URI} ^/modules/(?!public/|api/website/) [OR]
+RewriteCond %{REQUEST_URI} ^/database/ [OR]
+RewriteCond %{REQUEST_URI} ^/config/ [OR]
+RewriteCond %{REQUEST_URI} ^/scripts/ [OR]
+RewriteCond %{REQUEST_URI} ^/vendor/ [OR]
+RewriteCond %{REQUEST_URI} ^/logs/
+RewriteRule ^ - [F]
+
+# 🔹 **Разрешаем доступ к статическим файлам** в `/public/`
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(css|js|images|fonts)/(.*)$ public/$1/$2 [L]
+
+# 🔹 **Кэширование статических файлов для ускорения загрузки**
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+</IfModule>
+
+# 🔹 **Включаем сжатие контента для производительности**
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>
+
+# 🔹 **Защита от просмотра содержимого папок**
+Options -Indexes
+
+# 🔹 **Перенаправляем все остальные запросы на `index.php` (если нет файла или папки)**
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+# 🔹 **Отключаем модуль безопасности, если он блокирует POST-запросы**
+#<IfModule mod_security.c>
+    #SecFilterEngine Off
+    #SecFilterScanPOST Off
+#</IfModule>

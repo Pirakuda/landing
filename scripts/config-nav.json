@@ -1,0 +1,602 @@
+{
+    "Главная": {
+      "Обзор услуг": [
+        {
+          "title": "Заключение Росавиации",
+          "slug": "obzor-zaklyuchenie-rosaviatsii"
+        },
+        {
+          "title": "Заключение по зонам затопления",
+          "slug": "obzor-zaklyuchenie-zony-zatopleniya"
+        },
+        {
+          "title": "Юридическая помощь по земельным вопросам",
+          "slug": "obzor-yuridicheskaya-pomoshch"
+        },
+        {
+          "title": "Перераспределение земельных участков",
+          "slug": "obzor-pereraspredelenie-uchastkov"
+        },
+        {
+          "title": "Оформление земельных участков, занятых зданиями",
+          "slug": "obzor-oformlenie-uchastkov-zdaniy"
+        },
+        {
+          "title": "Расчет площади, необходимой для обслуживания здания",
+          "slug": "obzor-raschet-ploshchadi-zdaniya"
+        },
+        {
+          "title": "Экспертный анализ земельных участков для покупки/продажи",
+          "slug": "obzor-ekspertnyy-analiz-uchastkov"
+        },
+        {
+          "title": "Консультирование по Генеральному плану и Правилам землепользования и застройки",
+          "slug": "obzor-konsultirovanie-po-gp"
+        },
+        {
+          "title": "Геодезия, топографическая съемка",
+          "slug": "obzor-geodeziya-syomka"
+        },
+        {
+          "title": "Кадастровые работы",
+          "slug": "obzor-kadastrovye-raboty"
+        },
+        {
+          "title": "Документация по планировке территории",
+          "slug": "obzor-dokumentatsiya-planirovki"
+        },
+        {
+          "title": "Согласование строительства ИЖС",
+          "slug": "obzor-soglasovanie-izhs"
+        },
+        {
+          "title": "Проектирование",
+          "slug": "obzor-proektirovanie"
+        }
+      ],
+      "Концепция": [
+        {
+          "title": "Концепция",
+          "slug": "kontseptzia"
+        }
+      ],
+      "Как мы работаем": [
+        {
+          "title": "Первичная консультация",
+          "slug": "pervichnaya-konsultatsiya"
+        },
+        {
+          "title": "Предпроектный анализ и подготовка",
+          "slug": "predproektnyy-analiz"
+        },
+        {
+          "title": "Полевые и технические работы",
+          "slug": "polevye-raboty"
+        },
+        {
+          "title": "Разработка и согласование документации",
+          "slug": "razrabotka-dokumentatsii"
+        },
+        {
+          "title": "Получение разрешительной документации",
+          "slug": "razreshitelnaya-dokumentatsiya"
+        },
+        {
+          "title": "Юридическое закрепление результатов",
+          "slug": "yuridicheskoe-zakreplenie"
+        },
+        {
+          "title": "Постпроектное сопровождение",
+          "slug": "postproektnoe-soprovozhdenie"
+        }
+      ],
+      "Наши преимущества": [
+        {
+          "title": "Специализация на особенностях Сочи",
+          "slug": "spetsializatsiya-sochi"
+        },
+        {
+          "title": "Комплексный подход \"под ключ\"",
+          "slug": "kompleksnyy-podkhod"
+        },
+        {
+          "title": "Гарантированные сроки",
+          "slug": "garantirovannye-sroki"
+        },
+        {
+          "title": "Предварительная оценка рисков и вариантов",
+          "slug": "otsenka-riskov"
+        },
+        {
+          "title": "Опыт работы со сложными случаями",
+          "slug": "opyt-slozhnykh-sluchaev"
+        },
+        {
+          "title": "Использование цифровых технологий",
+          "slug": "tsifrovye-tekhnologii"
+        },
+        {
+          "title": "Прямые контакты во всех инстанциях",
+          "slug": "pryamye-kontakty"
+        },
+        {
+          "title": "Юридическая защита интересов клиента",
+          "slug": "yuridicheskaya-zashchita"
+        },
+        {
+          "title": "Поэтапная оплата по результатам",
+          "slug": "poetapnaya-oplata"
+        },
+        {
+          "title": "Постпроектное сопровождение",
+          "slug": "postproektnoe-soprovozhdenie-2"
+        }
+      ]
+    },
+    "Услуги": {
+      "Юридические услуги": [
+        {
+          "title": "Юридическая помощь по земельным вопросам",
+          "slug": "yuridicheskaya-pomoshch"
+        },
+        {
+          "title": "Перераспределение земельных участков",
+          "slug": "pereraspredelenie-uchastkov"
+        },
+        {
+          "title": "Оформление земельных участков",
+          "slug": "oformlenie-uchastkov"
+        },
+        {
+          "title": "Расчет площади, необходимой для обслуживания здания",
+          "slug": "raschet-ploshchadi-zdaniya"
+        },
+        {
+          "title": "Экспертный анализ земельных участков для покупки/продажи",
+          "slug": "ekspertnyy-analiz-uchastkov"
+        },
+        {
+          "title": "Консультирование по Генеральному плану и Правилам землепользования и застройки",
+          "slug": "konsultirovanie-po-gp"
+        }
+      ],
+      "Геодезия и кадастр": [
+        {
+          "title": "Геодезия, топографическая съемка",
+          "slug": "geodeziya-syomka"
+        },
+        {
+          "title": "Кадастровые работы",
+          "slug": "kadastrovye-raboty"
+        },
+        {
+          "title": "Документация по планировке территории, проект межевания территории (ДПТ)",
+          "slug": "dokumentatsiya-planirovki-dpt"
+        }
+      ],
+      "Проектирование и согласования": [
+        {
+          "title": "Согласование строительства ИЖС",
+          "slug": "soglasovanie-izhs"
+        },
+        {
+          "title": "Проектирование",
+          "slug": "proektirovanie"
+        }
+      ],
+      "Экспертизы и заключения": [
+        {
+          "title": "Заключение по зонам затопления",
+          "slug": "zaklyuchenie-zony-zatopleniya"
+        },
+        {
+          "title": "Заключение Росавиации",
+          "slug": "zaklyuchenie-rosaviatsii"
+        }
+      ]
+    },
+    "Комплексные решения": {
+      "Для частных застройщиков": [
+        {
+          "title": "Общая информация",
+          "slug": "obshchaya-informatsiya"
+        },
+        {
+          "title": "Ваши задачи",
+          "slug": "vashi-zadachi"
+        },
+        {
+          "title": "Наше решение",
+          "slug": "nashe-reshenie"
+        },
+        {
+          "title": "Состав пакета",
+          "slug": "sostav-paketa"
+        },
+        {
+          "title": "Преимущества комплексного подхода",
+          "slug": "preimushchestva-kompleksnogo-podkhoda"
+        },
+        {
+          "title": "Сроки и стоимость",
+          "slug": "sroki-i-stoimost"
+        },
+        {
+          "title": "Наш опыт",
+          "slug": "nash-opyt"
+        }
+      ],
+      "Для коммерческих застройщиков": [
+        {
+          "title": "Общая информация",
+          "slug": "obshchaya-informatsiya-kommercheskie"
+        },
+        {
+          "title": "Ваши задачи",
+          "slug": "vashi-zadachi-kommercheskie"
+        },
+        {
+          "title": "Наше решение",
+          "slug": "nashe-reshenie-kommercheskie"
+        },
+        {
+          "title": "Состав пакета",
+          "slug": "sostav-paketa-kommercheskie"
+        },
+        {
+          "title": "Преимущества комплексного подхода",
+          "slug": "preimushchestva-kompleksnogo-podkhoda-kommercheskie"
+        },
+        {
+          "title": "Сроки и стоимость",
+          "slug": "sroki-i-stoimost-kommercheskie"
+        },
+        {
+          "title": "Наш опыт",
+          "slug": "nash-opyt-kommercheskie"
+        }
+      ],
+      "Для муниципальных заказчиков": [
+        {
+          "title": "Общая информация",
+          "slug": "obshchaya-informatsiya-munitsipalnye"
+        },
+        {
+          "title": "Ваши задачи",
+          "slug": "vashi-zadachi-munitsipalnye"
+        },
+        {
+          "title": "Наше решение",
+          "slug": "nashe-reshenie-munitsipalnye"
+        },
+        {
+          "title": "Состав пакета",
+          "slug": "sostav-paketa-munitsipalnye"
+        },
+        {
+          "title": "Преимущества комплексного подхода",
+          "slug": "preimushchestva-kompleksnogo-podkhoda-munitsipalnye"
+        },
+        {
+          "title": "Сроки и стоимость",
+          "slug": "sroki-i-stoimost-munitsipalnye"
+        },
+        {
+          "title": "Наш опыт",
+          "slug": "nash-opyt-munitsipalnye"
+        }
+      ],
+      "Для инвесторов": [
+        {
+          "title": "Общая информация",
+          "slug": "obshchaya-informatsiya-investory"
+        },
+        {
+          "title": "Ваши задачи",
+          "slug": "vashi-zadachi-investory"
+        },
+        {
+          "title": "Наше решение",
+          "slug": "nashe-reshenie-investory"
+        },
+        {
+          "title": "Состав пакета",
+          "slug": "sostav-paketa-investory"
+        },
+        {
+          "title": "Преимущества комплексного подхода",
+          "slug": "preimushchestva-kompleksnogo-podkhoda-investory"
+        },
+        {
+          "title": "Сроки и стоимость",
+          "slug": "sroki-i-stoimost-investory"
+        },
+        {
+          "title": "Наш опыт",
+          "slug": "nash-opyt-investory"
+        }
+      ]
+    },
+    "Проверка участка": {
+      "Обзор": [
+        {
+          "title": "Обзор",
+          "slug": "proverka-uchastka-obzor"
+        }
+      ],
+      "Зачем нужна проверка участка": [
+        {
+          "title": "Зачем нужна проверка участка",
+          "slug": "zachem-proverka-uchastka"
+        }
+      ],
+      "Что включает экспресс-анализ участка": [
+        {
+          "title": "Что включает экспресс-анализ участка",
+          "slug": "ekspress-analiz-uchastka"
+        }
+      ],
+      "Как проходит проверка: этапы работы": [
+        {
+          "title": "Оформление заявки и сбор первичной информации",
+          "slug": "oformlenie-zayavki"
+        },
+        {
+          "title": "Юридический анализ и проверка документации",
+          "slug": "yuridicheskiy-analiz"
+        },
+        {
+          "title": "Градостроительный и инженерный анализ",
+          "slug": "gradostroitelnyy-analiz"
+        },
+        {
+          "title": "Выезд на участок (опционально)",
+          "slug": "vyezd-na-uchastok"
+        },
+        {
+          "title": "Подготовка и предоставление заключения",
+          "slug": "podgotovka-zaklyucheniya"
+        },
+        {
+          "title": "Дополнительные возможности",
+          "slug": "dopolnitelnye-vozmozhnosti"
+        }
+      ],
+      "Сроки и стоимость": [
+        {
+          "title": "Сроки и стоимость",
+          "slug": "sroki-i-stoimost"
+        }
+      ],
+      "Что вы получаете в результате": [
+        {
+          "title": "Официальный отчет о результатах проверки",
+          "slug": "ofitsialnyy-otchet"
+        },
+        {
+          "title": "Пакет документов и материалов",
+          "slug": "paket-dokumentov"
+        },
+        {
+          "title": "Рекомендации и консультации",
+          "slug": "rekomendatsii-konsultatsii"
+        },
+        {
+          "title": "Расширенная консультация специалистов",
+          "slug": "rasshirennaya-konsultatsiya"
+        },
+        {
+          "title": "Поддержка после предоставления заключения",
+          "slug": "podderzhka-posle-zaklyucheniya"
+        }
+      ],
+      "Преимущества заказа проверки у нас": [
+        {
+          "title": "Глубокое знание специфики Сочи",
+          "slug": "znanie-sochi"
+        },
+        {
+          "title": "Комплексный подход",
+          "slug": "kompleksnyy-podkhod"
+        },
+        {
+          "title": "Доступ к закрытым источникам информации",
+          "slug": "dostup-k-istochnikam"
+        },
+        {
+          "title": "Команда профильных специалистов",
+          "slug": "komanda-spetsialistov"
+        },
+        {
+          "title": "Практические рекомендации",
+          "slug": "praktichnye-rekomendatsii"
+        },
+        {
+          "title": "Использование современных технологий",
+          "slug": "sovremennye-tekhnologii"
+        },
+        {
+          "title": "Независимость и объективность",
+          "slug": "nezavisimost-obektivnost"
+        },
+        {
+          "title": "Юридическая защита",
+          "slug": "yuridicheskaya-zashchita"
+        },
+        {
+          "title": "Последующая поддержка",
+          "slug": "posleduyushchaya-podderzhka"
+        },
+        {
+          "title": "Сохранение конфиденциальности",
+          "slug": "konfidentsialnost"
+        }
+      ]
+    },
+    "О компании": {
+      "Вводный блок": [
+        {
+          "title": "Вводный блок",
+          "slug": "vvodnyy-blok"
+        }
+      ],
+      "Хронологическое развитие": [
+        {
+          "title": "Основание компании",
+          "slug": "osnovanie-kompanii"
+        },
+        {
+          "title": "Первые успехи",
+          "slug": "pervye-uspekhi"
+        },
+        {
+          "title": "Олимпийский импульс",
+          "slug": "olimpiyskiy-impuls"
+        },
+        {
+          "title": "Расширение специализации",
+          "slug": "rasshirenie-spetsializatsii"
+        },
+        {
+          "title": "Технологический прорыв",
+          "slug": "tekhnologicheskiy-proryv"
+        },
+        {
+          "title": "Выход на новый уровень",
+          "slug": "vykhod-na-novyy-uroven"
+        },
+        {
+          "title": "Преодоление кризиса",
+          "slug": "preodolenie-krizisa"
+        },
+        {
+          "title": "Инновационное развитие",
+          "slug": "innovatsionnoe-razvitie"
+        },
+        {
+          "title": "Масштабирование бизнеса",
+          "slug": "masshtabirovanie-biznesa"
+        },
+        {
+          "title": "Лидерство на рынке",
+          "slug": "liderstvo-na-rynke"
+        },
+        {
+          "title": "Современное состояние",
+          "slug": "sovremennoe-sostoyanie"
+        }
+      ],
+      "Лицензии и сертификаты": [
+        {
+          "title": "Лицензии на осуществление геодезической и картографической деятельности",
+          "slug": "litsenzii-geodeziya"
+        },
+        {
+          "title": "Свидетельство о членстве в СРО \"Кадастровые инженеры юга\"",
+          "slug": "sro-kadastrovye-inzhenery"
+        },
+        {
+          "title": "Членство в СРО \"Ассоциация проектировщиков Южного региона\"",
+          "slug": "sro-proektirovshchiki"
+        },
+        {
+          "title": "Сертификаты соответствия ISO 9001:2015",
+          "slug": "iso-9001"
+        },
+        {
+          "title": "Аккредитация при Торгово-промышленной палате Краснодарского края",
+          "slug": "akkreditatsiya-tpp"
+        },
+        {
+          "title": "Сертификаты профессиональных организаций",
+          "slug": "sertifikaty-organizatsiy"
+        },
+        {
+          "title": "Квалификационные аттестаты специалистов",
+          "slug": "attestaty-spetsialistov"
+        },
+        {
+          "title": "Разрешение на работу с государственными информационными системами",
+          "slug": "razreshenie-gis"
+        },
+        {
+          "title": "Сертификаты профессионального программного обеспечения",
+          "slug": "sertifikaty-po"
+        },
+        {
+          "title": "Аккредитация при администрации города Сочи",
+          "slug": "akkreditatsiya-sochi"
+        }
+      ],
+      "Оборудование и технологии": [
+        {
+          "title": "Оборудование и технологии",
+          "slug": "oborudovanie-tekhnologii"
+        }
+      ],
+      "Статистика и результаты": [
+        {
+          "title": "800+ успешно реализованных проектов",
+          "slug": "proekty-800"
+        },
+        {
+          "title": "35 профессиональных специалистов",
+          "slug": "spetsialisty-35"
+        },
+        {
+          "title": "4 района Сочи",
+          "slug": "rayony-sochi"
+        },
+        {
+          "title": "96% успешных дел",
+          "slug": "uspeshnye-dela"
+        },
+        {
+          "title": "180+ гектаров оформленных земель",
+          "slug": "zemli-180"
+        },
+        {
+          "title": "75 успешно легализованных объектов",
+          "slug": "legalizovannye-obekty"
+        },
+        {
+          "title": "40+ партнеров",
+          "slug": "partnery-40"
+        },
+        {
+          "title": "12 лет стабильного развития",
+          "slug": "razvitie-12-let"
+        }
+      ]
+    },
+    "Портфолио": {
+      "Галерея проектов": [
+        {
+          "title": "Проект 1",
+          "slug": "project-1"
+        },
+        {
+          "title": "Проект 2",
+          "slug": "project-2"
+        },
+        {
+          "title": "Проект 3",
+          "slug": "project-3"
+        }
+      ],
+      "Детальные кейсы": [
+        {
+          "title": "Кейс проекта 1",
+          "slug": "case-project-1"
+        },
+        {
+          "title": "Кейс проекта 2",
+          "slug": "case-project-2"
+        },
+        {
+          "title": "Кейс проекта 3",
+          "slug": "case-project-3"
+        }
+      ]
+    }
+}
