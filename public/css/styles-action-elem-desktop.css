@@ -137,8 +137,11 @@
 /* 347 Zeilen - 145 */
 }
 
-@media only screen and (min-width:2560px) {
+@media only screen and (min-width:2500px) {
 	.nav-box .act-anchor{
 		font-size:18px;
 	}
+	.nav-box .act-anchor {
+    	text-align: left;
+  	}
 }

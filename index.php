@@ -1,7 +1,7 @@
 <?php
 define('APP_ROOT', __DIR__);
 // define('BASE_URL', 'https://relanding.de'); // на проде
-define('BASE_URL', '/web_eco_de'); // локально
+define('BASE_URL', '/landing'); // локально
 //session_start();
 
 // Подключаем конфигурацию и базу данных

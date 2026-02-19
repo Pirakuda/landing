@@ -362,7 +362,7 @@
 		-ms-flex-align:center;
 			align-items:center;
 	color:var(--main-color);
-	width:calc(54.945054vh - 4px);/*500px/9.1*/
+	width:calc(100% - 4px);/*500px/9.1*/
 	height: calc(100% - 10.958241vh);
 	border-radius:0.844772vh;/*8px/9,47*/
 	border:0.2111vh solid var(--main-border-color);/*2px/9,47*/
@@ -634,6 +634,9 @@
 .scr-wrap.full .slide-text.right .text-main-wrap{
 	padding: 0;/*20px 40px/9,47*/
 	width:100%;
+}
+.scr-wrap.full .slide-text.right .text-main-wrap.show{
+	padding: 2vh 0 6vh;
 }
 
 /* desktop COST container *****************************************/
@@ -2186,7 +2189,7 @@ textarea::placeholder {
 		border-radius:0.879120vh;/*8px/9,1*/
 	}
 }
-@media only screen and (max-width:1921px) {
+@media only screen and (min-width:1921px) {
 	.page-bg{
 		/*max-width:1920px;*/
 		left:50%;
@@ -2196,7 +2199,7 @@ textarea::placeholder {
 				transform:translateX(-50%);
 	}
 }
-@media only screen and (min-width:2560px) {
+@media only screen and (min-width:2500px) {
 	/* header *************************************************************************/
 	.header{
 		padding-top:14px;
@@ -2219,5 +2222,16 @@ textarea::placeholder {
 	.level-title {
 		top: 13.4vh;
 	}
+	.scr-wrap {
+		max-width: 90vw;
+		top: 22vh;
+    	bottom: 16vh;
+	}
+	.screen {
+		width: 26.8vw;/*670px*/
+		height: calc(100% - 0.879120vh);
+	}
+	.text-wrap {
+		min-height:9rem;
+	}
 }
-body { outline: 3px solid red !important; }

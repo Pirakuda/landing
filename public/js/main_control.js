@@ -382,7 +382,7 @@ function isPortraitOrient() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
+console.log(window.innerWidth, window.devicePixelRatio);
 	//////////////////////////////////////////////////////////////////////////////////////
 	preloader = document.getElementById('preloader');
 
