@@ -53,16 +53,16 @@
 	  <canvas id='canvas' class='canvas'></canvas>
 	</div>
 	
-	<script src="./public/js/background_control.js" defer></script>
-	<script src="./public/js/cookie_control.js" defer></script>
-	<script src="./chat/PrivacyConsentHandler.js" defer></script>
-	<script src="./chat/assets/chat.js" defer></script>
-	<script src="./public/js/main_control.js" defer></script>
-	<script src="./chat/widget.js" defer></script>
+	<script src="<?= BASE_URL ?>/public/js/background_control.js" defer></script>
+	<script src="<?= BASE_URL ?>/public/js/cookie_control.js" defer></script>
+	<script src="<?= BASE_URL ?>/modules/chat/PrivacyConsentHandler.js" defer></script>
+	<script src="<?= BASE_URL ?>/modules/chat/assets/chat.js" defer></script>
+	<script src="<?= BASE_URL ?>/public/js/main_control.js" defer></script>
+	<script src="<?= BASE_URL ?>/modules/chat/widget.js" defer></script>
 	
-	<script src="./public/js/nav_control.js" defer></script>
-	<script src="./public/js/level_control.js" defer></script>
-	<script src="./public/js/data_control.js" defer></script>
-	<script src="./public/js/drag_drop_control.js" defer></script>
+	<script src="<?= BASE_URL ?>/public/js/nav_control.js" defer></script>
+	<script src="<?= BASE_URL ?>/public/js/level_control.js" defer></script>
+	<script src="<?= BASE_URL ?>/public/js/data_control.js" defer></script>
+	<script src="<?= BASE_URL ?>/public/js/drag_drop_control.js" defer></script>
   </body>
 </html>

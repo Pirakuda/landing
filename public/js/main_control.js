@@ -113,7 +113,19 @@ function moreHandler(btn) {
 		} else {
 			const pageBtnHeight = pageBtnWrap ? pageBtnWrap.offsetHeight : 0;
 			const viewportHeight = window.innerHeight;
-			textScrollWrap.style.maxHeight = `${((slide.offsetHeight - pageBtnHeight - 80) / viewportHeight) * 100}vh`;
+
+			// padding textMainWrap (верх + низ)
+			const mainWrapStyle = window.getComputedStyle(textMainWrap);
+			const mainWrapPadding = parseFloat(mainWrapStyle.paddingTop) + parseFloat(mainWrapStyle.paddingBottom);
+
+			// расстояние от верха textMainWrap до верха textScrollWrap
+			// это автоматически включает все элементы выше (title, subtitle и т.д.)
+			const scrollWrapOffsetTop = textScrollWrap.offsetTop;
+
+			// итоговая доступная высота
+			const available = slide.offsetHeight - scrollWrapOffsetTop - mainWrapPadding - pageBtnHeight;
+			textScrollWrap.style.maxHeight = `${(available / viewportHeight) * 100}vh`;
+			//textScrollWrap.style.maxHeight = `${((slide.offsetHeight - pageBtnHeight - 80) / viewportHeight) * 100}vh`;
 		}
 		
 		const panelMoreHeight = panelMore.scrollHeight;

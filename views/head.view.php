@@ -91,39 +91,40 @@
 		}
 		</style>
 
-		<link rel="stylesheet" type="text/css" href="/web_eco_de/public/css/styles.min.css">
+		<!-- <link rel="stylesheet" type="text/css" href="/web_eco_de/public/css/styles.min.css"> -->
 
-		<!-- <link rel="stylesheet" type="text/css" href="https://relanding.ru/public/css/styles-atomic.css"> -->
+		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/styles-atomic.css">
 
 		<!-- Общие стили для мобильных устройств и планшетов в портретной ориентации -->
-		<!-- <link rel="stylesheet" href="https://relanding.ru/public/css/styles-mobile.css" media="(max-width:767px) and (orientation: portrait)"> -->
+		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-mobile.css" media="(max-width:767px) and (orientation: portrait)">
 
 		<!-- Стили для планшетов в горизонтальном положении -->
-		<!-- <link rel="stylesheet" href="https://relanding.ru/public/css/styles-tablet.css" media="(max-width: 1023px) and (orientation: landscape)"> -->
+		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-tablet.css" media="(max-width: 1023px) and (orientation: landscape)">
 
 		<!-- мобильные стили, активные элементы -->
-		<!-- <link rel="stylesheet" href="https://relanding.ru/public/css/styles-action-elem-mobile.css" media="(max-width:1023px)"> -->
+		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-action-elem-mobile.css" media="(max-width:1023px)">
 
 		<!-- десктопные стили -->
-  		<!-- <link rel="stylesheet" href="https://relanding.ru/public/css/styles-desktop.css" media="(min-width: 1024px)"> -->
+  		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-desktop.css" media="(min-width: 1024px)">
 		<!-- десктопные стили, активные элементы -->
-		<!-- <link rel="stylesheet" href="https://relanding.ru/public/css/styles-action-elem-desktop.css" media="(min-width: 1024px)"> -->
+		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-action-elem-desktop.css" media="(min-width: 1024px)">
 
-		<!-- <link rel="stylesheet" href="https://relanding.ru/public/css/styles-tablet-ipad-mobile.css" media="(min-width: 768px) and (max-width: 1366px) and (orientation: portrait) and (hover: none) and (pointer: coarse)"> -->
-		<!-- <link rel="stylesheet" href="https://relanding.ru/public/css/styles-tablet-ipad-desktop.css" media="(min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) and (pointer: coarse)"> -->
+		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-tablet-ipad-mobile.css" media="(min-width: 768px) and (max-width: 1366px) and (orientation: portrait) and (hover: none) and (pointer: coarse)">
+		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css//styles-tablet-ipad-desktop.css" media="(min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) and (pointer: coarse)">
   	
 		<!-- interactive elements -->
 		<!-- <link rel="stylesheet" type="text/css" href="https://relanding.ru/public/css/interactive-elem.css"> -->
 		<!-- <link rel="stylesheet" type="text/css" href="https://relanding.ru/public/css/main-audit.css"> -->
 		<!-- <link rel="stylesheet" type="text/css" href="https://relanding.ru/public/css/main-calc.css"> -->
-		<link rel="stylesheet" type="text/css" href="/web_eco_de/public/css/chat.css">
+		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/chat.css">
+	<script>const BASE_URL = '<?= BASE_URL ?>';</script>
 	</head>
   	<body>
 	  <div id="page-bg" class="page-bg">
 	    <header class='page-header top-contr pos-abs flex'>
 		  <div id="header" class="header">
 		    <a id="logo-wrap" class="logo-wrap" href="/" aria-label="Наверх">
-				<img src="/web_eco_de/public/store/briemchainai-logo-dark-gray.webp" alt="Logo von BriemChainAI, Plattform für AI-CRM, Landingpages und Automatisierung" class="logo">
+				<img src="<?= BASE_URL ?>/public/store/briemchainai-logo-dark-gray.webp" alt="Logo von BriemChainAI, Plattform für AI-CRM, Landingpages und Automatisierung" class="logo">
 			</a>
 		    <h1 id="pageName" class="page-name-wrap">
 			  <span class="page-name"><?= $pageStructure['brand'] ?? 'Brand' ?></span>

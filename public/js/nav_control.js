@@ -349,7 +349,9 @@ function updateScreenMeta(isLevAct, pageStructure) {
 
 	// Вспомогательная функция обновления URL и META
 	function setMeta(title, slug, description) {
-		const baseUrl = `/web_medic/${slug}`;
+		const baseUrl = `${BASE_URL}/${slug}`;
+
+		console.log("result: ", baseUrl)
 	
 		window.history.replaceState({}, title, baseUrl);
 		// window.history.pushState({}, title, baseUrl);

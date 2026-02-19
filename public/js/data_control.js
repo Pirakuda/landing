@@ -37,7 +37,7 @@ function createVideo(isLastElem, dataObj, preloader) {
 
     const source = document.createElement('source');
     source.type = 'video/mp4'; // mimeType
-    source.src = `./public/store/${dataObj.path}`;
+    source.src = `${BASE_URL}/public/store/${dataObj.path}`;
     video.appendChild(source);
 
     return video;
@@ -198,14 +198,14 @@ function createMainData(elemWrap, pageStructure) {
         if (data.nodeName !== 'VIDEO') {
             // dataWrap.replaceChild(createVideo(true, manager, preloader), data);
         } else {
-            const path = `./public/store/${manager.path}`;
+            const path = `${BASE_URL}/public/store/${manager.path}`;
             data.children[0].setAttribute('src', path);
         }
     } else {
         if (data.nodeName !== 'IMG') {
             // dataWrap.replaceChild(createImg(true, manager, preloader), data);
         } else {
-            const baseUrl = './public/store/';
+            const baseUrl = `${BASE_URL}/public/store/`;
             const source = figure.querySelector('source');
             
             // Обновляем source для landscape ориентации

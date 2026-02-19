@@ -136,3 +136,9 @@
 
 /* 347 Zeilen - 145 */
 }
+
+@media only screen and (min-width:2560px) {
+	.nav-box .act-anchor{
+		font-size:18px;
+	}
+}

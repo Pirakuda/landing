@@ -333,7 +333,7 @@
 /* level title *****************************/
 .level-title{
 	position:absolute;
-	top:12.3vh;/*160px/9,47*/
+	top:14vh;/*ca.160px/9,47*/
 	left:2%;
 	padding:1.0559vh 1.689545vh;/*10px 16px/9,47*/
 	font-size:2vh;/*ca42px/9,47*/
@@ -712,7 +712,7 @@
 	transition: all .8s ease-out;
 }
 .scr-wrap.full .text-main-wrap.show .text-scroll-wrap{
-	padding-top:7.3917vh;/*70px/9,47*/
+	/*padding-top:7.3917vh;/*70px/9,47*/
 	transition:padding-top .4s ease-out;
 }
 .curtain-top,
@@ -2186,9 +2186,9 @@ textarea::placeholder {
 		border-radius:0.879120vh;/*8px/9,1*/
 	}
 }
-@media only screen and (min-width:1921px) {
+@media only screen and (max-width:1921px) {
 	.page-bg{
-		max-width:1920px;
+		/*max-width:1920px;*/
 		left:50%;
 		margin-right:-50%;
 		-webkit-transform:translateX(-50%);
@@ -2196,3 +2196,28 @@ textarea::placeholder {
 				transform:translateX(-50%);
 	}
 }
+@media only screen and (min-width:2560px) {
+	/* header *************************************************************************/
+	.header{
+		padding-top:14px;
+		padding-bottom:14px;
+		padding-left:20px;
+		padding-right:24px;
+	}
+	.page-name-wrap{
+		margin-left:20px;
+	}
+	.page-name{
+		font-size:30px;
+		/* letter-spacing: 0.1em; */
+	}
+	.concept-name{
+		font-size:24px;
+		margin-top: 16px;
+    	/* letter-spacing: 0.06em; */
+	}
+	.level-title {
+		top: 13.4vh;
+	}
+}
+body { outline: 3px solid red !important; }

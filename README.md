@@ -19,8 +19,8 @@ PHP-лендинг с встроенным чат-виджетом, аналит
 web_eco_de/
 │
 ├── config/
-│   ├── config.php              # Конфигурация (не в git — см. config.example.php)
-│   └── config.example.php      # Шаблон конфигурации с заглушками
+│   ├── config.php            # Конфигурация (не в git — см. config.example.php)
+│   └── config.example.php    # Шаблон конфигурации с заглушками
 │
 ├── database/
 │   ├── database.php            # Подключение к БД

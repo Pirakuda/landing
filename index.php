@@ -1,12 +1,15 @@
-<?php 
+<?php
+define('APP_ROOT', __DIR__);
+// define('BASE_URL', 'https://relanding.de'); // на проде
+define('BASE_URL', '/web_eco_de'); // локально
 //session_start();
 
 // Подключаем конфигурацию и базу данных
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/scripts/landing_nav_creater.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/scripts/functions.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/scripts/Analytics.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/config/config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/database/database.php';
+require_once APP_ROOT . '/scripts/landing_nav_creater.php';
+require_once APP_ROOT . '/scripts/functions.php';
+require_once APP_ROOT . '/scripts/Analytics.php';
+require_once APP_ROOT . '/config/config.php';
+require_once APP_ROOT . '/database/database.php';
 
 try {
   $database = new Database(Config::SERVERNAME, Config::USERNAME, Config::PASSWORD, Config::DBNAME);
@@ -166,8 +169,8 @@ try {
     $database->close();
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/views/head.view.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/views/main.view.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/views/mainContr.view.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/views/asideContr.view.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/web_eco_de/views/footer.view.php';
+require_once APP_ROOT . '/views/head.view.php';
+require_once APP_ROOT . '/views/main.view.php';
+require_once APP_ROOT . '/views/mainContr.view.php';
+require_once APP_ROOT . '/views/asideContr.view.php';
+require_once APP_ROOT . '/views/footer.view.php';
