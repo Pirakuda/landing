@@ -26,19 +26,17 @@
 			--popup-color: <?= $themes['popup_color'] ?? '#eee' ?>;
 			--popup-btn-bg: <?= $themes['popup_btn_bg'] ?? '#dda63d' ?>;
 			--popup-btn-color: <?= $themes['popup_btn_color'] ?? '#000' ?>;
+			--popup-border-color: <?= $themes['popup-border-color'] ?? '#665' ?>;
 			--popup-border-color-act: <?= $themes['popup-border-color-act'] ?? '#dda63d' ?>;
 
 			--lev-title-bg: <?= $themes['lev_title_bg'] ?? '#DDA63D' ?>;
 			--lev-title-color: <?= $themes['lev_title_color'] ?? '#000' ?>;
 			
 			--menu-color: <?= $themes['menu_color'] ?? '#eee' ?>;
-			--menu-cur-bg: <?= $themes['menu_cur_bg'] ?? '#dda63d' ?>;
-			--menu-hover-bg: <?= $themes['menu_hover_bg'] ?? '#dde3ea' ?>;
+			--menu-cur-color: <?= $themes['menu_cur_color'] ?? '#dda63d' ?>;
 
-			--pageActBtn-bg: <?= $themes['act_btn_bg'] ?? '#444' ?>;
-			--pageActBtn-color: <?= $themes['act_btn_color'] ?? '#DDA63D' ?>;
-			--pageActSecBtn-bg: <?= $themes['act_sec_btn_bg'] ?? '#444' ?>;
-			--pageActSecBtn-color: <?= $themes['act_sec_btn_color'] ?? '#eee' ?>;
+			--nav-btn-color: <?= $themes['nav_btn_color'] ?? '#eee' ?>;
+			--nav-cur-btn-color: <?= $themes['nav_cur_btn_color'] ?? '#eee' ?>;
 
 			--text-bg: <?= $themes['text_bg'] ?? '#222' ?>;
 			--full-text-bg: <?= $themes['full_text_bg'] ?? '#222' ?>;
@@ -66,28 +64,13 @@
 			--offer-panel-btn-bg: <?= $themes['offer-panel-btn-bg'] ?? 'linear-gradient(135deg, #018601, #004900)' ?>;
 			--offer-panel-btn-color: <?= $themes['offer-panel-btn-color'] ?? '#eee' ?>;
 
-			--nav-btn-color: <?= $themes['nav_btn_color'] ?? '#eee' ?>;
-			--nav-cur-btn-color: <?= $themes['nav_cur_btn_color'] ?? '#eee' ?>;
+			--pageActBtn-bg: <?= $themes['act_btn_bg'] ?? '#444' ?>;
+			--pageActBtn-color: <?= $themes['act_btn_color'] ?? '#DDA63D' ?>;
+			--pageActSecBtn-bg: <?= $themes['act_sec_btn_bg'] ?? '#444' ?>;
+			--pageActSecBtn-color: <?= $themes['act_sec_btn_color'] ?? '#eee' ?>;
 
 			--guide-bg: <?= $themes['phone_bg'] ?? '#DDA63D' ?>;
   			--guide-color: <?= $themes['phone_color'] ?? '#000000' ?>;
-
-			--primary: #5b88b2;
-			--primary-dark: #0b5daa;
-
-			--secondary: #10b981;
-			--secondary-light: #34d399;
-			--secondary-dark: #059669;
-
-			--light: #f8fafc;
-			--dark: #122c4f;
-
-			--popup-border-color: <?= $themes['popup-border-color'] ?? '#665' ?>;
-			--gray: #bbb;
-
-			--danger: #ef4444;
-			--warning: #f59e0b;
-			--success: #22c55e;
 		}
 		</style>
 

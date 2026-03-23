@@ -13,6 +13,20 @@
 
 ## 🚀 Запуск проекта
 
+### Dresden ПК (Ubuntu)
+
+```bash
+http://localhost/landing/ # открыть в браузере
+
+cd ~/projects/landing # терминал
+mysql -u admin -p'1234567' relanding_db
+
+# Пуш на гитхаб
+git add .
+git commit -m "описание что сделал"
+git push
+```
+
 ### ПК (Ubuntu)
 
 ```bash
@@ -23,7 +37,12 @@ sudo systemctl status mysql
 # Если не запущены — запустить
 sudo systemctl start nginx
 sudo systemctl start mysql
+
+# Dresden PC
+cd ~/projects/landing
+http://localhost/landing/ # открыть в браузере 
 ```
+---
 
 Открыть в браузере: **http://localhost:8080/web_eco_de/**
 

@@ -58,33 +58,57 @@ function createFigcaption(captions) {
 	return `<figcaption class="figcaption">${captions[0]}</figcaption>`;
 }
 
-function createStyle(scrStyleId, styleName, styleVal, pageStructure) {
-	if (!pageStructure[scrStyleId][styleName]) return '';
-	
-	const styleValue = String(pageStructure[scrStyleId][styleName])
+// --- Сбор CSS-переменных экрана в одну строку для контейнера ---
+
+function escapeStyleValue(value) {
+	return String(value)
 	  .replace(/&/g, "&amp;")
 	  .replace(/</g, "&lt;")
 	  .replace(/>/g, "&gt;")
 	  .replace(/"/g, "&quot;")
 	  .replace(/'/g, "&#039;");
-  
-	return `${styleVal}:${styleValue};`;
 }
 
-function createCost(scrStyleId, secCost, cost, promo, pageStructure) {
-	const styles = scrStyleId ? [
-        createStyle(scrStyleId, 'sec_cost_color', '--sec-cost-color', pageStructure),
-		createStyle(scrStyleId, 'cost_color', '--cost-color', pageStructure),
-		createStyle(scrStyleId, 'promo_color', '--promo-color', pageStructure)
-    ].join('') : '';
+const SCR_STYLE_MAP = {
+	title_color:            '--title-color',
+	subtitle_color:         '--subtitle-color',
+	text_color:             '--text-color',
+	benefits_color:         '--benefits-color',
+	delivery_color:         '--delivery-color',
+	cost_color:             '--cost-color',
+	sec_cost_color:         '--sec-cost-color',
+	promo_color:            '--promo-color',
+	page_act_btn_bg:        '--pageActBtn-bg',
+	page_act_btn_color:     '--pageActBtn-color',
+	page_act_sec_btn_bg:    '--pageActSecBtn-bg',
+	page_act_sec_btn_color: '--pageActSecBtn-color',
+};
 
+function collectScrStyles(scrStyleId, pageStructure) {
+	if (!scrStyleId || !pageStructure[scrStyleId]) return '';
+
+	const styleObj = pageStructure[scrStyleId];
+	const parts = [];
+
+	for (const key in SCR_STYLE_MAP) {
+		if (styleObj[key]) {
+			parts.push(`${SCR_STYLE_MAP[key]}:${escapeStyleValue(styleObj[key])}`);
+		}
+	}
+
+	return parts.join(';');
+}
+
+// --- Элементы контента (стили наследуются из контейнера через CSS-каскад) ---
+
+function createCost(secCost, cost, promo) {
     const secCostHtml = secCost ? `<div class="cost-sec-wrap">${secCost}</div>` : '';
     const costHtml = cost ? `<div class="cost-first-wrap">${cost}</div>` : '';
     const promoHtml = promo ? `<div class="promo-wrap">${promo}</div>` : '';
 
 	if (!secCostHtml && !costHtml && !promoHtml) return '';
 
-    return `<div class="cost-wrap flex" style="${styles}">
+    return `<div class="cost-wrap flex">
                 <div class="cost-card">
                     ${secCostHtml}
                     ${costHtml}
@@ -93,67 +117,48 @@ function createCost(scrStyleId, secCost, cost, promo, pageStructure) {
             </div>`;
 }
 
-function createTitle(scrStyleId, title, pageStructure) {
+function createTitle(title) {
 	if (!title) return '';
-	const style = scrStyleId ? createStyle(scrStyleId, 'title_color', '--title-color', pageStructure) : '';
-	return `<h3 class="title" style="${style}">${title}</h3>`;
+	return `<h3 class="title">${title}</h3>`;
 }
 
-function createBenefits(scrStyleId, benefits, pageStructure) {
+function createBenefits(benefits) {
 	if (!benefits) return '';
-	const style = scrStyleId ? createStyle(scrStyleId, 'benefits_color', '--benefits-color', pageStructure) : '';
-	return `<ul class="product-benefits" style="${style}">${benefits}</ul>`;
+	return `<ul class="product-benefits">${benefits}</ul>`;
 }
 
-function createSubtitle(scrStyleId, subtitle, pageStructure) {
+function createSubtitle(subtitle) {
 	if (!subtitle) return '';
-	const style = scrStyleId ? createStyle(scrStyleId, 'subtitle_color', '--subtitle-color', pageStructure) : '';
-	return `<h4 class="subtitle" style="${style}">${subtitle}</h4>`;
+	return `<h4 class="subtitle">${subtitle}</h4>`;
 }
 
-function createPanelMore(scrStyleId, text, pageStructure) {
+function createPanelMore(text) {
 	if (!text) return '';
-	const style = scrStyleId ? createStyle(scrStyleId, 'text_color', '--text-color', pageStructure) : '';
-	return `<div class="panel-more" style="${style}">${text}</div>`
+	return `<div class="panel-more">${text}</div>`;
 }
 
-function createDelivery(scrStyleId, delivery, pageStructure) {
+function createDelivery(delivery) {
 	if (!delivery) return '';
-	const style = scrStyleId ? createStyle(scrStyleId, 'delivery_color', '--delivery-color', pageStructure) : '';
-	return `<div class="delivery-wrap" style="${style}">${delivery}</div>`;
+	return `<div class="delivery-wrap">${delivery}</div>`;
 }
 
-function createPageActBtn(scrStyleId, textObj, pageActLinkPath, pageActSecBtn, pageActBtn, pageStructure) {
+function createPageActBtn(textObj, pageActLinkPath, pageActSecBtn, pageActBtn) {
     if (!pageActLinkPath && !pageActSecBtn && !pageActBtn) return '';
     
-    // Исправление: правильные имена CSS-переменных для второстепенной кнопки
-    let style = '';
-	if (scrStyleId) {
-		style += createStyle(scrStyleId, 'page_act_btn_bg', '--pageActBtn-bg', pageStructure);
-		style += createStyle(scrStyleId, 'page_act_btn_color', '--pageActBtn-color', pageStructure);
-	}
-    
-    // Если есть pageActLink — рендерим только одну ссылку-кнопку
 	let linkBtn = '';
     if (pageActLinkPath) {
         const title = textObj.pageActLinkTitle || '';
-        linkBtn = `<a href="${pageActLinkPath}" class="pageActBtn shining" style="${style}">${title}</a>`; 
+        linkBtn = `<a href="${pageActLinkPath}" class="pageActBtn shining">${title}</a>`; 
     }
     
-    // В остальных случаях рендерим pageActSecBtn и pageActBtn (если есть)
-	let secStyle = '';
-	if (scrStyleId) {
-		secStyle += createStyle(scrStyleId, 'page_act_sec_btn_bg', '--pageActBtn-bg', pageStructure);
-		secStyle += createStyle(scrStyleId, 'page_act_sec_btn_color', '--pageActBtn-color', pageStructure);
-	}
     const secBtn = pageActSecBtn
-        ? `<button class="pageActBtn sec-btn sec-shining" style="${secStyle}" data-service="${textObj.secBtnService || ''}">
+        ? `<button class="pageActBtn sec-btn sec-shining" data-service="${textObj.secBtnService || ''}">
                 ${pageActSecBtn}
            </button>`
         : '';
     
     const mainBtn = pageActBtn
-        ? `<button class="pageActBtn shining" style="${style}" data-service="${textObj.btnService || ''}">
+        ? `<button class="pageActBtn shining" data-service="${textObj.btnService || ''}">
                 ${pageActBtn}
            </button>`
         : '';
@@ -182,6 +187,9 @@ function renderScr(levelObj, scrIndex, curScrClass, scrFull, pageStructure) {
 	const scrObj = levelObj.screens[scrIndex];
 	const scrStyleId = scrObj.styleId ?? null;
 
+	// Все CSS-переменные экрана — один раз на контейнер <article>
+	const scrStyles = collectScrStyles(scrStyleId, pageStructure);
+
 	const slideImgPos = (scrObj.img_pos) || 'left-50';
 	const slideTextPos = (scrObj.text_pos) || 'right';
 
@@ -192,12 +200,10 @@ function renderScr(levelObj, scrIndex, curScrClass, scrFull, pageStructure) {
 
 	const wrapHidClass = (!benefits && !subtitle && !text && (title || pageActBtn)) ? 'hid' : '';
 	const textHidClass = text ? '' : 'hid';
-    // const fullOut = !benefits && !subtitle && !text && !title && !pageActBtn;
 
-	// console.log("figcaption",figcaptions[0])
 	const isActScr = parseInt(levelObj.activeScreen ?? 0) === scrIndex;
 	
-	return `<article data-index="${scrIndex}" class="screen ${curScrClass}">
+	return `<article data-index="${scrIndex}" class="screen ${curScrClass}" style="${scrStyles}">
 
 				<figure class="sl slide-img ${slideImgPos}">
 				  ${createImg(isActScr, scrObj, pageStructure)}
@@ -209,18 +215,18 @@ function renderScr(levelObj, scrIndex, curScrClass, scrFull, pageStructure) {
 				  <div class="text-main-wrap ${wrapHidClass}">
 					<div class="text-wrap">
 					  <div class="text-scroll-wrap">
-					    ${createCost(scrStyleId, secCost, cost, promo, pageStructure)}
+					    ${createCost(secCost, cost, promo)}
 						<div class="panel-more-wrap ${textHidClass}">
-						  ${createTitle(scrStyleId, title, pageStructure)}
-						  ${createBenefits(scrStyleId, benefits, pageStructure)}
-						  ${createSubtitle(scrStyleId, subtitle, pageStructure)}
-                  	      ${createPanelMore(scrStyleId, text, pageStructure)}
+						  ${createTitle(title)}
+						  ${createBenefits(benefits)}
+						  ${createSubtitle(subtitle)}
+                  	      ${createPanelMore(text)}
 					    </div>
 					  </div>
 					  ${text ? `<button class="more-btn pos-abs act-elem link act-anchor">Подробнее</button>` : ''}
 					</div>
-					${createDelivery(scrStyleId, delivery, pageStructure)}
-					${createPageActBtn(scrStyleId, textObj, pageActLinkPath, pageSecActBtn, pageActBtn, pageStructure)}
+					${createDelivery(delivery)}
+					${createPageActBtn(textObj, pageActLinkPath, pageSecActBtn, pageActBtn)}
 				  	${createBgAbstract(true, slideTextPos, scrFull)}
 					</div>
 				  ${createBgAbstract(false, slideTextPos, scrFull)}
