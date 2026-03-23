@@ -32,8 +32,7 @@
 	top:0;
 	bottom: auto;
 }
-.page-bg .main-contr,
-.page-bg .bottom-contr{
+.page-bg .main-contr {
 	width: 100%;
     left: 0;
     right: 0;
@@ -104,9 +103,8 @@ header{
 .nav-box-wrap,
 .nav-box,
 .mobile-menu-header,
-.menu-btn,
 .menu-popup,
-.menu-sec-link{
+.menu-sec-link {
 	display:block;
 }
 
@@ -124,8 +122,7 @@ header{
 	pointer-events:none; /* Запретить элементу получение событий мыши */
 }
 #page-bg .popup-contr.cookies-popup,
-#page-bg .popup-contr.guide-popup,
-#page-bg .popup-contr.msg-popup{
+#page-bg .popup-contr.msg-popup {
 	top:auto;
 	bottom:88px;
 	border-radius: 26px;
@@ -184,10 +181,6 @@ header{
 .modal-body{
 	margin: 20px 30px;
 }
-.modal-nav-wrap{
-    margin-top:20px;
-    gap:20px;
-}
 .modal-nav-btn{
     padding:10px;
 	border: 2px solid #bbb;
@@ -197,11 +190,6 @@ header{
 }
 .modal-nav-btn:last-child{
 	padding: 14px;
-}
-.popup-header.action{
-	top: 6px;
-    left: 24px;
-    right: 20px;
 }
 .popup-title{
 	line-height:1.1em;
@@ -215,10 +203,6 @@ header{
 	padding-bottom: 10px;
 	margin-bottom: 10px;
 }
-.popup-title.popup-header{
-	margin-top: 18px;
-  	margin-bottom: 14px;
-}
 .popup-contr .popup-contr-wrap .form-group .form-label{
 	font-size:18px;
 }
@@ -229,20 +213,8 @@ header{
 	width:calc(100% - 40px);
 	padding:10px 20px;
 }
-.guide-popup .popup-title{
-	margin-bottom: 16px;
-}
 .popup-close-btn{
 	display:none;
-}
-.guide-popup .popup-close-btn{
-	display:block;
-	top:0.502512vh;/*6px/11,94*/
-    right:0.670016vh;/*8px/11,94*/
-    font-size:3.517587vh;/*42px/11,94*/
-  	line-height: 1;
-  	width:3.517587vh;/*42px/11,94*/
-	height:3.517587vh;/*42px/11,94*/
 }
 .popup-btn-wrap{
 	right: 16px;
@@ -278,8 +250,7 @@ header{
 	flex: 1;
 }
 
-.popup-subtitle,
-.popup-p{
+.popup-p {
 	line-height:1.5;
 	letter-spacing:1.5px;
 	font-size: 20px;
@@ -549,7 +520,6 @@ header{
 }
 
 /* LAWANDTECH interactive HOME ACT LINKS*/
-.home-act-links{display:none}
 
 /* data wrap *********************************************************************/
 .data-wrap{
@@ -602,11 +572,6 @@ header{
 	color: var(--main-bg, #444);
 	background-size: cover;
 	background-position: center;
-}
-.video-cap-span{
-	font-size:4.3956vh;/*6px/9,1*/
-	background: #ddd;
-	color: var(--main-bg, #444);
 }
 
 /* figure *****************************************************************/
@@ -796,8 +761,7 @@ header{
 	padding: 0;
 }
 .main-wrap.pos-abs .product-benefits,
-.main-wrap.pos-abs .subtitle,
-.main-wrap.pos-abs .article-text{
+.main-wrap.pos-abs .subtitle {
 	position: relative;
 	font-size:1.675041vh;/*20px/11,94*/
 }
@@ -929,46 +893,6 @@ header{
 	line-height:1;
 	width:50%;
 	border: 2px solid transparent;
-}
-.trade-dn-0,
-.trade-dn-1,
-.trade-dn-2,
-.trade-dn-3{
-	position: absolute;
-	transform: rotate(45deg);
-	box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.14);
-}
-.trade-dn-0{
-	top: -9vh;/*150px/9,47*/
-	right: 0px;
-	width: 18vh;/*300px/9,47*/
-	height: 18vh;/*300px/9,47*/
-	z-index: 2;
-	background: #ccc;
-}
-.trade-dn-1{
-	top: -9vh;/*150px/9,47*/
-	right: -9vh;/*150px/9,47*/
-	width: 18vh;/*300px/9,47*/
-	height: 18vh;/*300px/9,47*/
-	z-index: 2;
-	background: #ccc;
-}
-.trade-dn-2{
-	bottom: -9vh;/*150px/9,47*/
-	left: 0px;
-	width: 18vh;/*300px/9,47*/
-	height: 18vh;/*300px/9,47*/
-	z-index: 2;
-	background: #dda63d;
-}
-.trade-dn-3{
-	bottom: -9vh;/*150px/9,47*/
-	left: -9vh;/*150px/9,47*/
-	width: 18vh;/*300px/9,47*/
-	height: 18vh;/*300px/9,47*/
-	z-index: 2;
-	background: #dda63d;
 }
 
 /* controls body nav *******************************/
@@ -1113,9 +1037,6 @@ header{
 	  transform: translateX(10vw) rotate(20deg);
 	}
 }
-.mob-hid-elem{
-	display:none;
-}
 
 .page-rating-container{
 		right: 8%;
@@ -1129,9 +1050,6 @@ header{
 	.page-rating-wrap{
 		margin-top: 6px;
 	}
-	.page-stars-wrap{
-		margin-top: 10px;
-	}
 	.page-rating-stars{
 		font-size:42px;
 		margin-right:20px;
@@ -1143,9 +1061,6 @@ header{
 	.page-rating-wrap{
 		margin-top: 6px;
 	}
-	.page-rating-text{
-		margin-top: 6px;
-	}
 	
 	/* popup rating stars ******************************/
 	.rating-star{
@@ -1154,17 +1069,8 @@ header{
 	.comment-stars-wrap{
 		font-size:16px;
 	}
-	.calculator-section {
-        margin-top:20px;
-    }
     .section-title {
         font-size: 18px;
-    }
-    .package-selection {
-        margin: 20px 0px 30px;
-    }
-    .package-grid {
-        gap:20px;
     }
     .package-card {
         border: 2px solid #555;
@@ -1176,56 +1082,6 @@ header{
         top: 16px;
         right: 16px;
         font-size: 20px;
-    }
-    .package-badge {
-        top: -10px;
-        left: 20px;
-        padding: 4px 12px;
-        border-radius:6px;
-        font-size: 12px;
-        font-weight: 600;
-    }
-    .package-name {
-        font-size: 18px;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-    .package-price {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-    .package-features {
-        font-size: 13px;
-        line-height: 1.4;
-    }
-    .customization-section {
-        margin: 20px 0px 30px;
-        border-top: 2px solid #555;
-        border-bottom: 2px solid #555;
-    }
-    .option-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px 0;
-        border-bottom: 2px solid #555;
-    }
-    .option-info {
-        flex: 1;
-    }
-    .option-title {
-        font-weight: 600;
-        margin-bottom: 4px;
-    }
-    .option-desc {
-        font-size: 13px;
-    }
-    .option-price {
-        font-weight: 700;
-        margin: 0 16px;
-        min-width: 80px;
-        text-align: right;
     }
     .option-toggle {
         position: relative;
@@ -1245,72 +1101,6 @@ header{
     .option-toggle.active::after {
         transform: translateX(26px);
     }
-    .contact-section {
-        margin: 20px 30px 30px;
-    }
-    .pricing-summary {
-        margin: 20px 0px;
-    }
-    .summary-title {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 20px;
-    }
-    .price-breakdown {
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border: 2px solid #555;
-    }
-    .price-row {
-        padding: 8px 0;
-        border-bottom: 1px solid #444;
-    }
-    .price-row:last-child {
-        border-bottom: none;
-        margin-top: 8px;
-        padding-top: 16px;
-        border-top: 2px solid #dda63d;
-    }
-    .price-label {
-        font-size: 14px;
-    }
-    .price-value {
-        font-weight: 600;
-    }
-    .price-row:last-child .price-label {
-        font-weight: 700;
-        font-size: 16px;
-    }
-    .price-row:last-child .price-value {
-        font-weight: 700;
-        font-size: 18px;
-    }
-    .discount-section {
-        padding: 16px;
-        border-radius:8px;
-        margin-bottom: 20px;
-        text-align: center;
-        border: 2px solid #555;
-    }
-    .discount-title {
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-    .discount-desc {
-        font-size: 14px;
-        opacity: 0.9;
-    }
-    .savings-amount {
-        font-size: 24px;
-        font-weight: 700;
-        margin: 12px 0;
-    }
-    .payment-options {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 20px;
-    }
     .payment-option {
         flex: 1;
         border: 2px solid #555;
@@ -1320,24 +1110,6 @@ header{
         text-align: center;
         transition: all 0.3s ease;
     }
-    .payment-title {
-        font-weight: 600;
-        margin-bottom: 4px;
-    }
-    .payment-desc {
-        font-size: 12px;
-        opacity: 0.8;
-    }
-    .guarantee-section {
-        padding: 16px;
-        border-radius: 8px;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .guarantee-title {
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
     .guarantee-text {
         font-size: 14px;
         opacity: 0.9;
@@ -1345,23 +1117,6 @@ header{
     .consent-wrap{
         margin:0 30px;
     }
-	.modal-progress-wrap {
-          padding: 12px 30px;
-     }
-     .modal-progress-text {
-          font-size: 16px;
-          margin-bottom: 8px;
-          font-weight: 600;
-     }
-     .modal-progress-bar {
-          height: 10px;
-          border-radius: 5px;
-     }
-     .modal-progress-fill {
-          height: 100%;
-          width: 20%;
-          border-radius:0.4223vh;/*4px/9,47*/
-     }
      /* modal - body ******************************************/
      .audit-questions-header {
           margin-bottom: 24px;

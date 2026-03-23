@@ -37,9 +37,6 @@
 	.page-rating-wrap{
 		margin-top: 4px;
 	}
-	.page-stars-wrap{
-		margin-top: 10px;
-	}
 	.page-rating-stars{
 		font-size:20px;
 		margin-right:20px;
@@ -47,11 +44,6 @@
 	.page-rating-counter{
 		font-size:16px;
 		margin-top:5px;
-	}
-	.page-rating-text{
-		display:none;
-		/* margin-top: 6px;
-		font-size:13px; */
 	}
 	
 	/* popup rating stars ******************************/
@@ -157,8 +149,7 @@ nav,
 	pointer-events:none; /* Запретить элементу получение событий мыши */
 }
 .popup-contr.cookies-popup,
-.popup-contr.guide-popup,
-.popup-contr.msg-popup{
+.popup-contr.msg-popup {
 	bottom: 52px;
 	top: auto;
 	border-radius: 6px;
@@ -214,10 +205,6 @@ nav,
 .modal-body{
 	padding:8px 16px 30px;
 }
-.modal-nav-wrap{
-	gap: 16px;
-    margin-top: 16px;
-}
 .modal-nav-btn{
 	padding: 8px;
 	border: 2px solid #555;
@@ -253,11 +240,6 @@ nav,
 	background: #444;
     border: 2px solid #555;
 }
-.popup-subtitle{
-	font-size: 14px;
-	line-height: 1.4em;
-	margin-top: 10px;
-}
 .popup-p{
 	font-size:14px;/*14px/16*/
 	line-height:1.4em;
@@ -285,9 +267,6 @@ nav,
 .guide-main-btn{
 	bottom: 12px;
     right: 8px;
-}
-.mob-hid-elem{
-	display:none;
 }
 
 .popup-link{
@@ -486,17 +465,6 @@ nav,
 	background-size: cover;
   	background-position: center;
 }
-.home-act-links{display:none}
-.mobile-home-img-caption{
-	background: linear-gradient(135deg, #eee, #777);
-    background-clip: border-box;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	font-weight: bold;
-	position: absolute;
-	top: 54px;
-	right: 24px;
-}
 
 /* data wrap *********************************************************************/
 .data-wrap{
@@ -549,11 +517,6 @@ nav,
 	color: var(--main-bg, #444);
 	background-size: cover;
 	background-position: center;
-}
-.video-cap-span{
-	font-size:4.3956vh;/*6px/9,1*/
-	background: #ddd;
-	color: var(--main-bg, #444);
 }
 
 /* figure *****************************************************************/
@@ -900,20 +863,6 @@ section > .panel-btn-wrap .panel-btn{
 }
 
 /* text baner background **************************/
-.top-schirm{
-	width:100%;
-	height:16px;
-	top:0;
-	left:0;
-	z-index: 10;
-}
-.bottom-schirm{
-	width:100%;
-	height:40px;
-	bottom:0;
-	left:0;
-	z-index: 10;
-}
 
 /* delivery *****************************************/
 .delivery-wrap{
@@ -1055,9 +1004,8 @@ section > .panel-btn-wrap .panel-btn{
 	visibility:hidden;
 	z-index: 100;
 }
-.footer-close-btn,
 .footer-year,
-.footer-btn-list{
+.footer-btn-list {
 	display:none;
 }
 
@@ -1102,13 +1050,6 @@ section > .panel-btn-wrap .panel-btn{
 .section-title {
         font-size: 18px;
     }
-    .package-selection {
-        margin-top:10px;
-        margin-bottom: 20px;
-    }
-    .package-grid {
-        gap:16px;
-    }
     .package-card {
         border: 2px solid #555;
         border-radius: 6px;
@@ -1118,51 +1059,6 @@ section > .panel-btn-wrap .panel-btn{
         top: 10px;
         right: 16px;
         font-size: 20px;
-    }
-    .package-badge {
-        top: -14px;
-        left: 16px;
-        padding: 4px 12px;
-        border-radius:6px;
-        font-size: 12px;
-        font-weight: 600;
-    }
-    .package-name {
-        font-size: 18px;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-    .package-price {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-    .package-features {
-        font-size: 13px;
-        line-height: 1.4;
-    }
-    .customization-section {
-        margin: 10px 0px 20px;
-        border-top: 2px solid #555;
-        border-bottom: 2px solid #555;
-    }
-    .option-item {
-        position: relative;
-        display: block;
-        padding: 10px 0;
-        border-bottom: 2px solid #555;
-    }
-    .option-title {
-        font-weight: 600;
-        margin-bottom: 4px;
-    }
-    .option-desc {
-        font-size: 13px;
-    }
-    .option-price {
-        font-weight: 700;
-        text-align: left;
-        margin-top: 10px;
     }
     .option-toggle {
         position: absolute;
@@ -1183,93 +1079,10 @@ section > .panel-btn-wrap .panel-btn{
     .option-toggle.active::after {
         transform: translateX(26px);
     }
-    .contact-section {
-        margin: 20px 30px 30px;
-    }
-    .pricing-summary {
-        margin: 20px 0px;
-    }
-    .summary-title {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 10px;
-        text-align:left;
-    }
-    .price-breakdown {
-        padding: 10px 16px;
-        border-radius: 6px;
-        margin-bottom: 10px;
-        border: 2px solid #555;
-    }
-    .price-row {
-        padding: 8px 0;
-        border-bottom: 1px solid #444;
-    }
-    .price-row:last-child {
-        border-bottom: none;
-        margin-top: 8px;
-        padding-top: 16px;
-        border-top: 2px solid #dda63d;
-    }
-    .price-label {
-        font-size: 14px;
-    }
-    .price-value {
-        font-weight: 600;
-    }
-    .price-row:last-child .price-label {
-        font-weight: 700;
-        font-size: 16px;
-    }
-    .price-row:last-child .price-value {
-        font-weight: 700;
-        font-size: 18px;
-    }
-    .discount-section {
-        padding: 10px 10px 6px;
-        border-radius:6px;
-        margin-bottom: 10px;
-        border: 2px solid #555;
-    }
-    .discount-title {
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-    .discount-desc {
-        font-size: 14px;
-        opacity: 0.9;
-    }
-    .savings-amount {
-        font-size: 24px;
-        font-weight: 700;
-        margin: 8px 0;
-    }
-    .payment-options {
-        gap: 10px;
-        margin-bottom: 10px;
-    }
     .payment-option {
         border: 2px solid #555;
         padding: 10px;
         border-radius:6px;
-    }
-    .payment-title {
-        font-weight: 600;
-        margin-bottom: 4px;
-    }
-    .payment-desc {
-        font-size: 12px;
-        opacity: 0.8;
-    }
-    .guarantee-section {
-        padding: 10px 16px;
-        border-radius: 6px;
-        margin-bottom: 20px;
-        border: 2px solid #555;
-    }
-    .guarantee-title {
-        font-weight: 700;
-        margin-bottom: 8px;
     }
     .guarantee-text {
         font-size: 14px;
@@ -1278,23 +1091,6 @@ section > .panel-btn-wrap .panel-btn{
     .consent-wrap{
         margin:0 30px;
     }
-.modal-progress-wrap {
-          padding: 8px 16px;
-     }
-     .modal-progress-text {
-          font-size:1.4783vh;/*14px/9,47*/
-          margin-bottom:1.2671vh;/*12px/9,47*/
-          font-weight: 600;
-     }
-     .modal-progress-bar {
-          height:0.844772vh;/*8px/9,47*/
-          border-radius:0.4223vh;/*4px/9,47*/
-     }
-     .modal-progress-fill {
-          height: 100%;
-          width: 20%;
-          border-radius:0.4223vh;/*4px/9,47*/
-     }
      /* modal - body ******************************************/
      .audit-questions-header {
           margin-bottom: 16px;

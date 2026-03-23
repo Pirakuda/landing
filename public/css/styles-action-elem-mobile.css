@@ -9,7 +9,6 @@
 	
 
 
-
 /* menu toggle *****************************/
 .popup-btn-wrap{
 	-webkit-box-orient:vertical;
@@ -157,64 +156,12 @@
 	margin-bottom:4px;
 	font-size: 12px;
 }
-.popup-contr .service-config .service-title{
-	font-size: 14px;
-	margin-top: 8px;
-}
-.popup-contr .service-config .popup-p.service-description{
-	font-size: 12px;
-}
-.popup-contr .service-config .section-title{
-	font-size: 12px;
-	margin-top: 8px;
-}
-.popup-contr .service-config .form-group select{
-	font-size: 12px;
-	padding:8px 12px;
-}
-.popup-contr .service-list .service-item{
-	padding:6px 8px;
-	margin-bottom:4px;
-}
-.popup-contr .service-list .service-item h4{
-	padding:0;
-	font-size:14px;
-}
-.popup-contr .service-list .service-item p{
-	padding:6px 0 0;
-	font-size:12px;
-	line-height:1.6;
-}
-.popup-contr .service-list .service-item .price{
-	margin-top:8px;
-	font-size:14px;
-}
-.popup-contr .service-config .price-display{
-	border-radius: 1.055966vh;
-	padding: 10px;
-	margin: 10px 0;
-}
-.popup-contr .service-config .price-display .total-label{
-	font-size: 12px;
-  	margin-bottom: 6px;
-}
-.popup-contr .service-config .price-display .total-price{
-	font-size: 14px;
-}
-.popup-contr .service-config .price-display .disclaimer{
-	font-size: 12px;
-	margin-top:6px;
-}
 .popup-contr .popup-contr-wrap .action-buttons{
 	padding: 0 0 20px;
 }
 .popup-contr .popup-contr-wrap .action-buttons button{
 	font-size: 12px;
 	padding:8px;
-}
-.popup-contr .calculator-body .order-form h4{
-	font-size: 14px;
-  	padding-top: 8px;
 }
 
 /* FORM - GROUP *************************************/
@@ -280,10 +227,6 @@
 /********************************************************/
 
 .nav-box-wrap button{fill:inherit}
-.nav-item{
-	width:100%;
-	margin:6px 0;/*6px/16*/
-}
 .menu-sec-link .act-elem.link{
 
 }
@@ -312,8 +255,7 @@ textarea::placeholder {
   font-size:15px;/*16px/9,1*/
 }
 
-.form-lab,
-.form-area{
+.form-lab {
   font-size:15px;/*15px/9,1*/
 }
 
