@@ -1,6 +1,5 @@
 
 
-
 @media (min-width: 768px) and (max-width: 1366px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
 	.text-scroll-wrap{
 	overscroll-behavior: none;
@@ -14,8 +13,6 @@
 	height: 100%;
 	background-size: cover;
 	background-position: center;
-	-webkit-transition:background .5s,opacity .5s;
-	-o-transition:background .5s,opacity .5s;
 	transition:background .5s,opacity .5s;
 	visibility:visible;
 	opacity:1;
@@ -111,10 +108,7 @@ header{
 .page-bg .popup-contr{
 	position:absolute;
 	transform: translateX(-12.5rem);
-	-webkit-box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.14);
 	        box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.14);
-	-webkit-transition:all 800ms;
-	-o-transition:all 800ms;
 	transition:all 800ms;
 	visibility:hidden;
 	opacity:0;
@@ -135,8 +129,6 @@ header{
 	pointer-events:auto;
 	opacity:1;
 	z-index:11;
-	-webkit-transform:translateX(0);
-	    -ms-transform:translateX(0);
 	        transform:translateX(0);
 }
 .popup-contr.menu-wrap{
@@ -313,8 +305,6 @@ header{
 .social-links-wrap{
 	right: 14px;
     bottom: 88px;
-	-webkit-transition: all 800ms;
-	  -o-transition: all 800ms;
 	  transition: all 800ms;
 	visibility: visible;
 	pointer-events: auto;
@@ -324,8 +314,6 @@ header{
 	flex-direction: column;
 }
 .social-links-wrap.show{
-	-webkit-transform:translateX(0);
-		-ms-transform:translateX(0);
 			transform:translateX(0);
 	pointer-events: auto;
 	visibility: visible;
@@ -381,10 +369,7 @@ header{
 	position:fixed;
 	width: 100%;
     height: 100%;
-    -o-object-fit:cover;
        object-fit:cover;
-	-webkit-transition:background .5s,opacity .5s;
-	-o-transition:background .5s,opacity .5s;
 	transition:background .5s,opacity .5s;
 	visibility:visible;
 	opacity:1;
@@ -418,8 +403,6 @@ header{
 	left:0;
 	right:0;
 	overflow:visible;
-    -webkit-transition: all 800ms;
-    -o-transition: all 800ms;
     transition: all 800ms;
 }
 .scr-wrap.full{
@@ -429,67 +412,43 @@ header{
 	position: absolute;
 	width:100%;
 	height:100%;
-	-webkit-transition: 800ms;
-	-o-transition: 800ms;
 	transition: 800ms;
 	overflow:hidden;
-	-webkit-transform:translateX(0);
-		-ms-transform:translateX(0);
 			transform:translateX(0);
 }
 .scr-wrap.full .screen{
 	position:absolute;
-	-webkit-transition:800ms;
-	-o-transition:800ms;
 	transition:800ms;
 	overflow:hidden;
-	-webkit-transform:translateX(0);
-	    -ms-transform:translateX(0);
 	        transform:translateX(0);
 }
 .scr-wrap.full .screen.queue{
-    -webkit-transform:translateX(100%);
-        -ms-transform:translateX(100%);
             transform:translateX(100%);
     opacity:0;
 }
 .scr-wrap.full .screen.prev{
-    -webkit-transform:translateX(-100%);
-        -ms-transform:translateX(-100%);
             transform:translateX(-100%);
     opacity:0;
 }
 .scr-wrap.full .screen:first-child.queue-bounce{
-	-webkit-transform:translateX(10%);
-	    -ms-transform:translateX(10%);
 	        transform:translateX(10%);
 } 
 .scr-wrap.full .screen:last-child.prev-bounce{
-	-webkit-transform:translateX(-10%);
-	    -ms-transform:translateX(-10%);
 	        transform:translateX(-10%);
 }
 
 .screen.queue{
-	-webkit-transform:translateX(100%);
-		-ms-transform:translateX(100%);
 			transform:translateX(100%);
 	opacity:0;
 }
 .screen.prev{
-	-webkit-transform:translateX(-100%);
-		-ms-transform:translateX(-100%);
 			transform:translateX(-100%);
 	opacity:0;
 }
 .screen:first-child.queue-bounce{
-	-webkit-transform:translateX(10%);
-		-ms-transform:translateX(10%);
 			transform:translateX(10%);
 } 
 .screen:last-child.prev-bounce{
-	-webkit-transform:translateX(-10%);
-		-ms-transform:translateX(-10%);
 			transform:translateX(-10%);
 }
 /************nnnnnn*****************/
@@ -507,8 +466,6 @@ header{
 /* slide *************************************************************************/
 .sl{
 	position:absolute;
-	-webkit-transition:all .8s;
-	-o-transition:all .8s;
 	transition:all .8s;
   	overflow:hidden;
 }
@@ -528,27 +485,18 @@ header{
 	bottom:0;
 	left:0;
 	right:0;
-	-webkit-transition: width .5s, height .5s, top .5s, bottom .5s, left .5s, right .5s;
-	-o-transition: width .5s, height .5s, top .5s, bottom .5s, left .5s, right .5s;
 	transition: width .5s, height .5s, top .5s, bottom .5s, left .5s, right .5s;
-	display:-webkit-box;
-	display:-ms-flexbox;
 	display:flex;
-    -webkit-box-align:center;
-        -ms-flex-align:center;
             align-items:center;
 }
 .data{
 	position:absolute;
 	height:100%;
 	width:100%;
-	-o-object-fit:cover;
 	   object-fit:cover;
 	color:transparent;
 	opacity:1;
 	z-index:2;
-	-webkit-transition:opacity .8s;
-	-o-transition:opacity .8s;
 	transition:opacity .8s;
 }
 .data.main{
@@ -557,14 +505,8 @@ header{
 	margin-top: 0;
 }
 .mini-data{
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
             justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
             align-items: center;
 	width:100%;
 	height:100%;
@@ -581,11 +523,7 @@ header{
 	z-index:10;
 	position:absolute;
 	z-index:11;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
             align-items: center;
 }
 .figure-slider-container{
@@ -619,8 +557,6 @@ header{
 	visibility:visible;
 	width:auto;
 	border-radius:6px;
-	-webkit-transition:width .8s,margin .8s;
-	-o-transition:width .8s,margin .8s;
 	transition:width .8s,margin .8s;
 	background:#bbb;
 }
@@ -658,20 +594,11 @@ header{
 .text-main-wrap{
 	position:relative;
 	overflow: hidden;
-	-webkit-transition:all .4s ease;
-	-o-transition:all .4s ease;
 	transition:all .4s ease;
 	max-height: 100%;
 	width: calc(100% - 2px);
-	display:-webkit-box;
-	display:-ms-flexbox;
 	display:flex;
-	-webkit-box-pack:flex-end;
-		-ms-flex-pack:flex-end;
 			justify-content:flex-end;
-	-webkit-box-orient:vertical;
-	-webkit-box-direction:normal;
-		-ms-flex-direction:column;
 			flex-direction:column;
 	box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.1);
 	background: var(--text-bg);
@@ -679,8 +606,6 @@ header{
 	border: 1px solid #555;
 }
 .slide-text.center .text-main-wrap{
-	-webkit-box-pack:center;
-		-ms-flex-pack:center;
 			justify-content:center;
 }
 .text-main-wrap.show{z-index: 12}
@@ -717,8 +642,6 @@ header{
 .text-wrap{
 	position:relative;
 	display:block;
-	-webkit-transition:all .4s ease;
-	-o-transition:all .4s ease;
 	transition:all .4s ease;
 	text-align:left;
 	overflow:hidden;
@@ -734,8 +657,6 @@ header{
 .panel-more-wrap{
 	position:relative;
 	padding-bottom:52px;/*10px/7.6*/
-	-webkit-transition:max-height 0.4s, height 0.4s;
-	-o-transition:max-height 0.4s, height 0.4s;
 	transition:max-height 0.4s, height 0.4s;
 }
 .panel-more-wrap.hid{
@@ -782,8 +703,6 @@ header{
 .panel-more{
 	position: relative;
 	overflow:hidden;
-	-webkit-transition:max-height .8s, padding-bottom .8s;
-	-o-transition:max-height .8s, padding-bottom .8s;
 	transition:max-height .8s, padding-bottom .8s;
 	max-height:0;
     z-index: 1;
@@ -862,8 +781,6 @@ header{
 
 /* delivery *****************************************/
 .main-wrap.pos-abs .delivery-wrap{
-	-webkit-transition:all .4s;
-	-o-transition:all .4s;
 	transition:all .4s;
 	padding:0.83752vh;/*10px/11,94*/
     margin-top:0.83752vh;/*10px/11,94*/
@@ -872,14 +789,8 @@ header{
 }
 
 .main-wrap.pos-abs .page-action-btn-wrap {
-	-webkit-transition:all .8s;
-	-o-transition:all .8s;
 	transition:all .8s;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-pack:end;
-	  -ms-flex-pack:end;
 	  justify-content:flex-end;
 	padding-top: 20px;
 }
@@ -915,16 +826,10 @@ header{
 }
 .scr-nav-wrap{
 	position:absolute;
-	-webkit-transition:all 0.8s;
-	-o-transition:all 0.8s;
 	transition:all 0.8s;
-	-webkit-transform:translateY(0);
-	    -ms-transform:translateY(0);
 	        transform:translateY(0);
 	visibility:visible;
 	opacity:1;
-	-webkit-box-pack:center;
-		-ms-flex-pack:center;
 			justify-content:center;
 	justify-content: center;
 	bottom: 20px;
@@ -944,8 +849,6 @@ header{
 .scr-nav-wrap.hid{
 	visibility:hidden;
 	opacity:0;
-	-webkit-transform:translateY(10px);
-		-ms-transform:translateY(10px);
 			transform:translateY(10px);
 }
 .sec-scr-nav-btn.hid {

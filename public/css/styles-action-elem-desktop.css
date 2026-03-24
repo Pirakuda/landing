@@ -16,12 +16,9 @@
 }
 .footer-btn-list .act-anchor{
 	font-size:1.538461vh;/*14px/9,1*/
-	color: var(--nav-btn-color);
 }
 
 .act-elem{
-	-webkit-transition:all .4s ease;
-	-o-transition:all .4s ease;
 	transition:all .4s ease;
 }
 
@@ -59,23 +56,23 @@
 .nav-box .act-elem:focus,
 .nav-box .act-elem:focus-visible{
 	cursor:pointer;
-	border-color:var(--nav-btn-color);
+	border-color:var(--page-color);
 }
 .act-elem.cur,
 .act-elem.cur:hover,
 .nav-box .act-elem.cur,
 .nav-box .act-elem.cur:hover,
 .act-elem.link.cur .act-anchor{
-	color:var(--nav-cur-btn-color);
-	border-color:var(--nav-cur-btn-color);
+	color:var(--page-color);
+	border-color:var(--page-color);
 }
 .act-elem .act-anchor-btn,
 .act-elem .act-anchor-btn:hover{
-	background:var(--nav-cur-btn-color);
+	background:var(--page-color);
 }
 .act-elem.cur .act-anchor-btn,
 .act-elem.cur .act-anchor-btn:hover{
-	background:var(--nav-cur-btn-color);
+	background:var(--page-color);
 }
 
 /* top hpone ***************************************/

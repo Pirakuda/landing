@@ -65,8 +65,6 @@
 	height: 100%;
 	background-size: cover;
 	background-position: center;
-	-webkit-transition:background .5s,opacity .5s;
-	-o-transition:background .5s,opacity .5s;
 	transition:background .5s,opacity .5s;
 	visibility:visible;
 	opacity:1;
@@ -138,10 +136,7 @@ nav,
 	position:absolute;
 	/* background: linear-gradient(135deg, #323555 0%, #262A44 25%, #1A1E33 50%, #101521 100%); */
 	transform: translateX(-12.5rem);
-	-webkit-box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.14);
 	        box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.14);
-	-webkit-transition:all 800ms;
-	-o-transition:all 800ms;
 	transition:all 800ms;
 	visibility:hidden;
 	opacity:0;
@@ -161,8 +156,6 @@ nav,
 	pointer-events:auto;
 	opacity:1;
 	z-index:11;
-	-webkit-transform:translateX(0);
-	    -ms-transform:translateX(0);
 	        transform:translateX(0);
 }
 .popup-contr.menu-wrap{
@@ -286,8 +279,6 @@ nav,
 .social-links-wrap{
 	right: 6px;
     bottom: 64px;
-	-webkit-transition: all 800ms;
-	  -o-transition: all 800ms;
 	  transition: all 800ms;
 	visibility: visible;
 	pointer-events: auto;
@@ -297,8 +288,6 @@ nav,
 	flex-direction:column;
 }
 /* .social-links-wrap.show{
-	-webkit-transform:translateX(0);
-		-ms-transform:translateX(0);
 			transform:translateX(0);
 	pointer-events: auto;
 	visibility: visible;
@@ -328,10 +317,7 @@ nav,
 	position:fixed;
 	width: 100%;
     height: 100%;
-    -o-object-fit:cover;
        object-fit:cover;
-	-webkit-transition:background .5s,opacity .5s;
-	-o-transition:background .5s,opacity .5s;
 	transition:background .5s,opacity .5s;
 	visibility:visible;
 	opacity:1;
@@ -368,8 +354,6 @@ nav,
 	left:0;
 	right:0;
 	overflow:visible;
-    -webkit-transition: all 800ms;
-    -o-transition: all 800ms;
     transition: all 800ms;
 }
 .scr-wrap.full{
@@ -379,67 +363,43 @@ nav,
 	position: absolute;
 	width:100%;
 	height:100%;
-	-webkit-transition: 800ms;
-	-o-transition: 800ms;
 	transition: 800ms;
 	overflow:hidden;
-	-webkit-transform:translateX(0);
-		-ms-transform:translateX(0);
 			transform:translateX(0);
 }
 .scr-wrap.full .screen{
 	position:absolute;
-	-webkit-transition:800ms;
-	-o-transition:800ms;
 	transition:800ms;
 	overflow:hidden;
-	-webkit-transform:translateX(0);
-	    -ms-transform:translateX(0);
 	        transform:translateX(0);
 }
 .scr-wrap.full .screen.queue{
-    -webkit-transform:translateX(100%);
-        -ms-transform:translateX(100%);
             transform:translateX(100%);
     opacity:0;
 }
 .scr-wrap.full .screen.prev{
-    -webkit-transform:translateX(-100%);
-        -ms-transform:translateX(-100%);
             transform:translateX(-100%);
     opacity:0;
 }
 .scr-wrap.full .screen:first-child.queue-bounce{
-	-webkit-transform:translateX(10%);
-	    -ms-transform:translateX(10%);
 	        transform:translateX(10%);
 } 
 .scr-wrap.full .screen:last-child.prev-bounce{
-	-webkit-transform:translateX(-10%);
-	    -ms-transform:translateX(-10%);
 	        transform:translateX(-10%);
 }
 
 .screen.queue{
-	-webkit-transform:translateX(100%);
-		-ms-transform:translateX(100%);
 			transform:translateX(100%);
 	opacity:0;
 }
 .screen.prev{
-	-webkit-transform:translateX(-100%);
-		-ms-transform:translateX(-100%);
 			transform:translateX(-100%);
 	opacity:0;
 }
 .screen:first-child.queue-bounce{
-	-webkit-transform:translateX(10%);
-		-ms-transform:translateX(10%);
 			transform:translateX(10%);
 } 
 .screen:last-child.prev-bounce{
-	-webkit-transform:translateX(-10%);
-		-ms-transform:translateX(-10%);
 			transform:translateX(-10%);
 }
 /************nnnnnn*****************/
@@ -447,8 +407,6 @@ nav,
 /* slide *************************************************************************/
 .sl{
 	position:absolute;
-	-webkit-transition:all .8s;
-	-o-transition:all .8s;
 	transition:all .8s;
   	overflow:hidden;
 }
@@ -473,27 +431,18 @@ nav,
 	bottom:0;
 	left:0;
 	right:0;
-	-webkit-transition: width .5s, height .5s, top .5s, bottom .5s, left .5s, right .5s;
-	-o-transition: width .5s, height .5s, top .5s, bottom .5s, left .5s, right .5s;
 	transition: width .5s, height .5s, top .5s, bottom .5s, left .5s, right .5s;
-	display:-webkit-box;
-	display:-ms-flexbox;
 	display:flex;
-    -webkit-box-align:center;
-        -ms-flex-align:center;
             align-items:center;
 }
 .data{
 	position:absolute;
 	height:100%;
 	width:100%;
-	-o-object-fit:cover;
 	   object-fit:cover;
 	color:transparent;
 	opacity:1;
 	z-index:2;
-	-webkit-transition:opacity .8s;
-	-o-transition:opacity .8s;
 	transition:opacity .8s;
 }
 /* .data.main{
@@ -502,14 +451,8 @@ nav,
 	top:-20px;
 } */
 .mini-data{
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
             justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
             align-items: center;
 	width:100%;
 	height:100%;
@@ -528,11 +471,7 @@ nav,
 	z-index:10;
 	position:absolute;
 	z-index:100;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
             align-items: center;
 }
 .figure-slider-container{
@@ -573,8 +512,6 @@ nav,
 	background-color:#dda63d;
 	box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.3);
 	border-radius:3px;
-	-webkit-transition:width .8s,margin .8s;
-	-o-transition:width .8s,margin .8s;
 	transition:width .8s,margin .8s;
 }
 .mini-data{
@@ -610,20 +547,11 @@ nav,
 .text-main-wrap {
 	position: relative;
 	overflow: hidden;
-	-webkit-transition: all .4s ease;
-	-o-transition: all .4s ease;
 	transition: all .4s ease;
 	max-height: 100%;
 	width: calc(100% - 1px);
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-pack: flex-end;
-	-ms-flex-pack: flex-end;
 	justify-content: flex-end;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
 	flex-direction: column;
 	box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.1);
 	background: var(--text-bg);
@@ -668,8 +596,6 @@ nav,
 .text-wrap{
 	position:relative;
 	display:block;
-	-webkit-transition:all .4s ease;
-	-o-transition:all .4s ease;
 	transition:all .4s ease;
 	text-align:left;
 	overflow:hidden;
@@ -687,8 +613,6 @@ nav,
 .panel-more-wrap{
 	position:relative;
 	padding-bottom:34px;/*10px/7.6*/
-	-webkit-transition:max-height 0.4s, height 0.4s;
-	-o-transition:max-height 0.4s, height 0.4s;
 	transition:max-height 0.4s, height 0.4s;
 }
 .panel-more-wrap.hid{
@@ -702,8 +626,6 @@ nav,
 }
 .title{
     z-index: 1;
-	-webkit-transition:all .8s;
-	-o-transition:all .8s;
 	transition:all .8s;
 	padding:4px 12px 4px 16px;
 	font-size: 18px;
@@ -713,7 +635,6 @@ nav,
 }
 .product-benefits{
 	/* -webkit-transition: font-size 0.4s ease;
-	-o-transition: font-size 0.4s ease;
 	transition: font-size 0.4s ease;
     z-index: 1;
 	padding:4px 12px 0px 16px;
@@ -744,8 +665,6 @@ nav,
 .panel-more{
 	position: relative;
 	overflow:hidden;
-	-webkit-transition:max-height .8s, padding-bottom .8s;
-	-o-transition:max-height .8s, padding-bottom .8s;
 	transition:max-height .8s, padding-bottom .8s;
 	max-height:0;
     z-index: 1;
@@ -866,8 +785,6 @@ section > .panel-btn-wrap .panel-btn{
 
 /* delivery *****************************************/
 .delivery-wrap{
-	-webkit-transition:all .4s;
-	-o-transition:all .4s;
 	transition:all .4s;
 	padding: 4px 6px;
   	font-size: 13px;
@@ -876,17 +793,9 @@ section > .panel-btn-wrap .panel-btn{
 }
 
 .page-action-btn-wrap {
-	-webkit-transition:all .8s;
-	-o-transition:all .8s;
 	transition:all .8s;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-transition: all .8s;
-	-o-transition: all .8s;
 	transition: all .8s;
-	-webkit-box-pack:end;
-	  -ms-flex-pack:end;
 	justify-content:flex-end;
 	flex-direction:column;
 	width: 100%;
@@ -931,17 +840,11 @@ section > .panel-btn-wrap .panel-btn{
 }
 .scr-nav-wrap{
 	position:absolute;
-	-webkit-transition:all 0.8s;
-	-o-transition:all 0.8s;
 	transition:all 0.8s;
-	-webkit-transform:translateY(0);
-	    -ms-transform:translateY(0);
 	        transform:translateY(0);
 	visibility:visible;
 	opacity:1;
 	/* width:100%; */
-	-webkit-box-pack:center;
-		-ms-flex-pack:center;
 			justify-content:center;
 	bottom:16px;/*10px/16*/
 	left:24px;
@@ -960,8 +863,6 @@ section > .panel-btn-wrap .panel-btn{
 .scr-nav-wrap.hid{
 	visibility:hidden;
 	opacity:0;
-	-webkit-transform:translateY(10px);
-		-ms-transform:translateY(10px);
 			transform:translateY(10px);
 }
 .scr-nav-wrap .nav-wrap .act-elem.cur,
