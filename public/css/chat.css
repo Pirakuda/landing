@@ -1,639 +1,1122 @@
-#popup-list #cookies-popup-wrap{
-    padding:1.0559vh 3.1678vh;/* 10px 20px/9,47*/
-    border:0.2111vh solid #777;/* 2px/9,47*/
+/* ============================================================
+   СЕКЦИЯ 0: CSS-переменные (закомментированы)
+   Раскомментировать при интеграции чата на стороннем сайте.
+   Дефолтные значения соответствуют PHP-фолбэкам из head.view.php
+   ============================================================ */
+/*
+:root {
+	--popup-bg: linear-gradient(135deg, #444, #222);
+	--popup-cur-bg: #222;
+	--popup-color: #eee;
+	--popup-btn-bg: #dda63d;
+	--popup-btn-color: #000;
+	--popup-border-color: #665;
+	--popup-border-color-act: #dda63d;
+	--popup-header-color: #eee;
+	--popup-urgency-color: #eee;
+	--full-title-color: #DDA63D;
+	--pageActBtn-color: #DDA63D;
+	--page-border-color: #555;
+	--page-color: #eee;
+	--page-bg: #444;
+	--edit-bg: #eee;
+	--edit-bg-2: #626262;
+	--col-active-hover: #626262;
 }
-#chat-popup-wrap .popup-contr-wrap {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+*/
+
+/* ============================================================
+   === BASE (без медиа-запроса) ===
+   ============================================================ */
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 1: Общие стили popup-системы (ЗАКОММЕНТИРОВАНЫ)
+   Используются и чатом и другими popup-ами (faq, cookies, rating)
+   Раскомментировать при интеграции на стороннем сайте
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*
+.popup-contr{
+	color:var(--popup-color);
+	background:var(--popup-bg);
+}
+.popup-p{
+	color:#bbb;
+}
+.modal-header{
+	background: var(--full-title-color);
+	color:#222;
 }
 .modal-urgency{
-    display: flex;
-}
-.modal-title svg{
-    fill: var(--popup-header-color);
+	background: #e74c3c;
+	color: white;
+	display: flex;
 }
 .modal-urgency svg{
-    width: 2.639915vh;/*25px/9,47*/
-    margin-right:0.4223vh;/*4px/9,47*/
-    fill: var(--popup-urgency-color, #eee);
+	width: 2.639915vh;
+	margin-right:0.4223vh;
+	fill: var(--popup-urgency-color, #eee);
 }
+.modal-title svg{
+	fill: var(--popup-header-color);
+}
+.modal-nav-btn{
+	text-transform: uppercase;
+	border-color: #bbb;
+	transition: all 0.4s ease;
+	color: var(--pageActBtn-color);
+	text-align: center;
+	background: rgba(34, 34, 34, 0.7);
+	backdrop-filter: blur(10px);
+	width:50%;
+}
+.modal-nav-btn:last-child{
+	width:100%;
+}
+.modal-nav-btn[disabled] {
+	background: #333;
+	color: #555;
+	border-color: #555;
+}
+.popup-btn.act-elem{
+	background: var(--popup-bg);
+	color: var(--popup-color);
+}
+.popup-contr-wrap::-webkit-scrollbar-track {
+	background: var(--edit-bg, #eee);
+}
+.popup-contr-wrap::-webkit-scrollbar-thumb {
+	background: var(--edit-bg-2,#626262);
+	transition: background-color 0.3s ease;
+}
+.popup-contr-wrap::-webkit-scrollbar-thumb:hover {
+	background:#444;
+}
+*/
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 2: Стили ТОЛЬКО чата (АКТИВНЫЕ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* Специфичный для чата контейнер внутри popup */
+#chat-popup-wrap .popup-contr-wrap {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
 /* Основные стили чата */
 .chat-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    overflow: auto;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	overflow: auto;
 }
 
 /* Контейнер сообщений */
 .chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    scroll-behavior: smooth;
+	flex: 1;
+	overflow-y: auto;
+	padding: 16px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	scroll-behavior: smooth;
 }
 
-/* Кастомный скроллбар */
+/* Кастомный скроллбар чата */
 .chat-messages::-webkit-scrollbar {
-    width: 6px;
+	width: 6px;
 }
-
 .chat-messages::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 3px;
+	background: #f1f1f1;
+	border-radius: 3px;
 }
-
 .chat-messages::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 3px;
+	background: #c1c1c1;
+	border-radius: 3px;
 }
-
 .chat-messages::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+	background: #a8a8a8;
 }
 
-/* нижняя панель чата */
+/* Нижняя панель чата */
 .dialog-wrap {
-    margin-top: auto;
+	margin-top: auto;
 }
 
 /* Стили сообщений */
 .message {
-    display: flex;
-    flex-direction: column;
-    max-width: 85%;
-    margin-bottom: 8px;
-    animation: messageSlideIn 0.3s ease-out;
+	display: flex;
+	flex-direction: column;
+	max-width: 85%;
+	margin-bottom: 8px;
+	animation: messageSlideIn 0.3s ease-out;
 }
-
-@keyframes messageSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .message-user {
-    align-self: flex-end;
-    align-items: flex-end;
+	align-self: flex-end;
+	align-items: flex-end;
 }
-
 .message-bot {
-    align-self: flex-start;
-    align-items: flex-start;
+	align-self: flex-start;
+	align-items: flex-start;
 }
-
 .message-error {
-    align-self: center;
-    align-items: center;
+	align-self: center;
+	align-items: center;
 }
 
 /* Содержимое сообщений */
 .message-content {
-    padding: 12px 16px;
-    border-radius: 18px;
-    word-wrap: break-word;
-    font-size: 14px;
-    line-height: 1.4;
-    position: relative;
+	padding: 12px 16px;
+	border-radius: 18px;
+	word-wrap: break-word;
+	font-size: 14px;
+	line-height: 1.4;
+	position: relative;
 }
-
 .message-user .message-content {
-    /* background: linear-gradient(135deg, #007bff, #0056b3); */
-    /* color: white; */
-    border-bottom-right-radius: 4px;
-    border: 1px solid #777;
+	/* background: linear-gradient(135deg, #007bff, #0056b3); */
+	/* color: white; */
+	border-bottom-right-radius: 4px;
+	border: 1px solid #777;
 }
-
 .message-bot .message-content {
-    /* background: #f8f9fa;
-    color: #333; */
-    border: 1px solid #777;
-    border-bottom-left-radius: 4px;
+	/* background: #f8f9fa;
+	color: #333; */
+	border: 1px solid #777;
+	border-bottom-left-radius: 4px;
 }
-
 .message-error .message-content {
-    /* background: #f8d7da; */
-    color: #b00;
-    border: 2px solid #721c24;
-    text-align: center;
+	/* background: #f8d7da; */
+	color: #b00;
+	border: 2px solid #721c24;
+	text-align: center;
 }
 
 /* Время сообщения */
 .message-time {
-    font-size: 11px;
-    /* color: #bbb; */
-    margin-top: 4px;
-    opacity: 0.7;
+	font-size: 11px;
+	/* color: #bbb; */
+	margin-top: 4px;
+	opacity: 0.7;
 }
-
 .message-user .message-time {
-    text-align: right;
+	text-align: right;
 }
-
 .message-bot .message-time {
-    text-align: left;
+	text-align: left;
 }
 
 /* Индикатор печати */
 .typing-indicator {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    color: #bbb;
-    font-size: 13px;
-    animation: fadeIn 0.3s ease-in;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 16px;
+	color: #bbb;
+	font-size: 13px;
+	animation: fadeIn 0.3s ease-in;
 }
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 .typing-dots {
-    display: flex;
-    gap: 3px;
+	display: flex;
+	gap: 3px;
 }
-
 .typing-dots span {
-    width: 6px;
-    height: 6px;
-    background: #bbb;
-    border-radius: 50%;
-    animation: typingDot 1.4s infinite;
+	width: 6px;
+	height: 6px;
+	background: #bbb;
+	border-radius: 50%;
+	animation: typingDot 1.4s infinite;
 }
-
 .typing-dots span:nth-child(2) {
-    animation-delay: 0.2s;
+	animation-delay: 0.2s;
 }
-
 .typing-dots span:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes typingDot {
-    0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.4;
-    }
-    30% {
-        transform: translateY(-10px);
-        opacity: 1;
-    }
+	animation-delay: 0.4s;
 }
 
 /* Быстрые кнопки */
 .quick-buttons{
-    padding: 12px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    border-top: 4px solid #777;
+	padding: 12px 20px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	border-top: 4px solid #777;
 }
 .quick-button{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 12px;
-    border: 2px solid #555;
-    border-radius: 12px;
-    font-size: 13px;
-    color: #dda63d;
-    fill: #dda63d;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    flex:1;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 12px;
+	border: 2px solid #555;
+	border-radius: 12px;
+	font-size: 13px;
+	color: #dda63d;
+	fill: #dda63d;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	white-space: nowrap;
+	flex:1;
 }
 .quick-button:hover {
-    /* background: #dda63d; */
-    border-color: #dda63d;
-    transform: translateY(-1px);
+	/* background: #dda63d; */
+	border-color: #dda63d;
+	transform: translateY(-1px);
 }
 .quick-button:active {
-    transform: translateY(0);
+	transform: translateY(0);
 }
-
 .quick-button span{
-    width: 20px;
-    height: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    fill:inherit;
-    margin-right: 6px;
+	width: 20px;
+	height: 20px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	fill:inherit;
+	margin-right: 6px;
 }
 
 /* Кнопки действий */
 .action-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
-    animation: messageSlideIn 0.3s ease-out;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 8px;
+	animation: messageSlideIn 0.3s ease-out;
 }
-
 .action-button {
-    padding: 8px 16px 10px;
-    background: #dda63d;
-    color: #000;
-    border: none;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+	padding: 8px 16px 10px;
+	background: #dda63d;
+	color: #000;
+	border: none;
+	border-radius: 12px;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
 }
-
 .action-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
 }
-
 .action-button:active {
-    transform: translateY(0);
+	transform: translateY(0);
 }
 
 /* Контейнер ввода */
 .chat-input-container {
-    padding:0 20px 30px;
-    /* border-top: 1px solid #bbb; */
-    /* background: white; */
-    display: flex;
-    align-items: flex-end;
-    gap: 8px;
+	padding:0 20px 30px;
+	/* border-top: 1px solid #bbb; */
+	/* background: white; */
+	display: flex;
+	align-items: flex-end;
+	gap: 8px;
 }
+
 /* Поле ввода */
 .chat-input {
-    flex: 1;
-    min-height: 40px;
-    max-height: 120px;
-    padding: 10px 12px;
-    border: 2px solid #555;
-    border-radius: 16px;
-    font-size: 14px;
-    font-family: inherit;
-    resize: none;
-    outline: none;
-    transition: border-color 0.2s ease;
-    line-height: 1.4;
-    color:#eee;
+	flex: 1;
+	min-height: 40px;
+	max-height: 120px;
+	padding: 10px 12px;
+	border: 2px solid #555;
+	border-radius: 16px;
+	font-size: 14px;
+	font-family: inherit;
+	resize: none;
+	outline: none;
+	transition: border-color 0.2s ease;
+	line-height: 1.4;
+	color:#eee;
 }
-
 .chat-input:focus {
-    border-color: #dda63d;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+	border-color: #dda63d;
+	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
-
 .chat-input::placeholder {
-    color: #bbb;
+	color: #bbb;
 }
 
 /* Кнопка отправки */
 .chat-send-btn {
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius:12px;
-    background: #dda63d;
-    color: #000;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius:12px;
+	background: #dda63d;
+	color: #000;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+	flex-shrink: 0;
 }
-
 .chat-send-btn:hover {
-    background: #dba94d;
-    transform: scale(1.05);
+	background: #dba94d;
+	transform: scale(1.05);
 }
-
 .chat-send-btn.active {
-    background: #dba94d;
+	background: #dba94d;
 }
-
 .chat-send-btn.active:hover {
-    background: #dba94d;
+	background: #dba94d;
 }
-
 .chat-send-btn:disabled {
-    background: #777;
-    color: #bbb;
-    cursor: not-allowed;
-    transform: none;
+	background: #777;
+	color: #bbb;
+	cursor: not-allowed;
+	transform: none;
 }
 
 /* Форма контактов */
 .contact-form {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 20px;
-    animation: slideDown 0.8s ease-out;
-    transition: max-height .8s ease-out;
+	max-height: 0;
+	overflow: hidden;
+	padding: 0 20px;
+	animation: slideDown 0.8s ease-out;
+	transition: max-height .8s ease-out;
 }
 #contact-form{
-    margin-bottom: 30px;
+	margin-bottom: 30px;
 }
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        max-height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-    to {
-        opacity: 1;
-        max-height: 500px;
-        padding-top: 16px;
-        padding-bottom: 16px;
-    }
-}
-
 .contact-form h4 {
-    margin: 0 0 16px 0;
-    font-size: 16px;
-    font-weight: 600;
-    /* color: #333; */
+	margin: 0 0 16px 0;
+	font-size: 16px;
+	font-weight: 600;
+	/* color: #333; */
 }
-
 .contact-form input {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    border: 2px solid #555;
-    border-radius: 12px;
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s ease;
-    box-sizing: border-box;
-    color: #eee;
+	width: 100%;
+	padding: 10px 12px;
+	margin-bottom: 12px;
+	border: 2px solid #555;
+	border-radius: 12px;
+	font-size: 14px;
+	font-family: inherit;
+	outline: none;
+	transition: border-color 0.2s ease;
+	box-sizing: border-box;
+	color: #eee;
 }
-
 .contact-form input:focus {
-    border-color: #dda63d;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+	border-color: #dda63d;
+	box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
-
 .contact-form input::placeholder {
-    color: #bbb;
+	color: #bbb;
 }
 
 /* Кнопки формы */
 .form-buttons {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
+	display: flex;
+	gap: 8px;
+	margin-top: 16px;
 }
-
 .btn-primary {
-    flex: 1;
-    padding: 10px 16px;
-    background: #dda63d;
-    color: #000;
-    border: none;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
+	flex: 1;
+	padding: 10px 16px;
+	background: #dda63d;
+	color: #000;
+	border: none;
+	border-radius: 12px;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
 }
-
 .btn-primary:hover {
-    background: #e4b55d;
-    transform: translateY(-1px);
+	background: #e4b55d;
+	transform: translateY(-1px);
 }
-
 .btn-primary:disabled {
-    background: #6c757d;
-    cursor: not-allowed;
-    transform: none;
+	background: #6c757d;
+	cursor: not-allowed;
+	transform: none;
 }
-
 .btn-secondary {
-    padding: 10px 16px;
-    background: transparent;
-    color: #eee;
-    border: 2px solid #555;
-    border-radius: 12px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+	padding: 10px 16px;
+	background: transparent;
+	color: #eee;
+	border: 2px solid #555;
+	border-radius: 12px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: all 0.2s ease;
 }
-
 .btn-secondary:hover {
-    border-color: #bbb;
+	border-color: #bbb;
 }
 
 /* Ошибки формы */
 .form-error {
-    padding: 8px 12px;
-    /* background: #f8d7da; */
-    color: #b00;
-    border: 2px solid rgb(114, 2, 2);
-    border-radius: 12px;
-    font-size: 13px;
-    margin-bottom: 12px;
-    animation: shake 0.5s ease-in-out;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+	padding: 8px 12px;
+	/* background: #f8d7da; */
+	color: #b00;
+	border: 2px solid rgb(114, 2, 2);
+	border-radius: 12px;
+	font-size: 13px;
+	margin-bottom: 12px;
+	animation: shake 0.5s ease-in-out;
 }
 
 /* CSS стили для чекбокса согласия */
 .privacy-consent-container{
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .8s ease-out;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height .8s ease-out;
 }
 .privacy-consent-wrapper {
-    font-size: 12px;
-    line-height: 1.4;
-    padding: 12px;
-    border: 1px solid #555;
-    border-radius: 12px;
-    margin: 0;
+	font-size: 12px;
+	line-height: 1.4;
+	padding: 12px;
+	border: 1px solid #555;
+	border-radius: 12px;
+	margin: 0;
 }
 .privacy-consent-label {
-    display: flex;
-    align-items: flex-start;
-    cursor: pointer;
-    user-select: none;
-    gap: 8px;
-    line-height: 1.5;
-    color: #555;
+	display: flex;
+	align-items: flex-start;
+	cursor: pointer;
+	user-select: none;
+	gap: 8px;
+	line-height: 1.5;
+	color: #555;
 }
 .privacy-consent-label input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
 }
 .checkmark {
-    flex-shrink: 0;
-    height: 16px;
-    width: 16px;
-    background-color: #fff;
-    border: 2px solid #ddd;
-    border-radius: 3px;
-    margin-top: 1px;
-    transition: all 0.3s ease;
-    position: relative;
-    margin-top: 2px;
+	flex-shrink: 0;
+	height: 16px;
+	width: 16px;
+	background-color: #fff;
+	border: 2px solid #ddd;
+	border-radius: 3px;
+	margin-top: 2px;
+	transition: all 0.3s ease;
+	position: relative;
 }
 .privacy-consent-label:hover input ~ .checkmark {
-    border-color: #dda63d;
+	border-color: #dda63d;
 }
 .privacy-consent-label input:checked ~ .checkmark {
-    background-color: #dda63d;
-    border-color: #dda63d;
+	background-color: #dda63d;
+	border-color: #dda63d;
 }
 .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-    left: 5px;
-    top: 2px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
+	content: "";
+	position: absolute;
+	display: none;
+	left: 5px;
+	top: 2px;
+	width: 4px;
+	height: 8px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
 }
 .privacy-consent-label input:checked ~ .checkmark:after {
-    display: block;
+	display: block;
 }
 .consent-text {
-    color: #eee;
-    flex: 1;
+	color: #eee;
+	flex: 1;
 }
 .privacy-link {
-    color: #dda63d;
-    text-decoration: none;
-    font-weight: 500;
+	color: #dda63d;
+	text-decoration: none;
+	font-weight: 500;
 }
 .privacy-link:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 .privacy-consent-error {
-    display: none;
-    margin-top: 8px;
-    animation: shake 0.5s ease-in-out;
+	display: none;
+	margin-top: 8px;
+	animation: shake 0.5s ease-in-out;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .chat-container {
-        height: calc(100vh - 100px);
-    }
-    
-    .message {
-        max-width: 90%;
-    }
-    
-    .message-content {
-        font-size: 13px;
-        padding: 10px 14px;
-    }
-    
-    .quick-button {
-        font-size: 12px;
-        padding: 6px 10px;
-    }
-    
-    .action-button {
-        font-size: 12px;
-        padding: 8px 14px;
-    }
-    
-    .chat-input-container {
-        padding: 12px;
-    }
-    
-    .chat-input {
-        font-size: 16px; /* Предотвращает зум на iOS */
-    }
+/* Анимации */
+@keyframes messageSlideIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+@keyframes typingDot {
+	0%, 60%, 100% {
+		transform: translateY(0);
+		opacity: 0.4;
+	}
+	30% {
+		transform: translateY(-10px);
+		opacity: 1;
+	}
+}
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		max-height: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	to {
+		opacity: 1;
+		max-height: 500px;
+		padding-top: 16px;
+		padding-bottom: 16px;
+	}
+}
+@keyframes shake {
+	0%, 100% { transform: translateX(0); }
+	25% { transform: translateX(-5px); }
+	75% { transform: translateX(5px); }
 }
 
-/* Анимации для модального окна чата */
-/* #chat-popup-wrap {
-    transition: all 0.3s ease;
+
+/* ============================================================
+   === MOBILE PORTRAIT: (max-width:767px) and (orientation: portrait) ===
+   ============================================================ */
+@media (max-width:767px) and (orientation: portrait) {
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 1: Общие стили popup-системы (ЗАКОММЕНТИРОВАНЫ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*
+.popup-contr{
+	position:absolute;
+	transform: translateX(-12.5rem);
+	box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.14);
+	transition:all 800ms;
+	visibility:hidden;
+	opacity:0;
+	z-index:-1;
+	pointer-events:none;
+}
+.popup-contr.show{
+	visibility:visible;
+	pointer-events:auto;
+	opacity:1;
+	z-index:11;
+	transform:translateX(0);
+}
+.popup-contr-wrap{
+	height:100%;
+	overflow:auto;
+}
+.modal-header{
+	padding: 10px 16px 8px;
+}
+.modal-title{
+	font-size: 20px;
+	line-height: 1.4;
+}
+.modal-title svg{
+	height: 20px;
+	margin-bottom: -4px;
+	margin-right: 6px;
+}
+.modal-subtitle{
+	font-size: 14px;
+	margin-top: 5px;
+	line-height: 1.4;
+}
+.modal-urgency{
+	padding: 6px 16px;
+	font-size: 12px;
+	line-height: 1.4;
+}
+.modal-body{
+	padding:8px 16px 30px;
+}
+.modal-nav-btn{
+	padding: 8px;
+	border: 2px solid #555;
+	border-radius: 6px;
+	text-align: center;
+	background: rgba(34, 34, 34, 0.7);
+	backdrop-filter: blur(10px);
+	color: #eee;
+}
+.modal-nav-btn:last-child{
+	padding: 10px;
+}
+.popup-close-btn{
+	display:none;
+}
+.popup-p{
+	font-size:14px;
+	line-height:1.4em;
+}
+.popup-link{
+	display:inline-block;
+	text-decoration:underline;
+}
+.popup-btn.act-elem{
+	border-radius:8px;
+	box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.14);
+	font-size: 14px;
+	margin: 0;
+}
+.cookies-popup .popup-btn {
+	flex: 1;
+	background: #444;
+	border: 2px solid #555;
+}
+*/
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 2: Стили ТОЛЬКО чата (АКТИВНЫЕ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+.chat-container {
+	height: calc(100vh - 100px);
+}
+.message {
+	max-width: 90%;
+}
+.message-content {
+	font-size: 13px;
+	padding: 10px 14px;
+}
+.quick-button {
+	font-size: 12px;
+	padding: 6px 10px;
+}
+.action-button {
+	font-size: 12px;
+	padding: 8px 14px;
+}
+.chat-input-container {
+	padding: 12px;
+}
+.chat-input {
+	font-size: 16px; /* Предотвращает зум на iOS */
 }
 
-#chat-popup-wrap .popup-contr-wrap {
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
+} /* конец mobile portrait */
+
+
+/* ============================================================
+   === TABLET LANDSCAPE: (max-width: 1023px) and (orientation: landscape) ===
+   ============================================================ */
+@media (max-width: 1023px) and (orientation: landscape) {
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 1: Общие стили popup-системы (ЗАКОММЕНТИРОВАНЫ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*
+.popup-contr{
+	position: absolute;
+	width:320px;
+	transform: translateX(12.5rem);
+	box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.14);
+	transition: all 800ms;
+	visibility: hidden;
+	opacity: 0;
+	z-index: -1;
+	pointer-events: none;
+	overflow: hidden;
+}
+.popup-contr.show{
+	visibility: visible;
+	opacity: 1;
+	z-index: 11;
+	transform: translateX(0);
+	pointer-events: auto;
+}
+.popup-contr-wrap {
+	height: 100%;
+	padding: 0 28px 0 20px;
+	overflow: auto;
+}
+.popup-p {
+	line-height:1.6em;
+	font-size: 12px;
+	padding-top:8px;
+}
+.popup-close-btn{
+	font-size: 30px;
+	width: 30px;
+	height: 30px;
+	top: 6px;
+	right: 6px;
+	line-height: 1;
+}
+.popup-link{
+	display:inline-block;
+	text-decoration: underline;
+	transition:color .4s;
+	font-size:14px;
+}
+.popup-btn.act-elem{
+	background: inherit;
+	font-size: 12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 12px;
+	box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.14);
+}
+.cookies-popup .popup-btn {
+	flex:1;
+	margin-bottom:10px;
+}
+*/
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 2: Стили ТОЛЬКО чата (АКТИВНЫЕ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* (пока нет tablet landscape специфичных стилей чата) */
+
+} /* конец tablet landscape */
+
+
+/* ============================================================
+   === MOBILE + TABLET ACTION ELEMENTS: (max-width:1023px) ===
+   ============================================================ */
+@media (max-width:1023px) {
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 1: Общие стили popup-системы (ЗАКОММЕНТИРОВАНЫ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*
+.popup-p.confirm-span{
+	font-size:10px;
+	line-height:1.4em;
+}
+.popup-p.confirm-span .popup-link{
+	font-size:11px;
+	line-height:2em;
+	padding-bottom: 20px;
+}
+*/
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 2: Стили ТОЛЬКО чата (АКТИВНЫЕ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* (пока нет action-elem-mobile специфичных стилей чата) */
+
+} /* конец mobile + tablet action elements */
+
+
+/* ============================================================
+   === DESKTOP: (min-width: 1024px) ===
+   (объединены styles-desktop + styles-action-elem-desktop)
+   ============================================================ */
+@media (min-width: 1024px) {
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 1: Общие стили popup-системы (ЗАКОММЕНТИРОВАНЫ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*
+.popup-contr{
+	position: absolute;
+	top:0;
+	bottom:0;
+	right:0;
+	width:60vh;
+	transform: translateX(60px);
+	box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.14);
+	transition: all 800ms;
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+	overflow: hidden;
+	z-index: 1001;
+}
+.popup-contr.show{
+	visibility: visible;
+	opacity: 1;
+	transform: translateX(0);
+	pointer-events: auto;
+}
+.popup-contr-wrap {
+	height: 100%;
+	overflow: auto;
+}
+.modal-header{
+	width: calc(100% - 6.3356vh);
+	padding:2.1119vh 3.1678vh 2.1119vh;
+}
+.modal-title{
+	line-height:1.4em;
+	font-size: 2.4vh;
+}
+.modal-title svg{
+	height:2.745512vh;
+	margin-right:0.527983vh;
+	margin-bottom:-0.633579vh;
+}
+.modal-subtitle{
+	line-height:1.6em;
+	font-size: 1.7582vh;
+	padding-top:0.527983vh;
+}
+.modal-urgency{
+	padding:1.0559vh 3.1678vh;
+	text-align: center;
+	font-size:1.4783vh;
+}
+.modal-body{
+	margin:2.1119vh 3.1678vh 4.2238vh;
+}
+.modal-nav-btn{
+	border-radius:0.844772vh;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	border:0.2111vh solid #555;
+	font-size:1.3727vh;
+	padding:0.633579vh 1.4783vh;
+}
+.modal-nav-btn:last-child{
+	font-size:1.689545vh;
+	padding:1.4vh 2.1119vh;
+}
+.cookies-popup .popup-contr-wrap{
+	padding-bottom:1.538461vh;
+}
+.popup-p {
+	line-height:1.6em;
+	font-size: 1.7582vh;
+}
+.popup-close-btn{
+	font-size:3.2967vh;
+	width:4.835164vh;
+	height:4.835164vh;
+}
+.popup-contr .popup-close-btn{
+	top:0.4223vh;
+	right:0.4223vh;
+	position: absolute;
+}
+.popup-link{
+	display:inline-block;
+	text-decoration: underline;
+	transition:color .4s;
+	font-size: 1.7582vh;
+}
+.popup-btn.act-elem{
+	border-radius:0.844772vh;
+	font-size: 1.6483vh;
+	box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.14);
+	transition:color .5s, background .5s, filter 0.5s ease;
+	filter: brightness(1.1);
+	padding-top:1.0416vh;
+	padding-bottom:1.0416vh;
+}
+.cookies-popup .popup-btn{
+	top:auto;
+	flex: 1;
+}
+*/
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 2: Стили ТОЛЬКО чата (АКТИВНЫЕ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* (пока нет desktop специфичных стилей чата) */
+
+} /* конец desktop */
+
+
+/* ============================================================
+   === iPad PORTRAIT: (min-width: 768px) and (max-width: 1366px) and (orientation: portrait) and (hover: none) and (pointer: coarse) ===
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1366px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 1: Общие стили popup-системы (ЗАКОММЕНТИРОВАНЫ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*
+.page-bg .popup-contr{
+	position:absolute;
+	transform: translateX(-12.5rem);
+	box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.14);
+	transition:all 800ms;
+	visibility:hidden;
+	opacity:0;
+	z-index:-1;
+	pointer-events:none;
+}
+.popup-contr.show{
+	visibility:visible;
+	pointer-events:auto;
+	opacity:1;
+	z-index:11;
+	transform:translateX(0);
+}
+.popup-contr-wrap{
+	height: 100%;
+	overflow: auto;
+}
+.modal-header{
+	padding:20px 30px;
+}
+.modal-title{
+	line-height: 1.4;
+	font-size: 24px;
+}
+.modal-title svg{
+	height:26px;
+	margin-right:5px;
+	margin-bottom:-6px;
+}
+.modal-subtitle{
+	margin-top: 5px;
+	font-size: 16px;
+}
+.modal-urgency{
+	line-height: 1.4;
+	padding:10px 30px;
+}
+.modal-body{
+	margin: 20px 30px;
+}
+.modal-nav-btn{
+	padding:10px;
+	border: 2px solid #bbb;
+	border-radius: 6px;
+	letter-spacing: 0.2em;
+	font-weight: bold;
+}
+.modal-nav-btn:last-child{
+	padding: 14px;
+}
+.popup-close-btn{
+	display:none;
+}
+.popup-p {
+	line-height:1.5;
+	letter-spacing:1.5px;
+	font-size: 20px;
+}
+.popup-link{
+	display:inline-block;
+}
+.popup-btn.act-elem{
+	font-size: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 20px;
+	box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.14);
+}
+.cookies-popup .popup-btn {
+	flex: 1;
+}
+*/
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 2: Стили ТОЛЬКО чата (АКТИВНЫЕ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+.chat-container {
+	height: calc(100vh - 100px);
+}
+.message {
+	max-width: 90%;
+}
+.message-content {
+	font-size: 13px;
+	padding: 10px 14px;
+}
+.quick-button {
+	font-size: 12px;
+	padding: 6px 10px;
+}
+.action-button {
+	font-size: 12px;
+	padding: 8px 14px;
+}
+.chat-input-container {
+	padding: 12px;
+}
+.chat-input {
+	font-size: 16px; /* Предотвращает зум на iOS */
 }
 
-#chat-popup-wrap.active .popup-contr-wrap {
-    transform: translateX(0);
-} */
+} /* конец iPad portrait */
 
-/* Стили для темной темы (опционально) */
-@media (prefers-color-scheme: dark) {
-    .chat-container {
-        background: #1a1a1a;
-        color: #e9ecef;
-    }
-    
-    .message-bot .message-content {
-        background: #2d3748;
-        color: #e9ecef;
-        border-color: #4a5568;
-    }
-    
-    .chat-input-container {
-        background: #2d3748;
-        border-color: #4a5568;
-    }
-    
-    .chat-input {
-        background: #1a202c;
-        color: #e9ecef;
-        border-color: #4a5568;
-    }
-    
-    .chat-input::placeholder {
-        color: #a0aec0;
-    }
-    
-    .quick-buttons {
-        background: #2d3748;
-        border-color: #4a5568;
-    }
-    
-    .quick-button {
-        background: #1a202c;
-        color: #e9ecef;
-        border-color: #4a5568;
-    }
-    
-    .contact-form {
-        background: #2d3748;
-        border-color: #4a5568;
-    }
-    
-    .contact-form input {
-        background: #1a202c;
-        color: #e9ecef;
-        border-color: #4a5568;
-    }
+
+/* ============================================================
+   === iPad LANDSCAPE: (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) and (pointer: coarse) ===
+   ============================================================ */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 1: Общие стили popup-системы (ЗАКОММЕНТИРОВАНЫ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*
+.popup-contr{
+	position: absolute;
+	width:460px;
+	transform: translateX(12.5rem);
+	box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.14);
+	transition: all 800ms;
+	visibility: hidden;
+	opacity: 0;
+	z-index: -1;
+	pointer-events: none;
+	overflow: hidden;
 }
+.popup-contr.show{
+	visibility: visible;
+	opacity: 1;
+	z-index: 1000;
+	transform: translateX(0);
+	pointer-events: auto;
+}
+.popup-contr-wrap {
+	height: 100%;
+	overflow: auto;
+}
+.popup-p {
+	line-height:1.4;
+	font-size:1.918465vh;
+}
+.popup-contr .popup-close-btn,
+.popup-contr.menu-wrap .popup-close-btn{
+	display:block;
+	font-size: 38px;
+	width: 38px;
+	height: 38px;
+	top: 6px;
+	right: 6px;
+	line-height: 1;
+}
+.popup-link{
+	display:inline-block;
+	text-decoration: underline;
+	transition:color .4s;
+	font-size:16px;
+}
+.popup-btn.act-elem{
+	font-size: 16px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 22px;
+	box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.14);
+}
+.cookies-popup .popup-btn{
+	top:auto;
+	flex:1;
+}
+*/
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   СЕКЦИЯ 2: Стили ТОЛЬКО чата (АКТИВНЫЕ)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* (пока нет iPad landscape специфичных стилей чата) */
+
+} /* конец iPad landscape */
