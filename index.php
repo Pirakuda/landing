@@ -237,6 +237,13 @@ try {
     $database->close();
 }
 
+$pageStructure = $pageStructure ?? [];
+$navStructure = $navStructure ?? [];
+$socialMedia = $socialMedia ?? [];
+$legal = $legal ?? [];
+$p = $p ?? ['#eee','#bbb','164,164,164','#111','#222','#333','#eee','#555','#DDA63D','#222','#fb5a69','#DDA63D'];
+$themes = $themes ?? ['canvasType' => 'hexagon', 'bgUrl' => ''];
+
 require_once APP_ROOT . '/views/head.view.php';
 require_once APP_ROOT . '/views/main.view.php';
 require_once APP_ROOT . '/views/mainContr.view.php';
