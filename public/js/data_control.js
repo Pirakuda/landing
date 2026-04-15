@@ -214,8 +214,8 @@ function createMainData(elemWrap, pageStructure) {
             }
             
             // Обновляем img (fallback) для portrait ориентации
-            if (data && manager.m_path) {
-                data.setAttribute('src', `${baseUrl}${manager.m_path}`);
+            if (data && manager.mobilePath) {
+                data.setAttribute('src', `${baseUrl}${manager.mobilePath}`);
             }
         }
     }

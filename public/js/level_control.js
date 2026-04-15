@@ -13,14 +13,14 @@ function createImg(isActScr, scrObj, pageStructure) {
 	if (!dataId) return '';
     
 	const dataObj = pageStructure[dataId];
-	const alt = (dataObj.name || 'Изображение');
+	const alt = (dataObj.name || 'Image');
     const baseUrl = './public/store/';
 	const lazyAttrs = scrObj.scrFull === 'full' && !isActScr ? 'loading="lazy" decoding="async"' : '';
 
     return `
 		<picture class="data-wrap">
 		  <source media="(orientation: landscape)" srcset="${baseUrl}${dataObj.path}">
-		  <img src="${baseUrl}${dataObj.m_path}" alt="${alt}" ${lazyAttrs} class="data" draggable="false">
+		  <img src="${baseUrl}${dataObj.mobilePath}" alt="${alt}" ${lazyAttrs} class="data" draggable="false">
 		</picture>
 	`;
 }
@@ -70,18 +70,18 @@ function escapeStyleValue(value) {
 }
 
 const SCR_STYLE_MAP = {
-	title_color:            '--title-color',
-	subtitle_color:         '--subtitle-color',
-	text_color:             '--text-color',
-	benefits_color:         '--benefits-color',
-	delivery_color:         '--delivery-color',
-	cost_color:             '--cost-color',
-	sec_cost_color:         '--sec-cost-color',
-	promo_color:            '--promo-color',
-	page_act_btn_bg:        '--pageActBtn-bg',
-	page_act_btn_color:     '--pageActBtn-color',
-	page_act_sec_btn_bg:    '--pageActSecBtn-bg',
-	page_act_sec_btn_color: '--pageActSecBtn-color',
+	titleColor:            '--title-color',
+	subtitleColor:         '--subtitle-color',
+	textColor:             '--text-color',
+	benefitsColor:         '--benefits-color',
+	deliveryColor:         '--delivery-color',
+	costColor:             '--cost-color',
+	secCostColor:         '--sec-cost-color',
+	promoColor:            '--promo-color',
+	pageActBtnBg:        '--pageActBtn-bg',
+	pageActBtnColor:     '--pageActBtn-color',
+	pageActSecBtnBg:    '--pageActSecBtn-bg',
+	pageActSecBtnColor: '--pageActSecBtn-color',
 };
 
 function collectScrStyles(scrStyleId, pageStructure) {
@@ -167,8 +167,8 @@ function renderScr(levelObj, scrIndex, curScrClass, scrFull, pageStructure) {
 	// Все CSS-переменные экрана — один раз на контейнер <article>
 	const scrStyles = collectScrStyles(scrStyleId, pageStructure);
 
-	const slideImgPos = (scrObj.img_pos) || 'left-50';
-	const slideTextPos = (scrObj.text_pos) || 'right';
+	const slideImgPos = (scrObj.imgPos) || 'left-50';
+	const slideTextPos = (scrObj.textPos) || 'right';
 
 	const slider = (scrObj.dataIds.length > 1) ? createHtmlSlider(scrObj, pageStructure) : '';
 	

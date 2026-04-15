@@ -2,6 +2,7 @@
 //session_start();
 
 require_once __DIR__ . '/config/config.php';
+
 define('APP_ROOT', __DIR__);
 define('BASE_URL', Config::BASE_URL);
 
@@ -112,14 +113,12 @@ try {
   // Инициализация аналитики
   $analytics = new Analytics($database, $domain, $language);
   $session = $analytics->initSession();
-  $deviceType = $session['device_type']; // device_type из сессии
-  $deviceType = 'desktop';
 
   //////////////////////////////////////////////////////////////////////////////
   // Получение данных из render_cache
   $pageData = $database->fetch(
-      "SELECT data FROM render_cache WHERE domain = ? AND language = ? AND device_type = ? LIMIT 1",
-      [$domain, $language, $deviceType]
+      "SELECT data FROM render_cache WHERE domain = ? AND language = ? LIMIT 1",
+      [$domain, $language]
   );
   
   if ($pageData) {
@@ -129,14 +128,14 @@ try {
     $pageStructure = [
        'data' => json_encode([
            "domain" => "relanding.ru",
-           "deviceType" => $deviceType,
-           "page_slug" => "404",
+           "deviceType" => "",
+           "pageSlug" => "404",
            "type" => "landing",
-           "brand" => "ReLanding",
+           "brand" => "BriemChainAI",
            "slogan" => "Сложные технологии - простые решения",
            "developerName" => "",
            "developerLink" => "",
-           "phone1" => "+7 988 153 15 36",
+           "phone" => ["+7 988 153 15 36"],
            "activeLevel" => 0,
            "levels" => [
                [
@@ -147,11 +146,11 @@ try {
                        [
                            "slug" => "obzor",
                            "rating" => "true",
-                           "img_pos" => "center",
-                           "text_pos" => "center",
+                           "imgPos" => "center",
+                           "textPos" => "center",
                            "dataIds" => ["1001"],
                            "textId" => "101",
-                           "style_id" => ""
+                           "styleId" => ""
                        ]
                    ]
                ]
@@ -159,14 +158,13 @@ try {
            "1001" => 
              ["type" => "image", 
                "path" => "ai-ekosistema-nedvizhimost-sayt-lendingi-avtomatizatsiya.webp",
-               "m_path" => "ai-ekosistema-nedvizhimost-sayt-lendingi-avtomatizatsiya-mobile.webp",
-               "name" => "AI-экосистема недвижимости BriemChainAI для Краснодара - интегрированное решение с умным сайтом, персонализированными лендингами, полной автоматизацией продаж и продвижением"],
+               "mobilePath" => "ai-ekosistema-nedvizhimost-sayt-lendingi-avtomatizatsiya-mobile.webp",
+               "name" => "AI-экосистема BriemChainAI для Краснодара - интегрированное решение с умным сайтом, персонализированными лендингами, полной автоматизацией продаж и продвижением"],
            "101" => [
                "type" => "text",
-               "page_title" => "404 - Страница не найдена | Sikamo",
-               "meta_title" => "Страница не найдена на Sikamo. Вернитесь на главную или воспользуйтесь меню.",
-               "title" => "Страница не найдена!",
-               "subtitle" => "К сожалению, страница, которую вы ищете, не существует или была перемещена."
+               "pageTitle" => "404 - Страница не найдена",
+               "metaTitle" => "Страница не найдена. Вернитесь на главную или воспользуйтесь меню.",
+               "title" => "Страница не найдена!"
            ]
        ], JSON_THROW_ON_ERROR)
     ];
@@ -175,8 +173,8 @@ try {
   //////////////////////////////////////////////////////////////////////////////
   // Получение данных из render_theme_cache
 //   $themeData = $database->fetch(
-//       "SELECT theme FROM render_theme_cache WHERE domain = ? AND language = ? AND device_type = ?",
-//       [$domain, $language, $deviceType]
+//       "SELECT theme FROM render_theme_cache WHERE domain = ? AND language = ?",
+//       [$domain, $language]
 //   );
 //  $theme = $themeData ? json_decode($themeData['theme'], true, 512, JSON_THROW_ON_ERROR) : null;
 

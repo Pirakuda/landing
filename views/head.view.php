@@ -4,9 +4,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<title><?= getMeta($pageStructure)['page_title'] ?></title>
-		<meta name="description" content="<?= getMeta($pageStructure)['meta_title'] ?>">
-		<link rel="canonical" href="<?= BASE_URL ?>/<?= $pageStructure['screen_slug'] ?>">
+		<title><?= getMeta($pageStructure)['pageTitle'] ?></title>
+		<meta name="description" content="<?= getMeta($pageStructure)['metaTitle'] ?>">
+		<link rel="canonical" href="<?= BASE_URL ?>/<?= $pageStructure['screenSlug'] ?>">
 
 		<style>
 		  :root {
@@ -46,8 +46,8 @@
 
 			--msg-error-color: <?= $p[10] ?>;
 
-			--canvas-type: <?= $themes['canvas_type'] ?? 'hexagon'?>;
-			--bg-url: <?= $themes['bg_url'] ?? ''?>;
+			--canvas-type: <?= $themes['canvasType'] ?? 'hexagon'?>;
+			--bg-url: <?= $themes['bgUrl'] ?? ''?>;
 		  }
 
 		</style>
@@ -89,13 +89,13 @@
 		  </div>
 		</header>
 		<nav class='top-contr pos-abs'>
-			<div id='menu-popup-wrap' class="popup-contr menu-wrap <?= !empty($themes['nav_bg']) ? '' : 'trans' ?>">
+			<div id='menu-popup-wrap' class="popup-contr menu-wrap">
 				<h3 class="mobile-menu-header popup-title m-t-10 p-t-5 p-b-10">Menu</h3>
 				<button class='popup-close-btn act-elem pos-abs' onclick='popupCrossCloseHandle(this)'>&times;</button>
-				<div class="nav-box-wrap <?= !empty($themes['nav_bg']) ? '' : 'trans' ?>">
+				<div class="nav-box-wrap">
 					<ul id='nav-top-list' class="nav-box nav-burger" aria-label="Seitennavigation">
 						<?php
-							if (!empty($pageStructure['type']) && $pageStructure['type'] == 'site') {
+							if (!empty($pageStructure['type']) && $pageStructure['type'] == 'landing') {
 								echo renderNavBurgerList($pageStructure, $navStructure);
 							} else {
 								echo generateNavigationMenu($pageStructure);
@@ -128,7 +128,7 @@
 				<span class='menu-year pos-rel'>
 					© 
 					<span id="currentYear-menu"></span>
-					<span><?= !empty($pageStructure['f_brand']) ? $pageStructure['f_brand'] : 'Unternehmen' ?></span>
+					<span><?= !empty($pageStructure['footerBrand']) ? $pageStructure['footerBrand'] : 'Unternehmen' ?></span>
 				</span>
 			</div>
 		</nav>

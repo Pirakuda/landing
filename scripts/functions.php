@@ -62,9 +62,9 @@ function createDefaultScrSlug(array &$pageStructure, ?string $curScrSlug): void 
         if (!isset($level['screens'][0])) return; // Если экраны отсутствуют, завершаем выполнение
         
         $screen = $level['screens'][0];
-        $pageStructure['screen_slug'] = $screen['slug'];
+        $pageStructure['screenSlug'] = $screen['slug'];
     } else {
-        $pageStructure['screen_slug'] = $level['slug'];
+        $pageStructure['screenSlug'] = $level['slug'];
     }
     return;
 }
@@ -84,7 +84,7 @@ function createActLevScrNum(array &$pageStructure, ?string $curScrSlug): void {
                 if ($screen['slug'] === $curScrSlug) {
                     $pageStructure['activeLevel'] = $levelIndex;
                     $level['activeScreen'] = $screenIndex;
-                    $pageStructure['screen_slug'] = $curScrSlug;
+                    $pageStructure['screenSlug'] = $curScrSlug;
                     $isDefined = true;
                     return;
                 }
@@ -94,7 +94,7 @@ function createActLevScrNum(array &$pageStructure, ?string $curScrSlug): void {
             if ($level['slug'] === $curScrSlug) {
                 $pageStructure['activeLevel'] = $levelIndex;
                 $level['activeScreen'] = 0; // Default to first screen
-                $pageStructure['screen_slug'] = $curScrSlug;
+                $pageStructure['screenSlug'] = $curScrSlug;
                 $isDefined = true;
                 return;
             }
@@ -112,7 +112,7 @@ function createActLevScrNum(array &$pageStructure, ?string $curScrSlug): void {
 function renderNavBurgerList(array $pageStructure, array $navStructure): string {
     $html = '' . PHP_EOL;
     $actLev = (Int)$pageStructure['activeLevel'];
-    $curPageSlug = $pageStructure['page_slug'];
+    $curPageSlug = $pageStructure['pageSlug'];
 
     // Проходим по всем основным страницам (первый уровень)
     foreach ($navStructure as $mainPage => $pageData) {
@@ -120,7 +120,7 @@ function renderNavBurgerList(array $pageStructure, array $navStructure): string 
         $pageSlug = htmlspecialchars($pageData['slug'], ENT_QUOTES, 'UTF-8');
         $isActive = $curPageSlug === $pageSlug ? true : false;
         $class = 'act-elem link nav-level-1' . ($isActive ? ' cur' : '');
-        $mainItemHref = "/webwagen_site/{$pageSlug}/";
+        $mainItemHref = "/{$domain}/{$pageSlug}/";
 
         $html .= sprintf('<li class="%s" role="menuitem">', $class) . PHP_EOL;
 
@@ -152,7 +152,7 @@ function renderNavBurgerList(array $pageStructure, array $navStructure): string 
                     $itemSlug = htmlspecialchars($section['screens'][0]['slug'] ?? '#', ENT_QUOTES, 'UTF-8');
                     $itemTitle = htmlspecialchars($section['screens'][0]['title'] ?? $sectionKey, ENT_QUOTES, 'UTF-8');
                 }
-                $itemHref = "/webwagen_site/{$pageSlug}/{$itemSlug}";
+                $itemHref = "/{$domain}/{$pageSlug}/{$itemSlug}";
 
                 $html .= sprintf(
                     '<a href="%s" data-index="%d" class="act-anchor">%s</a>',
@@ -162,7 +162,7 @@ function renderNavBurgerList(array $pageStructure, array $navStructure): string 
                 ) . PHP_EOL;
             } else {
                 $itemSlug = htmlspecialchars($section['screens'][0]['slug'] ?? '#', ENT_QUOTES, 'UTF-8');
-                $itemHref = "/webwagen_site/{$pageSlug}/{$itemSlug}";
+                $itemHref = "/{$domain}/{$pageSlug}/{$itemSlug}";
 
                 $html .= sprintf(
                     '<a href="%s" data-index="%d" class="act-anchor">%s</a>',
@@ -181,7 +181,7 @@ function renderNavBurgerList(array $pageStructure, array $navStructure): string 
     }
 
     // Добавляем статический пункт FAQ
-    if (isset($pageStructure['page_slug']) && $pageStructure['page_slug'] !== 'o-kompanii' && $pageStructure['page_slug'] !== 'portfolio') {
+    if (isset($pageStructure['pageSlug']) && $pageStructure['pageSlug'] !== 'o-kompanii' && $pageStructure['pageSlug'] !== 'portfolio') {
         $html .= '<li class="act-elem link" role="menuitem"><button id="nav-faq-btn" class="act-anchor" aria-label="Open FAQ">FAQ</button></li>' . PHP_EOL;
     } else {
         $html .= '<li style="display:none" class="act-elem link" role="menuitem"><button id="nav-faq-btn" class="act-anchor" aria-label="Open FAQ">FAQ</button></li>' . PHP_EOL;
@@ -221,12 +221,10 @@ function createPhoneAnchor($phone, $secClass) {
 
 function createPhone($pageStructure) {
 
-    $phoneAnchor1 = !empty($pageStructure['phone1']) ? createPhoneAnchor($pageStructure['phone1'], '') : '';
-    $phoneAnchor2 = !empty($pageStructure['phone2']) ? createPhoneAnchor($pageStructure['phone2'], 'hpone-sec') : '';
+    $phoneAnchor = !empty($pageStructure['phone']) ? createPhoneAnchor($pageStructure['phone'], '') : '';
     
     return "<div  id=\"phone-wrap\" class=\"phone-wrap\">
-              {$phoneAnchor1}
-              {$phoneAnchor2}
+              {$phoneAnchor}
             </div>";
 }
 
@@ -242,13 +240,13 @@ function createDataHTML($levelObj, $isActScr, $scrObj, $pageStructure) {
     $isImage = $dataObj['type'] === 'image';
 
     if ($isImage) {
-        $alt = htmlspecialchars($dataObj['name'] ?? 'Изображение');
+        $alt = htmlspecialchars($dataObj['name'] ?? 'Image');
         $lazyAttrs = ($levelObj['scrFull'] ?? '') === 'full' && !$isActScr ? 'loading="lazy" decoding="async"' : '';
         
         return '
             <picture class="data-wrap">
               <source media="(orientation: landscape)" srcset="'. $baseUrl . $dataObj['path'] .'">
-              <img src="'. $baseUrl . $dataObj['m_path'] .'" alt="'. $alt .'" '. $lazyAttrs .' class="data" draggable="false">
+              <img src="'. $baseUrl . $dataObj['mobilePath'] .'" alt="'. $alt .'" '. $lazyAttrs .' class="data" draggable="false">
             </picture>';
 
     } else {
@@ -302,17 +300,17 @@ function createFigcaption($captions) {
 
 function createStyle(array $scrStyleId, string $styleName, string $styleVal, array $pageStructure): string {
     if (empty($pageStructure[$scrStyleId][$styleName])) return '';
-    $styleValue = htmlspecialchars($pageStructure[$scrObj['style_id']][$styleName]);
+    $styleValue = htmlspecialchars($pageStructure[$scrObj['styleId']][$styleName]);
     return "{$styleVal}:{$styleValue};";
 }
 
 function createCost($scrStyleId, $secCost, $cost, $promo, $pageStructure) {
     $styles = [];
     if (!empty($scrStyleId)) {
-        $styles[] = createStyle($scrStyleId, 'sec_cost_color', '--sec-cost-color', $pageStructure);
-        $styles[] = createStyle($scrStyleId, 'cost_color', '--cost-color', $pageStructure);
-        $styles[] = createStyle($scrStyleId, 'promo_color', '--promo-color', $pageStructure);
-        $styles[] = createStyle($scrStyleId, 'promo_size', '--promo-size', $pageStructure);
+        $styles[] = createStyle($scrStyleId, 'secCostColor', '--sec-cost-color', $pageStructure);
+        $styles[] = createStyle($scrStyleId, 'costColor', '--cost-color', $pageStructure);
+        $styles[] = createStyle($scrStyleId, 'promoColor', '--promo-color', $pageStructure);
+        $styles[] = createStyle($scrStyleId, 'promoSize', '--promo-size', $pageStructure);
     }
     $styleAttr = implode('', $styles);
 
@@ -333,19 +331,19 @@ function createCost($scrStyleId, $secCost, $cost, $promo, $pageStructure) {
 
 function createTitle($scrStyleId, $title, $pageStructure) {
     if (empty($title)) return "";
-    $style = !empty($scrStyleId) ? createStyle($scrStyleId, 'title_color', '--title-color', $pageStructure) : '';
+    $style = !empty($scrStyleId) ? createStyle($scrStyleId, 'titleColor', '--title-color', $pageStructure) : '';
     return "<h3 class=\"title\" style=\"{$style}\">{$title}</h3>";
 }
 
 function createPanelMore($scrStyleId, $text, $pageStructure) {
     if (empty($text)) return "";
-    $style = !empty($scrStyleId) ? createStyle($scrStyleId, 'text_color', '--text-color', $pageStructure) : '';
+    $style = !empty($scrStyleId) ? createStyle($scrStyleId, 'textColor', '--text-color', $pageStructure) : '';
     return "<div class=\"panel-more\" style=\"{$style}\">{$text}</div>";
 }
 
 function createDelivery($scrStyleId, $delivery, $pageStructure) {
     if (empty($delivery)) return "";
-    $style = !empty($scrStyleId) ? createStyle($scrStyleId, 'delivery_color', '--delivery-color', $pageStructure) : '';
+    $style = !empty($scrStyleId) ? createStyle($scrStyleId, 'deliveryColor', '--delivery-color', $pageStructure) : '';
     return "<div class=\"delivery-wrap\" style=\"{$style}\">{$delivery}</div>";
 }
 
@@ -355,8 +353,8 @@ function createPageActBtn($scrStyleId, $textObj, $pageActLinkPath, $pageActSecBt
     // Стили для основной и вторичной кнопок должны быть разделены
     $mainStyles = [];
     if (!empty($scrStyleId)) {
-        $mainStyles[] = createStyle($scrStyleId, 'page_act_btn_bg', '--pageActBtn-bg', $pageStructure);
-        $mainStyles[] = createStyle($scrStyleId, 'page_act_btn_color', '--pageActBtn-color', $pageStructure);
+        $mainStyles[] = createStyle($scrStyleId, 'pageActBtnBg', '--pageActBtn-bg', $pageStructure);
+        $mainStyles[] = createStyle($scrStyleId, 'pageActBtnColor', '--pageActBtn-color', $pageStructure);
     }
     $mainStyleAttr = implode('', $mainStyles);
 
@@ -371,8 +369,8 @@ function createPageActBtn($scrStyleId, $textObj, $pageActLinkPath, $pageActSecBt
     if (!empty($pageActSecBtn)) {
         $secStyles = [];
         if (!empty($scrStyleId)) {
-            $secStyles[] = createStyle($scrStyleId, 'page_act_sec_btn_bg', '--pageActBtn-bg', $pageStructure);
-            $secStyles[] = createStyle($scrStyleId, 'page_act_sec_btn_color', '--pageActBtn-color', $pageStructure);
+            $secStyles[] = createStyle($scrStyleId, 'pageActSecBtnBg', '--pageActBtn-bg', $pageStructure);
+            $secStyles[] = createStyle($scrStyleId, 'pageActSecBtnColor', '--pageActBtn-color', $pageStructure);
         }
         $secStyleAttr = implode('', $secStyles);
 
@@ -396,8 +394,8 @@ function renderScr($isActScr, $levelObj, $scrIndex, $curScrClass, $scrFull, $pag
     $scrObj = $levelObj['screens'][$scrIndex];
     $scrStyleId = $scrObj['styleId'] ?? null;
 
-    $slideImgPos = $scrObj['img_pos'] ?? 'left-50';
-    $slideTextPos = !empty($scrObj['text_pos']) ? $scrObj['text_pos'] : 'right';
+    $slideImgPos = $scrObj['imgPos'] ?? 'left-50';
+    $slideTextPos = !empty($scrObj['textPos']) ? $scrObj['textPos'] : 'right';
 
     $dataHTML = createDataHTML($levelObj, $isActScr, $scrObj, $pageStructure);
     $slider = (count($scrObj['dataIds']) > 1) ? createHtmlSlider($scrObj, $pageStructure) : '';
@@ -407,7 +405,7 @@ function renderScr($isActScr, $levelObj, $scrIndex, $curScrClass, $scrFull, $pag
 
     $figcaptions = $textObj['figcaption'] ?? null;
     $cost = $textObj['cost'] ?? null;
-    $secCost = $textObj['sec_cost'] ?? null;
+    $secCost = $textObj['secCost'] ?? null;
     $promo = $textObj['promo'] ?? null;
     $title = $textObj['title'] ?? null;
     $text = $textObj['text'] ?? null;

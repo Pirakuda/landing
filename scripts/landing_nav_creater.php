@@ -33,7 +33,7 @@ function generateLevelItem($level, $levelIndex, $actLevIndex, $baseUrl, $pageStr
     $isActive = $levelIndex === $actLevIndex ? true : false;
     $hasSubmenu = count($level['screens']) > 1;
     $class = 'act-elem link' . ($hasSubmenu ? ' nav-level-1' : '') . ($isActive ? ' cur' : '');
-    $levelName = htmlspecialchars($level['nav_title'], ENT_QUOTES, 'UTF-8');
+    $levelName = htmlspecialchars($level['navTitle'], ENT_QUOTES, 'UTF-8');
     $html = sprintf('<li class="%s">', $class) . PHP_EOL;
     
     // Определяем основную ссылку уровня
@@ -144,7 +144,7 @@ function generateScreenItem($level, $levelIndex, $screen, $screenIndex, $baseUrl
     $ariaCurrent = $isActive ? 'location' : 'false';
     
     // Определяем текст ссылки
-    $linkText = htmlspecialchars($screen['nav_title'] ?? $level['nav_title'], ENT_QUOTES, 'UTF-8');
+    $linkText = htmlspecialchars($screen['navTitle'] ?? $level['navTitle'], ENT_QUOTES, 'UTF-8');
 
     $html .= sprintf(
             '<a href="%s" aria-current="%s" data-level="%d" data-screen="%d" class="act-anchor">%s</a>',

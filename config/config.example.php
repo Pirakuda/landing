@@ -1,19 +1,12 @@
 <?php
 class Config {
-    // const DATABASE root@localhost 
-    // const SERVERNAME = "localhost";
-    // const USERNAME = "cy13096_briem";
-    // const PASSWORD = "kdjs239hhnGK&%6()AKGDyx";
-    // const DBNAME = "cy13096_briem";
-
     const SERVERNAME = "localhost";
     const USERNAME = "admin";
     const PASSWORD = "1234567";
     const DBNAME = "relanding_db";
 
-    const SITE_USERNAME = "";
-    const SITE_PASSWORD = "";
-    const SITE_DBNAME = "";
+    const BASE_URL = '/landing';
+    const DOMAIN = 'relanding.de';
 
     const JWT_SECRET = "";
 

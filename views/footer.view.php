@@ -1,5 +1,5 @@
 	  <footer class="footer pos-fxd">
-		<div id='footer-wrap' class="footer-wrap pos-rel <?= !empty($themes['footer_bg']) ? '' : 'trans' ?>">
+		<div id='footer-wrap' class="footer-wrap pos-rel">
 			
 			<span class='footer-year pos-abs pos-b-l p-b-10 p-l-20'>
 			<?php
@@ -16,14 +16,14 @@
 				<span>
 				  ©
 				  <span id="currentYear"></span> 
-				  <span id='footer-page-name'><?= !empty($pageStructure['f_brand']) ? $pageStructure['f_brand'] : 'Фирма' ?></span>
+				  <span id='footer-page-name'><?= !empty($pageStructure['footerBrand']) ? $pageStructure['f_brand'] : 'Firma' ?></span>
 				</span>
 			</span>
 
 			<?php
 				if (!empty($legal) && is_array($legal)) {
 			?>
-			<ul class="footer-btn-list flex pos-abs" aria-label="Навигация по юридическим и контактным страницам сайта">
+			<ul class="footer-btn-list flex pos-abs" aria-label="Navigation auf den Rechts- und Kontaktseiten der Website">
 				<?php foreach ($legal as $legalItem) {
 					if (!empty($legalItem['name']) && !empty($legalItem['url'])) {
 						$name = htmlspecialchars($legalItem['name'], ENT_QUOTES, 'UTF-8');

@@ -25,6 +25,11 @@ mysql -u admin -p'1234567' relanding_db
 git add .
 git commit -m "описание что сделал"
 git push
+
+# Hetzner Landing
+cd /var/www/briemchain.ai
+sudo git pull
+sudo chown -R www-data:www-data /var/www/briemchain.ai
 ```
 
 ### ПК (Ubuntu)
