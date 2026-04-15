@@ -221,8 +221,9 @@ function createPhoneAnchor($phone, $secClass) {
 
 function createPhone($pageStructure) {
 
-    $phoneAnchor = !empty($pageStructure['phone']) ? createPhoneAnchor($pageStructure['phone'], '') : '';
-    
+    $phone = $pageStructure['phone'][0] ?? null;
+    $phoneAnchor = !empty($phone) ? createPhoneAnchor($phone, '') : '';
+
     return "<div  id=\"phone-wrap\" class=\"phone-wrap\">
               {$phoneAnchor}
             </div>";
@@ -235,8 +236,8 @@ function createDataHTML($levelObj, $isActScr, $scrObj, $pageStructure) {
     $dataObj = $pageStructure[$dataId] ?? null;
     if (empty($dataObj)) return '';
 
-    $baseUrl = './public/store/';
-    $url = './public/store/' . $dataObj['path'];
+    $baseUrl = BASE_URL . './public/store/';
+    $url = BASE_URL . './public/store/' . $dataObj['path'];
     $isImage = $dataObj['type'] === 'image';
 
     if ($isImage) {

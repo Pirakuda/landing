@@ -205,9 +205,9 @@ try {
   $pageStructure['rgbBg'] = $rgbBg;
 
   // test raiting & phone data
-  $pageStructure['levels'][0]['screens'][0]['rating'] = 'true';
-  $pageStructure['levels'][0]['screens'][0]['phone'] = 'true';
-  $pageStructure['phone1'] = '+49 15259 465 402';
+  // $pageStructure['levels'][0]['screens'][0]['rating'] = 'true';
+  // $pageStructure['levels'][0]['screens'][0]['phone'] = 'true';
+  // $pageStructure['phone'] = '+49 15259 465 402';
 
   // $pageStructure['screen_slug'] = $screenSlug ?? 'ai-ekosistema-nedvizhimosti';
   createActLevScrNum($pageStructure, $screenSlug);
