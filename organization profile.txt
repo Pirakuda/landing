@@ -1,0 +1,139 @@
+organization_profile — один основной профиль
+organization_tags или organization_capabilities — дополнительные специализации
+ecosystem_roles — одна или несколько ролей в сети
+
+BriemChainAI должен описывать организацию не одним полем, а тремя слоями.
+
+1. profile
+
+Это основной профиль бизнеса — кто организация по своей сути.
+Сюда входят текущие профили:
+
+beauty_salon
+barbershop
+medical_clinic
+dental_clinic
+consulting
+fitness
+yoga_studio
+spa_wellness
+restaurant
+education
+photo_studio
+coworking
+auto_service
+field_service
+quest_room
+guesthouse
+custom
+events
+
+И сюда же нужно добавить основные сервисные профили:
+
+smm_agency
+content_studio
+performance_agency
+web_studio
+legal_service
+recruiting_agency
+call_center
+subcontractor_service
+event_agency
+tour_operator
+
+То есть profile — это тип организации как бизнеса.
+
+2. organization_tags / organization_capabilities
+
+Это дополнительные специализации организации.
+Они уточняют, что именно организация умеет делать.
+
+Примеры:
+
+seo
+paid_ads
+reels_production
+telegram_bot_setup
+booking_management
+local_tours
+emergency_repairs
+corporate_events
+hiring_junior_staff
+
+То есть это не профиль, а набор компетенций и направлений работы.
+
+3. ecosystem_role
+
+Это функция организации во взаимодействии с другими организациями внутри системы.
+
+Базовые роли:
+
+client
+service_provider
+partner
+hub
+vendor
+subcontractor
+
+То есть ecosystem_role отвечает не на вопрос “кто это?”, а на вопрос “как организация участвует в межорганизационном слое?”
+
+Главная логика модели
+
+Одна и та же организация может:
+
+по профилю быть web_studio,
+по capabilities иметь seo, landing_pages, crm_integration,
+по ecosystem_role быть одновременно service_provider и partner.
+
+Или:
+
+по профилю быть guesthouse,
+по capabilities иметь family_rooms, local_tours,
+по ecosystem_role быть client и partner.
+Итоговая концепция
+
+В BriemChainAI организация описывается как цифровой субъект с тремя уровнями:
+
+profile — тип бизнеса,
+capabilities — что именно она умеет,
+ecosystem_role — как она взаимодействует с другими организациями.
+
+A. Client Organization
+
+Основная организация, которая продает свои услуги конечному клиенту.
+Например:
+
+салон
+клиника
+ресторан
+гостиница
+ремонтная бригада
+B. Service Provider Organization
+
+Организация, которая обслуживает другие организации.
+Например:
+
+SMM-агентство
+юрист
+веб-студия
+рекрутер
+колл-центр
+C. Infrastructure Organization
+
+Организация, которая обеспечивает системный слой.
+Например:
+
+платежный оператор
+контакт-центр
+интегратор
+аналитический подрядчик
+AI-агентство/оператор
+D. Hub Organization
+
+Организация-хаб, которая агрегирует поток и распределяет его между другими организациями.
+Например:
+
+диспетчерский центр ремонтников
+туристический хаб
+beauty-хаб
+event-хаб

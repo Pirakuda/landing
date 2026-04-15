@@ -1,12 +1,6 @@
 
 
 @media (max-width: 1023px) and (orientation: landscape) {
-	/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
 
 /* chrom scroll style *******************************************/
 .page-rating-container{
@@ -46,9 +40,6 @@
 	transition:background .5s,opacity .5s;
 	visibility:visible;
 	opacity:1;
-	/* left:50%;
-	margin-right:-50%;
-			transform:translateX(-50%); */
 }
 .canvas{
 	position:fixed;
@@ -97,9 +88,9 @@ header{
 	padding-right:8px;/*20px/9.1*/
 	visibility:visible;
 	float:left;
-			align-items:center;
+	align-items:center;
 	border-radius:3px;/*8px/9.1*/
-			box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.14);
+	box-shadow: 1px 1px 6px 2px rgba(0, 0, 0, 0.14);
 	overflow: hidden;
 }
 .logo-wrap{
@@ -127,7 +118,6 @@ header{
 }
 .concept-name{
 	font-size:12px;/*24px/9,1*/
-	/* letter-spacing: 0.26em; */
 }
 
 .header-bg {display:none}
@@ -923,125 +913,8 @@ nav, .popup-contr{
 .act-anchor{
 	padding:1.0989vh 16px;/*10px/9.1*//*20px/9.1*/
 }
-    .section-title {
-        font-size: 18px;
-    }
-    .package-card {
-        border: 2px solid #555;
-        border-radius:8px;
-        padding: 20px;
-        transition: all 0.3s ease;
-    }
-    .package-card.selected::after {
-        top: 16px;
-        right: 16px;
-        font-size: 20px;
-    }
-    .option-toggle {
-        position: relative;
-        width: 50px;
-        height: 24px;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-    .option-toggle::after {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 20px;
-        height: 20px;
-    }
-    .option-toggle.active::after {
-        transform: translateX(26px);
-    }
-    .payment-option {
-        flex: 1;
-        border: 2px solid #555;
-        padding: 16px;
-        border-radius:8px;
-        cursor: pointer;
-        text-align: center;
-        transition: all 0.3s ease;
-    }
-    .guarantee-text {
-        font-size: 14px;
-        opacity: 0.9;
-    }
-    .consent-wrap{
-        margin:0 30px;
-    }
-     /* modal - body ******************************************/
-     .audit-questions-header {
-          margin-bottom: 24px;
-     }
-     .audit-question-text {
-          font-size: 18px;
-          font-weight: 600;
-          line-height: 1.4;
-          margin-bottom: 8px;
-     }
-     .audit-question-subtitle {
-          font-size: 14px;
-     }
-     .audit-answers-container {
-          gap: 10px;
-     }
-     .answerBtn {
-          padding: 16px 20px;
-          border: 2px solid #555;
-          border-radius: 6px;
-          font-size: 15px;
-     }
-     .answerBtn.selected::after {
-          top: 50%;
-          right: 16px;
-          transform: translateY(-50%);
-          font-size: 20px;
-     }
-
-     .resultBlock {
-          padding: 30px 20px;
-     }
-     .score-indicator {
-          width:12.671594vh;/*120px/9,47*/
-          height:12.671594vh;/*120px/9,47*/
-          border-radius: 50%;
-          margin: 0 auto 20px;
-          font-size: 2.5em;
-          font-weight: 700;
-     }
-     .score-indicator svg{
-          height:6.758183vh;/*64px/9,47*/
-     }
-     .loss-amount {
-          font-size: 1.8em;
-          font-weight: 700;
-          margin: 20px 0 15px;
-     }
-     .result-message {
-          font-size: 1.1em;
-          line-height: 1.5;
-          margin-bottom: 25px;
-     }
-     .problems-detected {
-          padding: 20px;
-          border-radius: 6px;
-          margin: 20px 0;
-          border:2px solid #555;
-          border-left: 6px solid #e74c3c;
-     }
-     .problems-title {
-          font-weight: 600;
-          margin-bottom: 12px;
-          gap: 8px;
-     }
-     .problem-item {
-          font-size: 14px;
-          margin: 6px 0;
-          gap: 8px;
-     }
-     .problem-item::before {
-          font-size: 16px;
-     }
+.section-title {
+    font-size: 18px;
+}
+    
 }

@@ -1,7 +1,7 @@
 
 <aside id="contr" class="main-contr popup pos-abs">
 
-  <div id="toggle-wrap" class='popup-btn-wrap pos-abs flex flex-dir-col'>
+  <div id="toggle-wrap" class='toggle-wrap popup-btn-wrap pos-abs flex flex-dir-col'>
 	<button id='menu-toggle' class='menu-toggle pos-rel flex column sp-between al-it-end' title='Menu'>
 		<span class="line"></span>
 		<span class="line"></span>
@@ -13,20 +13,22 @@
   <div id="page-rating-container" class="page-rating-container pos-abs" role="region">
     <p class="page-rating-heading">Nutzerbewertungen</p>
     <div id="page-rating-wrap" class="page-rating-wrap flex al-it-center" role="group" aria-label="Средняя оценка страницы">
-      <span id="page-rating-stars" class="page-rating-stars"></span>
-      <div id="page-rating-counter" class="page-rating-counter" aria-live="polite"></div>
+      <span id="page-rating-stars" class="page-rating-stars">&#9733;</span>
+      <div id="page-rating-counter" class="page-rating-counter" aria-live="polite">5/4.1</div>
     </div>
   </div>
+
+  <?= createPhone($pageStructure); ?>
 
   <ul id="popup-list">
 
   <li id="cookies-popup-wrap" class="popup-contr cookies-popup">
     <section class="popup-contr-wrap" aria-label="Cookie-Hinweis">
-      <p class="popup-p m-t-10">
+      <p class="popup-p">
       Diese Website nutzt Cookies, um Ihr Nutzungserlebnis zu optimieren, die Seitenperformance zu analysieren und Ihnen passende Inhalte anzuzeigen.
       </p>
       <p class="popup-p m-b-10">
-        Mehr erfahren: <a class="popup-link m-l-10" href="./legal/cookies" target="_blank">Datenschutz</a>
+        Mehr erfahren: <a class="popup-link m-l-10" href="./legal/privacy/" target="_blank">Datenschutz</a>
       </p>
       <div class="cookie-banner-actions">
         <button id="decline-cookies" type="button" class="popup-btn secondary act-elem">
@@ -45,7 +47,7 @@
   <li id="cookie-settings-popup-wrap" class="popup-contr cookie-settings-popup">
     <section class="popup-contr-wrap" aria-label="Cookie-Einstellungen">
       <div class="modal-header">
-        <button class="popup-close-btn" onclick="popupCrossCloseHandle(this)" aria-label="Schließen">×</button>
+        <button class="popup-close-btn pos-abs" onclick="popupCrossCloseHandle(this)" aria-label="Schließen">×</button>
         <h3 class="modal-title">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M321.5 91.6C320.7 86.2 316.6 81.8 311.2 81C289.1 77.9 266.6 81.9 246.8 92.4L172.8 131.9C153.1 142.4 137.2 158.9 127.4 179L90.7 254.6C80.9 274.7 77.7 297.5 81.6 319.5L96.1 402.3C100 424.4 110.7 444.6 126.8 460.2L187.1 518.6C203.2 534.2 223.7 544.2 245.8 547.3L328.8 559C350.9 562.1 373.4 558.1 393.2 547.6L467.2 508.1C486.9 497.6 502.8 481.1 512.6 460.9L549.3 385.4C559.1 365.3 562.3 342.5 558.4 320.5C557.5 315.2 553.1 311.2 547.8 310.4C496.3 302.2 455 263.3 443.3 213C441.5 205.4 435.3 199.6 427.6 198.4C373 189.7 329.9 146.4 321.4 91.6zM272 208C289.7 208 304 222.3 304 240C304 257.7 289.7 272 272 272C254.3 272 240 257.7 240 240C240 222.3 254.3 208 272 208zM208 400C208 382.3 222.3 368 240 368C257.7 368 272 382.3 272 400C272 417.7 257.7 432 240 432C222.3 432 208 417.7 208 400zM432 336C449.7 336 464 350.3 464 368C464 385.7 449.7 400 432 400C414.3 400 400 385.7 400 368C400 350.3 414.3 336 432 336z"/></svg>
           Cookie-Einstellungen
@@ -54,13 +56,6 @@
           Verwalten Sie Ihre Cookie-Präferenzen. Sie können Ihre Auswahl jederzeit ändern. 
           Notwendige Cookies können nicht deaktiviert werden.
         </p>
-      </div>
-
-      <div class="modal-urgency">
-        <span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M232.5 136L320 229L407.5 136L232.5 136zM447.9 163.1L375.6 240L504.6 240L448 163.1zM497.9 288L142.1 288L320 484.3L497.9 288zM135.5 240L264.5 240L192.2 163.1L135.6 240zM569.8 280.1L337.8 536.1C333.3 541.1 326.8 544 320 544C313.2 544 306.8 541.1 302.2 536.1L70.2 280.1C62.5 271.6 61.9 258.9 68.7 249.7L180.7 97.7C185.2 91.6 192.4 87.9 200 87.9L440 87.9C447.6 87.9 454.8 91.5 459.3 97.7L571.3 249.7C578.1 258.9 577.4 271.6 569.8 280.1z"/></svg>
-        </span>
-        30% Trade-In beim Umstieg auf unser System!
       </div>
       
       <div class="popup-content">
@@ -73,8 +68,8 @@
                 <span class="required-badge">Erforderlich</span>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" id="necessary-cookies" checked disabled>
-                <span class="toggle-slider"></span>
+                <input type="checkbox" id="necessary-cookies"disabled>
+                <span class="toggle-slider checked"></span>
               </label>
             </div>
             <p class="category-description">
@@ -314,9 +309,7 @@
       </div>
 
       <div class="modal-urgency">
-        <span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M232.5 136L320 229L407.5 136L232.5 136zM447.9 163.1L375.6 240L504.6 240L448 163.1zM497.9 288L142.1 288L320 484.3L497.9 288zM135.5 240L264.5 240L192.2 163.1L135.6 240zM569.8 280.1L337.8 536.1C333.3 541.1 326.8 544 320 544C313.2 544 306.8 541.1 302.2 536.1L70.2 280.1C62.5 271.6 61.9 258.9 68.7 249.7L180.7 97.7C185.2 91.6 192.4 87.9 200 87.9L440 87.9C447.6 87.9 454.8 91.5 459.3 97.7L571.3 249.7C578.1 258.9 577.4 271.6 569.8 280.1z"/></svg>
-        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M232.5 136L320 229L407.5 136L232.5 136zM447.9 163.1L375.6 240L504.6 240L448 163.1zM497.9 288L142.1 288L320 484.3L497.9 288zM135.5 240L264.5 240L192.2 163.1L135.6 240zM569.8 280.1L337.8 536.1C333.3 541.1 326.8 544 320 544C313.2 544 306.8 541.1 302.2 536.1L70.2 280.1C62.5 271.6 61.9 258.9 68.7 249.7L180.7 97.7C185.2 91.6 192.4 87.9 200 87.9L440 87.9C447.6 87.9 454.8 91.5 459.3 97.7L571.3 249.7C578.1 258.9 577.4 271.6 569.8 280.1z"/></svg>
         30% Trade-In beim Umstieg auf unser System!
       </div>
 
@@ -389,5 +382,3 @@
   </ul>
 
 </aside>
-
-			

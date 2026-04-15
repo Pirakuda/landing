@@ -319,8 +319,13 @@ const CookieConsent = {
     },
 
     getCookie(name) {
-        return (document.cookie.split('; ').find(row => row.startsWith(name + '=')) || '')
-            .split('=')[1] || null;
+        const match = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+        if (!match) return null;
+        try {
+            return decodeURIComponent(match.substring(name.length + 1));
+        } catch (e) {
+            return match.substring(name.length + 1);
+        }
     },
     
     setCookie(name, value, days) {
@@ -411,11 +416,10 @@ const CookieConsent = {
         // Загружаем текущие настройки в UI
         this.loadCurrentSettingsToUI();
         
-        // Показываем модальное окно
+        // Показываем модальное окно (баннер остаётся под ним)
         modal.classList.add('show');
         
-        // Закрываем другие попапы
-        this.closeBanner();
+        // Закрываем другие попапы (но НЕ баннер — он останется если настройки закроют без сохранения)
         document.getElementById('menu-popup-wrap')?.classList.remove('show');
         document.getElementById('menu-toggle')?.classList.remove('checked');
     },
@@ -428,11 +432,24 @@ const CookieConsent = {
             Object.assign(this.categories, consent.categories);
         }
         
-        // Обновляем чекбоксы
+        // Обновляем чекбоксы (categories может быть boolean или {enabled: bool})
         Object.keys(this.categories).forEach(category => {
             const checkbox = document.getElementById(`${category}-cookies`);
             if (checkbox) {
-                checkbox.checked = this.categories[category].enabled;
+                const val = this.categories[category];
+                checkbox.checked = val === true || (typeof val === 'object' && val?.enabled);
+            }
+        });
+
+        this.syncToggleSliders();
+    },
+
+    // Синхронизация класса .checked на .toggle-slider по состоянию checkbox
+    syncToggleSliders() {
+        document.querySelectorAll('.toggle-switch input[type="checkbox"]').forEach(input => {
+            const slider = input.nextElementSibling;
+            if (slider && slider.classList.contains('toggle-slider')) {
+                slider.classList.toggle('checked', input.checked);
             }
         });
     },
@@ -567,40 +584,53 @@ const CookieConsent = {
         }
 
         // Кнопки модального окна настроек
-        document.addEventListener('DOMContentLoaded', () => {
-            const acceptAllSettingsBtn = document.getElementById('accept-all-settings');
-            const declineAllSettingsBtn = document.getElementById('decline-all-settings');
-            const savePreferencesBtn = document.getElementById('save-cookie-preferences');
+        const acceptAllSettingsBtn = document.getElementById('accept-all-settings');
+        const declineAllSettingsBtn = document.getElementById('decline-all-settings');
+        const savePreferencesBtn = document.getElementById('save-cookie-preferences');
 
-            if (acceptAllSettingsBtn) {
-                acceptAllSettingsBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.acceptAllCookies();
-                });
-            }
+        if (acceptAllSettingsBtn) {
+            acceptAllSettingsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.acceptAllCookies();
+            });
+        }
 
-            if (declineAllSettingsBtn) {
-                declineAllSettingsBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.declineAllCookies();
-                });
-            }
+        if (declineAllSettingsBtn) {
+            declineAllSettingsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.declineAllCookies();
+            });
+        }
 
-            if (savePreferencesBtn) {
-                savePreferencesBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.saveSelectedPreferences();
-                });
-            }
+        if (savePreferencesBtn) {
+            savePreferencesBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.saveSelectedPreferences();
+            });
+        }
+
+        // Переключение тогглов: явный click вместо change,
+        // чтобы input.checked и визуальный класс всегда были синхронны
+        document.querySelectorAll('.toggle-switch').forEach(label => {
+            const input = label.querySelector('input[type="checkbox"]');
+            const slider = label.querySelector('.toggle-slider');
+            if (!input || !slider || input.disabled) return;
+
+            label.addEventListener('click', (e) => {
+                e.preventDefault();
+                input.checked = !input.checked;
+                slider.classList.toggle('checked', input.checked);
+            });
         });
     },
 
     // Утилита для проверки согласия на конкретную категорию
     hasConsentFor(category) {
-        return this.categories[category] && this.categories[category].enabled;
+        const val = this.categories[category];
+        return val === true || (typeof val === 'object' && val?.enabled);
     },
 
     // Получение статистики согласия
@@ -679,38 +709,6 @@ function waitForChatBot() {
     }
 }
 
-// Функция настройки обработчиков событий для модального окна cookies
-function setupCookieSettingsEventListeners() {
-    // Кнопки в модальном окне настроек
-    const acceptAllSettingsBtn = document.getElementById('accept-all-settings');
-    const declineAllSettingsBtn = document.getElementById('decline-all-settings');
-    const savePreferencesBtn = document.getElementById('save-cookie-preferences');
-
-    if (acceptAllSettingsBtn) {
-        acceptAllSettingsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            CookieConsent.acceptAllCookies();
-        });
-    }
-
-    if (declineAllSettingsBtn) {
-        declineAllSettingsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            CookieConsent.declineAllCookies();
-        });
-    }
-
-    if (savePreferencesBtn) {
-        savePreferencesBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            CookieConsent.saveSelectedPreferences();
-        });
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function() {
 
     CookieConsent.init();
@@ -723,19 +721,18 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.warn('PrivacyConsentHandler not found');
     }
-
-    // Добавляем обработчики для кнопок модального окна настроек cookies
-    setupCookieSettingsEventListeners();
     
     // Запускаем ожидание
     waitForChatBot();
 
-    // открытие настроек куков
-    manageAnalysisBtn.addEventListener('click', function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		stopGuide();
-		popupList.querySelector('.popup-contr.show')?.classList.remove('show');
-        popupList.querySelector('.cookie-settings-popup')?.classList.add('show');
-	});
+    // открытие настроек куков (manageAnalysisBtn определена во внешнем скрипте)
+    if (typeof manageAnalysisBtn !== 'undefined' && manageAnalysisBtn) {
+        manageAnalysisBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            stopGuide();
+            popupList.querySelector('.popup-contr.show')?.classList.remove('show');
+            popupList.querySelector('.cookie-settings-popup')?.classList.add('show');
+        });
+    }
 });

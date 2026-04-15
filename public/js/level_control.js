@@ -122,16 +122,6 @@ function createTitle(title) {
 	return `<h3 class="title">${title}</h3>`;
 }
 
-function createBenefits(benefits) {
-	if (!benefits) return '';
-	return `<ul class="product-benefits">${benefits}</ul>`;
-}
-
-function createSubtitle(subtitle) {
-	if (!subtitle) return '';
-	return `<h4 class="subtitle">${subtitle}</h4>`;
-}
-
 function createPanelMore(text) {
 	if (!text) return '';
 	return `<div class="panel-more">${text}</div>`;
@@ -170,19 +160,6 @@ function createPageActBtn(textObj, pageActLinkPath, pageActSecBtn, pageActBtn) {
             </div>`;
 }
 
-function createBgAbstract(isValid, slideTextPos, scrFull) {
-	if (scrFull === '') return '';
-	if (isValid === true && slideTextPos === 'center' || isValid === false && slideTextPos === 'right') {
-		return `
-			<div class=\"slide-bg-abstract-0\"></div>
-			<div class=\"slide-bg-abstract-1\"></div>
-			<div class=\"curtain-top\"></div>
-            <div class=\"curtain-bottom\"></div>
-		`;
-	}
-	return '';
-}
-
 function renderScr(levelObj, scrIndex, curScrClass, scrFull, pageStructure) {
 	const scrObj = levelObj.screens[scrIndex];
 	const scrStyleId = scrObj.styleId ?? null;
@@ -196,9 +173,9 @@ function renderScr(levelObj, scrIndex, curScrClass, scrFull, pageStructure) {
 	const slider = (scrObj.dataIds.length > 1) ? createHtmlSlider(scrObj, pageStructure) : '';
 	
 	const textObj = pageStructure[scrObj.textId] || {};
-	const { figcaptions, secCost, cost, promo, title, benefits, subtitle, text, delivery, pageActLinkPath, pageSecActBtn, pageActBtn } = textObj;
+	const { figcaptions, secCost, cost, promo, title, text, delivery, pageActLinkPath, pageSecActBtn, pageActBtn } = textObj;
 
-	const wrapHidClass = (!benefits && !subtitle && !text && (title || pageActBtn)) ? 'hid' : '';
+	const wrapHidClass = (!text && (title || pageActBtn)) ? 'hid' : '';
 	const textHidClass = text ? '' : 'hid';
 
 	const isActScr = parseInt(levelObj.activeScreen ?? 0) === scrIndex;
@@ -218,18 +195,16 @@ function renderScr(levelObj, scrIndex, curScrClass, scrFull, pageStructure) {
 					    ${createCost(secCost, cost, promo)}
 						<div class="panel-more-wrap ${textHidClass}">
 						  ${createTitle(title)}
-						  ${createBenefits(benefits)}
-						  ${createSubtitle(subtitle)}
                   	      ${createPanelMore(text)}
 					    </div>
+						${text ? `<button class="more-btn act-elem link act-anchor">Weiter lesen</button>` : ''}
+						${createDelivery(delivery)}
+						${createPageActBtn(textObj, pageActLinkPath, pageSecActBtn, pageActBtn)}
 					  </div>
-					  ${text ? `<button class="more-btn pos-abs act-elem link act-anchor">Подробнее</button>` : ''}
 					</div>
-					${createDelivery(delivery)}
-					${createPageActBtn(textObj, pageActLinkPath, pageSecActBtn, pageActBtn)}
-				  	${createBgAbstract(true, slideTextPos, scrFull)}
-					</div>
-				  ${createBgAbstract(false, slideTextPos, scrFull)}
+					
+					<button class="popup-close-btn act-elem pos-abs" onclick="moreCloseHandler(this)" aria-label="Close window">&times;</button>
+				  </div>
 				</div>
 			</article>`;
 }

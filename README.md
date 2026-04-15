@@ -16,7 +16,7 @@ PHP-лендинг с встроенным чат-виджетом, аналит
 ## Структура проекта
 
 ```
-web_eco_de/
+project/landing/
 │
 ├── config/
 │   ├── config.php            # Конфигурация (не в git — см. config.example.php)
@@ -117,7 +117,7 @@ mysql -u your_db_user -p your_db_name < database/schema/tables/local_daily_stats
 Положить проект в `htdocs/`, запустить Apache + MySQL в XAMPP, открыть в браузере:
 
 ```
-http://localhost/web_eco_de/
+http://localhost/landing/
 ```
 
 ---
@@ -140,7 +140,7 @@ http://localhost/web_eco_de/
 
 ---
 ## Синхронизация с базой данных
-cd /d/XAMPP/htdocs/web_eco_de
+cd /d/XAMPP/htdocs/landing
 git add .
 git commit -m "описание что сделал"
 git push

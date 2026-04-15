@@ -36,7 +36,7 @@
 					}
 				} ?>
 				<li class="act-elem">
-					<button id="manage-analysis" class="manage-analysis act-anchor">Analyse verwalten</button>
+					<button id="manage-analysis" class="manage-analysis act-anchor" onclick='footerAnalysePopupOpenHandler()'>Analyse verwalten</button>
 				</li>
 			</ul>
 			<?php

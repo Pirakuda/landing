@@ -1,5 +1,8 @@
 
 const BASE_PATH = '';
+
+let pageBg;
+
 // переменные DRAG and DROP
 let dragY;
 let dragX;
@@ -17,6 +20,7 @@ const isMobile = () => window.innerWidth <= 768;
 const IS_MOBILE = () => window.innerWidth <= 768;
 // let deviceType;
 
+let headerWrap;
 let preloader;
 
 let navTopList;
@@ -29,6 +33,8 @@ let popupList;
 
 // let actionContr;
 let ratingContainer;
+let phoneWrap;
+let benefitsWrap;
 
 let guideMainBtn;
 let IS_GUIDE_ACT = false;
@@ -75,8 +81,31 @@ function updateMsg(popupList, msg) {
 	setTimeout(()=> msgWrap.classList.remove('show'), 4000);
 }
 
+function mobileMoreCloseHandler() {
+	pageBg.classList.remove('full');
+}
+
+function moreCloseHandler(btn) {
+	pageBg.classList.remove('full');
+
+	const textMainWrap = btn.closest('.text-main-wrap');
+	const slide = textMainWrap.parentElement;
+	const textScrollWrap = textMainWrap.querySelector('.text-scroll-wrap');
+	const panelMore = textMainWrap.querySelector('.panel-more');
+	panelMore.style.maxHeight = null;
+	panelMore.style.minHeight = null;
+	textScrollWrap.style.maxHeight = textScrollWrap.offsetHeight;
+	setTimeout(() => {textScrollWrap.style.maxHeight = null}, 1000);
+
+	const moreBtn = textScrollWrap.querySelector('.more-btn');
+	moreBtn.innerHTML = 'Weiter lesen';
+
+	slide.classList.remove('show');
+	textMainWrap.classList.remove('show');
+}
+
 function moreHandler(btn) {
-	const textMainWrap = btn.parentElement.parentElement;
+	const textMainWrap = btn.closest('.text-main-wrap');
 	const slide = textMainWrap.parentElement;
 	const textScrollWrap = textMainWrap.querySelector('.text-scroll-wrap');
 	const panelMore = textMainWrap.querySelector('.panel-more');
@@ -84,58 +113,72 @@ function moreHandler(btn) {
 	if (textMainWrap.classList.contains('show')) {
 		// закрываем панель
 
-		const rating = getCurScrObj(pageStructure).rating;
-		ratingContainer.classList.toggle('show', Boolean(rating));
+		pageBg.classList.remove('full');
 
 		panelMore.style.maxHeight = null;
+		panelMore.style.minHeight = null;
 
 		textScrollWrap.style.maxHeight = textScrollWrap.offsetHeight;
 		setTimeout(() => {textScrollWrap.style.maxHeight = null}, 1000);
 
-		btn.innerHTML = 'Mehr lesen';
+		btn.innerHTML = 'Weiter lesen';
 	} else {
 		// открываем панель
 
-		ratingContainer.classList.toggle('show', false);
-		const pageBtnWrap = textMainWrap.querySelector('.page-action-btn-wrap');
+		const screen = slide.parentElement;
+		const scrWrap = screen.parentElement;
 
-		if (isPortraitOrient()) {
-			const screen = slide.parentElement;
-			const screenHeight = screen.offsetHeight;
-			// получаем значение отступа с низу
-			const bottomStr = window.getComputedStyle(slide).bottom;
-			const bottomValue = Math.round(parseFloat(bottomStr));
-			// получаем значение отступа с верху
-			const pageHeader = document.getElementById('header')?.offsetHeight ?? 0;
-			const levTitle = screen.parentElement?.previousElementSibling?.offsetHeight ?? 0;
+		let panelMoreH = panelMore.scrollHeight;
+		let screenHeight;
 
-			textScrollWrap.style.maxHeight = `${screenHeight - bottomValue - pageHeader - levTitle - (pageBtnWrap ? pageBtnWrap.offsetHeight : 0)}px`;
-		} else {
-			const pageBtnHeight = pageBtnWrap ? pageBtnWrap.offsetHeight : 0;
+		if (scrWrap.classList.contains('full')) {
+			pageBg.classList.add('full');
 			const viewportHeight = window.innerHeight;
+			const viewportH = window.visualViewport?.height || viewportHeight;
+			screenHeight = Math.max(screen.offsetHeight, viewportH);
+		} else {
+			if (!isPortraitOrient()) {
+				if (window.matchMedia('(min-width: 768px) and (max-width: 1366px)').matches && (navigator.maxTouchPoints > 0)) {
+					pageBg.classList.add('full');
+					screenHeight = Math.max(screen.offsetHeight) - 40;
+				} else {
+					const style = getComputedStyle(textMainWrap);
+					screenHeight = slide.offsetHeight - parseFloat(style.borderTopWidth) - parseFloat(style.borderBottomWidth);
+				}
+			} else {
+				pageBg.classList.add('full');
+				screenHeight = Math.max(screen.offsetHeight);
+				console.log('screenHeight',screenHeight)
+			}
+		}
 
-			// padding textMainWrap (верх + низ)
-			const mainWrapStyle = window.getComputedStyle(textMainWrap);
-			const mainWrapPadding = parseFloat(mainWrapStyle.paddingTop) + parseFloat(mainWrapStyle.paddingBottom);
+		if (panelMoreH < screenHeight) {
+			const moreTitle = textScrollWrap.querySelector('.title');
+			const moreBtn = textScrollWrap.querySelector('.more-btn');
+			let moreTitleH = moreTitle.offsetHeight;
+			const moreBtnH = moreBtn.offsetHeight;
+		    panelMoreH = (screenHeight - moreTitleH - moreBtnH);
+			panelMore.style.minHeight = `${panelMoreH}px`;
 
-			// расстояние от верха textMainWrap до верха textScrollWrap
-			// это автоматически включает все элементы выше (title, subtitle и т.д.)
-			const scrollWrapOffsetTop = textScrollWrap.offsetTop;
-
-			// итоговая доступная высота
-			const available = slide.offsetHeight - scrollWrapOffsetTop - mainWrapPadding - pageBtnHeight;
-			textScrollWrap.style.maxHeight = `${(available / viewportHeight) * 100}vh`;
-			//textScrollWrap.style.maxHeight = `${((slide.offsetHeight - pageBtnHeight - 80) / viewportHeight) * 100}vh`;
+			// после раскрытия отнимаем высоту заголовка
+			setTimeout(() => {
+				moreTitleH = moreTitle.offsetHeight;
+				h = (screenHeight - moreTitleH - moreBtnH) + "px";
+				panelMore.style.minHeight = h;
+				panelMore.style.maxHeight = h;
+			}, 600);
 		}
 		
-		const panelMoreHeight = panelMore.scrollHeight;
-		let duration = panelMoreHeight * 0.0009;
-		duration = Math.max(2, Math.min(duration, 2));
-		panelMore.style.transition = `max-height ${duration}s ease`;
-		panelMore.style.maxHeight = panelMoreHeight + "px";
+		let duration = panelMoreH * 0.0009;
+		duration = Math.max(2,Math.min(duration, 2));
+		panelMore.style.transition = `max-height ${duration}s ease, min-height ${duration}s ease`;
+
+		panelMore.style.maxHeight = `${panelMoreH}px`;
+		textScrollWrap.style.maxHeight = `${screenHeight}px`;
 		btn.innerHTML = 'Verbergen';
 	}
 
+	slide.classList.toggle('show');
 	textMainWrap.classList.toggle('show');
 }
 
@@ -260,6 +303,9 @@ function screenHandler(e) {
 		case 'A':
 			// переход по ссылке из текстового материала
 			if (target.classList.contains('panel-btn')) {
+				// сворачиваем экран
+				moreCloseHandler(target);
+
 				// Получаем значения data-level и data-screen
 				const levIndex = parseInt(target.getAttribute('data-level') ?? 0);
 				const curLevIndex = parseInt(pageStructure.activeLevel || 0);
@@ -270,7 +316,7 @@ function screenHandler(e) {
 				// переключаем экран
 				const levObj = getCurLevObj(pageStructure);
 				const scrIndex = parseInt(target.getAttribute('data-screen') ?? 0);
-				setTimeout(() => { scrNavHandler(levObj, scrIndex, pageStructure) },400);
+				setTimeout(() => { scrNavHandler(levObj, scrIndex, pageStructure) },0);
 			}
 			break;
 		default:
@@ -377,13 +423,29 @@ function guidePopupHandler(btn, pageStructure) {
 	}, 2000);
 }
 
+// Analyse popup open handler
+function menuAnalysePopupOpenHandler() {
+	menuPopupWrap.classList.remove('show');
+	popupList.querySelector('#cookie-settings-popup-wrap')?.classList.add('show');
+}
+function footerAnalysePopupOpenHandler() {
+	stopGuide();
+	popupList.querySelector('.popup-contr.show')?.classList.remove('show');
+	popupList.querySelector('#cookie-settings-popup-wrap')?.classList.add('show');
+}
+
 function isPortraitOrient() {
 	return window.innerHeight > window.innerWidth;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-console.log(window.innerWidth, window.devicePixelRatio);
+
+	pageBg = document.getElementById('page-bg');
+
+	// console.log(window.innerWidth, window.devicePixelRatio);
 	//////////////////////////////////////////////////////////////////////////////////////
+	headerWrap = document.getElementById('header-wrap');
+	
 	preloader = document.getElementById('preloader');
 
 	navTopList = document.getElementById('nav-top-list');
@@ -398,14 +460,19 @@ console.log(window.innerWidth, window.devicePixelRatio);
 	commentForm = popupList.querySelector('#comment-form');
 
 	// actionContr = document.getElementById('action-contr');
+	phoneWrap = document.getElementById('phone-wrap');
 	ratingContainer = document.getElementById('page-rating-container');
+	
+	benefitsWrap = document.getElementById('benefits-wrap');
 
 	guideMainBtn = document.getElementById('guide-main-btn');
 	
 	secScrNavBtnPrev = document.getElementById("sec-scr-nav-btn-prev");
     secScrNavBtnNext = document.getElementById('sec-scr-nav-btn-next');
+	
 	arrowL = document.getElementById('arrow-L');
 	arrowR = document.getElementById('arrow-R');
+
 	navLevWrap = document.getElementById('navLevWrap');
 	navScrWrap = document.getElementById('navScrWrap');
 
@@ -417,8 +484,8 @@ console.log(window.innerWidth, window.devicePixelRatio);
 	manageAnalysisBtn = document.getElementById('manage-analysis');
 		
 	// первый запуск create page background ////////////////////////////////////////////////////////////////////////////
-	const curTheme = pageStructure.theme || '0';
-    createMainBG(curTheme, pageStructure);
+	//console.log('canvasType:', pageStructure.canvasType);
+	createMainBG(pageStructure);
 
 	// прикручиваем слушателей к SCREENS
 	const screens = document.querySelectorAll('.screen');

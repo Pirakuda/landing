@@ -1,0 +1,142 @@
+{
+  "domain": "domain",
+  "pageSlug":"page-slug",
+  "type":"landing",
+  "pallete":"edtech-yellow-dark",
+  "brand":"bcai",
+  "slogan":"ai native system",
+  "footerBrand":"bcai",
+  "developerName":"",
+  "developerLink":"",
+  "phone":[],
+  "activeLevel":0,
+  "levels": [
+    {
+      "title": "Level title",
+      "navTitle": "Nav-title",
+      "slug": "",
+      "metaTitle": "",
+      "scrFull": "full",
+      "activeScreen":0,
+      "screens": [
+        {
+          "slug": "scr-slug-lev-0-scr-0",
+          "navTitle": "Nav-title",
+          "rating": "true",
+          "phone": "true",
+          "imgPos": "center",
+          "textPos": "",
+          "dataIds": ["1"],
+          "textId": "101",
+          "styleId": "",
+          "displayOrder":"0"
+        }
+      ]
+    },
+    {
+      "title": "Level title",
+      "navTitle": "Nav title",
+      "slug": "level-slug-lev-1",
+      "metaTitle": "meta-description",
+      "scrFull":"",
+      "activeScreen":0,
+      "screens": [
+        {
+          "slug": "",
+          "navTitle": "Nav-title",
+          "rating": "",
+          "phone": "",
+          "imgPos": "",
+          "textPos": "",
+          "dataIds": ["21"],
+          "textId": "201",
+          "styleId": "",
+          "displayOrder":"0"
+        },
+        {
+          "slug": "",
+          "navTitle": "Nav-title",
+          "rating": "",
+          "phone": "",
+          "imgPos": "",
+          "textPos": "",
+          "dataIds": ["22"],
+          "textId": "202",
+          "styleId": "",
+          "displayOrder":"1"
+        }
+      ]
+    }
+  ],
+  
+  "1": {
+    "type": "image", 
+    "path": "image-path-lev-0-scr-0.webp", 
+    "mobilePath": "image-path-mobile-lev-0-scr-0.webp", 
+    "name": "Image description"
+  },
+  "101": {
+    "pageTitle": "Page title",
+    "metaTitle": "Meta description",
+    "figcaption": [""],
+    "cost": "",
+    "secCost": "",
+    "promo": "Screen promo",
+    "title": "Screen title",
+    "benefits": "<li>benefits 1</li><li>benefits 2</li>",
+    "text": "<section><h4 class='panel-highline'>title</h4><p>paragraph</p></section>",
+    "delivery": "",
+    "pageActLinkTitle": "",
+    "pageActLinkPath": "",
+    "pageSecActBtn": "",
+    "secBtnService": "",
+    "pageActBtn": "Call-to-action-btn-name",
+    "btnService": "chat"
+  },
+  "21": {
+    "type": "image", 
+    "path": "image-path-lev-0-scr-0.webp", 
+    "mobilePath": "image-path-mobile-lev-0-scr-0.webp",
+    "name": "Image description"
+  },
+  "22": {
+    "type": "image", 
+    "path": "image-path-lev-0-scr-0.webp", 
+    "mobilePath": "image-path-mobile-lev-0-scr-0.webp",
+    "name": "Image description"
+  },
+    "201": {
+    "pageTitle": "",
+    "metaTitle": "",
+    "cost": "",
+    "secCost": "",
+    "promo": "",
+    "title": "Screen title",
+    "benefits": "",
+    "text": "<p>paragraph</p><ul><li>text</li><li>text</li></ul>",
+    "delivery": "",
+    "pageActLinkTitle": "",
+    "pageActLinkPath": "",
+    "pageSecActBtn": "",
+    "secBtnService": "",
+    "pageActBtn": "",
+    "serviceName": ""
+  },
+  "202": {
+    "pageTitle": "",
+    "metaTitle": "",
+    "cost": "",
+    "secCost": "",
+    "promo": "",
+    "title": "Screen title",
+    "benefits": "",
+    "text": "<p>paragraph</p><ul><li>text</li><li>text</li></ul>",
+    "delivery": "",
+    "pageActLinkTitle": "",
+    "pageActLinkPath": "",
+    "pageSecActBtn": "",
+    "secBtnService": "",
+    "pageActBtn": "",
+    "serviceName": ""
+  }
+}

@@ -1,14 +1,6 @@
 <?php
-//session_start();
-
-// Подключаем конфигурацию и базу данных
-// require_once __DIR__ . '/config/database.php';
-// require_once __DIR__ . '/database/db.php';
-// require_once __DIR__ . '/scripts/functions.php';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/web_relanding/scripts/ConfigMigration.php';
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/scripts/SiteController.php';
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/scripts/ConfigJsonMigration.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/web_relanding/scripts/functions.php';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/web_relanding/config/config.php';
@@ -38,7 +30,7 @@ try {
   // $navStructure = $controller->getNavStructure();
 
   $migration = new ConfigMigration($database);
-  $configPath = $_SERVER['DOCUMENT_ROOT'] . '/web_relanding/scripts/config_page_1.json';
+  $configPath = $_SERVER['DOCUMENT_ROOT'] . '/web_relanding/scripts/config-page-example.json';
   $migration->mainMigrate($configPath);
   echo "Migration completed successfully";
 
@@ -53,11 +45,5 @@ try {
 
 // Закрытие соединений с базами данных
 $database->close();
-
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/views/head.view.php';
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/views/main.view.php';
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/views/mainContr.view.php';
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/views/asideContr.view.php';
-// require_once $_SERVER['DOCUMENT_ROOT'] . '/views/footer.view.php';
 
 exit();

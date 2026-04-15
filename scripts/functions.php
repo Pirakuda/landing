@@ -213,7 +213,7 @@ function createPhoneAnchor($phone, $secClass) {
     $icon = renderSvgIcon('512', 'svg-icon', $path, '2.1978vh');
     $cleanPhone = str_replace(' ', '', $phone);
 
-    return "<a href=\"tel:{$cleanPhone}\" class=\"hpone-anchor flex {$secClass}\">
+    return "<a href=\"tel:{$cleanPhone}\" class=\"phone-anchor flex {$secClass}\">
               <span class=\"phone-icon\">{$icon}</span>
               <span class=\"phone-span\">{$phone}</span>
             </a>";
@@ -224,7 +224,7 @@ function createPhone($pageStructure) {
     $phoneAnchor1 = !empty($pageStructure['phone1']) ? createPhoneAnchor($pageStructure['phone1'], '') : '';
     $phoneAnchor2 = !empty($pageStructure['phone2']) ? createPhoneAnchor($pageStructure['phone2'], 'hpone-sec') : '';
     
-    return "<div class=\"phone-wrap\">
+    return "<div  id=\"phone-wrap\" class=\"phone-wrap\">
               {$phoneAnchor1}
               {$phoneAnchor2}
             </div>";
@@ -337,18 +337,6 @@ function createTitle($scrStyleId, $title, $pageStructure) {
     return "<h3 class=\"title\" style=\"{$style}\">{$title}</h3>";
 }
 
-function createBenefits($scrStyleId, $benefits, $pageStructure) {
-    if (empty($benefits)) return "";
-    $style = !empty($scrStyleId) ? createStyle($scrStyleId, 'benefits_color', '--benefits-color', $pageStructure) : '';
-    return "<ul class=\"product-benefits\" style=\"{$style}\">{$benefits}</ul>";
-}
-
-function createSubtitle($scrStyleId, $subtitle, $pageStructure) {
-    if (empty($subtitle)) return "";
-    $style = !empty($scrStyleId) ? createStyle($scrStyleId, 'subtitle_color', '--subtitle-color', $pageStructure) : '';
-    return "<h4 class=\"subtitle\" style=\"{$style}\">{$subtitle}</h4>";
-}
-
 function createPanelMore($scrStyleId, $text, $pageStructure) {
     if (empty($text)) return "";
     $style = !empty($scrStyleId) ? createStyle($scrStyleId, 'text_color', '--text-color', $pageStructure) : '';
@@ -404,26 +392,12 @@ function createPageActBtn($scrStyleId, $textObj, $pageActLinkPath, $pageActSecBt
     return '<div class="page-action-btn-wrap flex">' . $secBtn . $linkBtn . $mainBtn . '</div>';
 }
 
-function createBgAbstract(bool $isValid, string $slideTextPos, string $scrFull): string {
-    if ($scrFull === '') return '';
-    
-    if (($isValid === true && $slideTextPos === 'center') || ($isValid === false && $slideTextPos === 'right')) {
-        return '
-            <div class="slide-bg-abstract-0"></div>
-            <div class="slide-bg-abstract-1"></div>
-            <div class="curtain-top"></div>
-            <div class="curtain-bottom"></div>
-        ';
-    }
-    return '';
-}
-
 function renderScr($isActScr, $levelObj, $scrIndex, $curScrClass, $scrFull, $pageStructure) {
     $scrObj = $levelObj['screens'][$scrIndex];
     $scrStyleId = $scrObj['styleId'] ?? null;
 
     $slideImgPos = $scrObj['img_pos'] ?? 'left-50';
-    $slideTextPos = $scrObj['text_pos'] ?? 'right';
+    $slideTextPos = !empty($scrObj['text_pos']) ? $scrObj['text_pos'] : 'right';
 
     $dataHTML = createDataHTML($levelObj, $isActScr, $scrObj, $pageStructure);
     $slider = (count($scrObj['dataIds']) > 1) ? createHtmlSlider($scrObj, $pageStructure) : '';
@@ -436,17 +410,15 @@ function renderScr($isActScr, $levelObj, $scrIndex, $curScrClass, $scrFull, $pag
     $secCost = $textObj['sec_cost'] ?? null;
     $promo = $textObj['promo'] ?? null;
     $title = $textObj['title'] ?? null;
-    $benefits = $textObj['benefits'] ?? null;
-    $subtitle = $textObj['subtitle'] ?? null;
     $text = $textObj['text'] ?? null;
     $delivery = $textObj['delivery'] ?? null;
     $pageActLinkPath = $textObj['pageActLinkPath'] ?? null;
     $pageSecActBtn = $textObj['pageSecActBtn'] ?? null;
     $pageActBtn = $textObj['pageActBtn'] ?? null;
 
-    $wrapHidClass = (!$benefits && !$subtitle && !$text && ($title || $pageActBtn)) ? 'hid' : '';
+    $wrapHidClass = (!$text && ($title || $pageActBtn)) ? 'hid' : '';
     $textHidClass = !empty($text) ? '' : 'hid';
-    //$fullOut = !$benefits && !$subtitle && !$text && !$title && !$pageActBtn;
+    //$fullOut = !$text && !$title && !$pageActBtn;
 
     return "<article data-index=\"$scrIndex\" class=\"screen $curScrClass\">
 
@@ -463,18 +435,16 @@ function renderScr($isActScr, $levelObj, $scrIndex, $curScrClass, $scrFull, $pag
                           " . createCost($scrStyleId, $secCost, $cost, $promo, $pageStructure) . "
                           <div class=\"panel-more-wrap {$textHidClass}\">
                             " . createTitle($scrStyleId, $title, $pageStructure) . "
-                            " . createBenefits($scrStyleId, $benefits, $pageStructure) . "
-                            " . createSubtitle($scrStyleId, $subtitle, $pageStructure) . "
                             " . createPanelMore($scrStyleId, $text, $pageStructure) . "
                           </div>
+                          " . (!empty($text) ? "<button class=\"more-btn act-elem link act-anchor\">Weiter lesen</button>" : '') . "
+                          " . createDelivery($scrStyleId, $delivery, $pageStructure) . "
+                          " . createPageActBtn($scrStyleId, $textObj, $pageActLinkPath, $pageSecActBtn, $pageActBtn, $pageStructure) . "
                         </div>
-                        " . (!empty($text) ? "<button class=\"more-btn pos-abs act-elem link act-anchor\">Подробнее</button>" : '') . "
+                        
                       </div>
-                      " . createDelivery($scrStyleId, $delivery, $pageStructure) . "
-                      " . createPageActBtn($scrStyleId, $textObj, $pageActLinkPath, $pageSecActBtn, $pageActBtn, $pageStructure) . "
-                      " . createBgAbstract(true, $slideTextPos, $scrFull) . "
+                      <button class=\"popup-close-btn act-elem pos-abs\" onclick=\"moreCloseHandler(this)\" aria-label=\"Close window\">&times;</button>
                     </div>
-                    " . createBgAbstract(false, $slideTextPos, $scrFull) . "
                 </div>
             </article>";
 }

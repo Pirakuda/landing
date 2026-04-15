@@ -81,7 +81,7 @@
       .catch(error => console.error("Ошибка загрузки комментариев:", error));
   
       // выводим рэйтинг при начальной загрузке страницы
-      showHidRating(pageStructure);
+      // showHidRating(pageStructure);
   
       // открытие окна с отзывами при клике по звездам
       ratingContainer.addEventListener('click', function(e) {

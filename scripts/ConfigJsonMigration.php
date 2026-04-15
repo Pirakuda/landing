@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteController - класс для управления структурой сайта и пользовательскими сессиями
+ * 
  */
 class ConfigJsonMigration {
     private $db;

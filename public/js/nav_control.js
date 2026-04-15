@@ -124,9 +124,134 @@ function arrowHandle(pageStructure) {
     nextSecBtn.classList.toggle('hid', !shouldShowArrows);
 }
 
+// ── Raiting & Phone ──
+
 function showHidRating(pageStructure) {
 	const rating = getCurScrObj(pageStructure).rating;
 	ratingContainer.classList.toggle('show', Boolean(rating));
+}
+
+function showHidPhone(pageStructure) {
+  const phone = getCurScrObj(pageStructure).phone;
+  phoneWrap.classList.toggle('show', Boolean(phone));
+}
+
+// ── ticker.js ──
+
+let tickerAnimId = null;
+let tickerInited = false;
+
+/**
+ * Обновляет содержимое ticker-track и перезапускает анимацию
+ * @param {string} benefitsHTML — innerHTML с <li>элементами
+ */
+function updateTicker(benefitsHTML) {
+  const track = document.querySelector('.ticker-track');
+  if (!track) return;
+
+  // Останавливаем текущую анимацию
+  stopTicker();
+
+  // Очищаем и вставляем оригинальные элементы
+  track.innerHTML = '';
+  track.insertAdjacentHTML('beforeend', benefitsHTML);
+
+  // Оборачиваем голый текст между <li> в <li>
+  normalizeBenefits(track);
+
+  const items = track.querySelectorAll('li');
+  if (!items.length) return;
+
+  // Добавляем разделитель между элементами и клонируем набор для бесшовного цикла
+  const fragment = document.createDocumentFragment();
+  items.forEach(li => li.classList.add('ticker-item'));
+
+  // Клонируем весь набор для замкнутости
+  const clone = track.innerHTML;
+  track.insertAdjacentHTML('beforeend', clone);
+
+  // Запускаем если контейнер видим
+  if (benefitsWrap.classList.contains('show')) {
+    startTicker();
+  }
+
+  tickerInited = true;
+}
+
+/**
+ * Нормализует содержимое: оборачивает текстовые узлы вне <li> в <li>
+ */
+function normalizeBenefits(track) {
+  const nodes = [...track.childNodes];
+  nodes.forEach(node => {
+    if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+      const li = document.createElement('li');
+      li.textContent = node.textContent.trim();
+      track.replaceChild(li, node);
+    }
+  });
+}
+
+/**
+ * Запускает CSS-анимацию бегущей строки
+ */
+function startTicker() {
+  const track = document.querySelector('.ticker-track');
+  if (!track) return;
+
+  // Сбрасываем анимацию, чтобы элементы получили естественную ширину
+  track.style.animation = 'none';
+
+  // Ждём пока браузер отрисует элементы
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const oneSetWidth = track.scrollWidth / 2;
+      if (oneSetWidth < 10) return; // защита от мусорных значений
+
+      track.style.setProperty('--ticker-width', `-${oneSetWidth}px`);
+      track.style.animation = `tickerScroll ${oneSetWidth / 50}s linear infinite`;
+    });
+  });
+}
+
+/**
+ * Ставит анимацию на паузу (не удаляет — мгновенный resume)
+ */
+function pauseTicker() {
+  const track = document.querySelector('.ticker-track');
+  if (track) track.style.animationPlayState = 'paused';
+}
+
+/**
+ * Полностью останавливает и сбрасывает анимацию
+ */
+function stopTicker() {
+  const track = document.querySelector('.ticker-track');
+  if (track) {
+    track.style.animation = 'none';
+    tickerInited = false;
+  }
+}
+
+function showHidBenefits(pageStructure) {
+  const levObj = pageStructure.levels[pageStructure.activeLevel];
+  const scrObj = getCurScrObj(pageStructure);
+  const textId = scrObj?.textId ?? null;
+  const textObj = textId ? pageStructure[textId] : null;
+  const benefits = textObj?.benefits ?? '';
+
+  const showBenefits = levObj?.scrFull === 'full' && Boolean(benefits.trim());
+  const wasVisible = benefitsWrap.classList.contains('show');
+
+  benefitsWrap.classList.toggle('show', showBenefits);
+
+  if (showBenefits) {
+    // Обновляем контент и запускаем
+    updateTicker(benefits);
+  } else if (wasVisible) {
+    // Скрыли — ставим на паузу (CSS правило тоже сработает, но подстрахуемся)
+    pauseTicker();
+  }
 }
 
 function lastLevAct(pageStructure) {
@@ -138,7 +263,9 @@ function lastLevAct(pageStructure) {
 	// Создаем функцию с задержкой 0.8 секунд
 	const delayedFunction = delayedAction(() => {
 		arrowHandle(pageStructure);
+		showHidPhone(pageStructure);
 		showHidRating(pageStructure);
+		showHidBenefits(pageStructure);
 		
 		//actionPopupHandler(pageStructure);
 		сreateNav('h', pageStructure);
@@ -250,7 +377,7 @@ function wheelyHandler(e) {
 function wheely(e) {
 	const target = e.target;
 	stopGuide();
-	if (target.closest('.text-main-wrap.show, .popup-contr, .legal-main-wrap, .menu-toggle, .menu-sec-link')) return;
+	if (target.closest('.page-bg.full, .popup-contr, .legal-main-wrap, .menu-toggle, .menu-sec-link')) return;
 
 	const elem = target.offsetParent;
 	if (elem && (!elem.classList.contains('text-wrap-wrap') || !elem.parentNode.classList.contains('show'))) {
@@ -274,19 +401,23 @@ function hotkeys(e) {
 			// }
 			break;
 		case 'ArrowLeft':
-			leftScreenContr(e, pageStructure);
+			if (!pageBg.classList.contains('full')) leftScreenContr(e, pageStructure);
 			break;
 		case 'ArrowUp':
-			topLevelContr(e, pageStructure);
+			if (!pageBg.classList.contains('full')) opLevelContr(e, pageStructure);
 			break;
 		case 'ArrowRight':
-			rightScreenContr(e, pageStructure);
+			if (!pageBg.classList.contains('full')) rightScreenContr(e, pageStructure);
 			break;
 		case 'ArrowDown':
-			bottomLevelContr(e, pageStructure);
+			if (!pageBg.classList.contains('full')) bottomLevelContr(e, pageStructure);
 			break;
 		case 'Escape':
-			popupList.querySelector('.popup-contr.show')?.classList.remove('show');
+			if (pageBg.classList.contains('full')) {
+				pageBg.classList.remove('show');
+			} else {
+				popupList.querySelector('.popup-contr.show')?.classList.remove('show');
+			}
 			break;
 		default:
 			break;
@@ -318,7 +449,9 @@ async function nextScreen(newScrNum) {
 	});
 
 	setTimeout(() => {
+		showHidPhone(pageStructure);
 		showHidRating(pageStructure);
+		showHidBenefits(pageStructure);
 
 		const nextScr = scrWrap.children[newScrNum];
 		nextScr.className = 'screen current';
@@ -350,8 +483,6 @@ function updateScreenMeta(isLevAct, pageStructure) {
 	// Вспомогательная функция обновления URL и META
 	function setMeta(title, slug, description) {
 		const baseUrl = `${BASE_URL}/${slug}`;
-
-		console.log("result: ", baseUrl)
 	
 		window.history.replaceState({}, title, baseUrl);
 		// window.history.pushState({}, title, baseUrl);
@@ -584,6 +715,12 @@ function handleInactiveLink(link, pageStructure) {
 
 // Функция для установки слушателя событий
 function setupNavEventListeners() {
+
+	// первый запуск рэйтинга и телефона
+	showHidPhone(pageStructure);
+	showHidRating(pageStructure);
+	// Первичный запуск тикера
+  	showHidBenefits(pageStructure);
 
 	const anchor = navTopList.querySelectorAll('a.act-anchor[aria-haspopup="true"]');
 

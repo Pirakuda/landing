@@ -390,10 +390,12 @@
     "serviceName": ""
   },
 
-  "10003": {"type": "image", 
+  "10003": {
+    "type": "image", 
     "path": "ki-crm-mittelstand-telegram-dashboard.webp", 
     "m_path": "ki-crm-mittelstand-telegram-dashboard-mobile.webp",
-    "name": "Telegram-Dashboard für KI-CRM mit Leadverteilung und automatischen Follow-ups"},
+    "name": "Telegram-Dashboard für KI-CRM mit Leadverteilung und automatischen Follow-ups"
+  },
   
   "301": {
     "type": "text",

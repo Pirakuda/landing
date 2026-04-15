@@ -21,7 +21,7 @@ function dragStartHandler(e) {
 
 function dragStart(e) {
     const target = e.target;
-    if (target.closest('.popup-contr, .legal-main-wrap, .menu-toggle, .menu-sec-link, .email-icon-wrap')) return;
+    if (target.closest('.page-bg.full, .popup-contr, .legal-main-wrap, .menu-toggle, .menu-sec-link, .email-icon-wrap')) return;
     const elem = target.offsetParent;
     
     if (elem && (!elem.classList.contains('text-wrap-wrap') &&
