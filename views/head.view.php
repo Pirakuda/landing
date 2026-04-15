@@ -6,7 +6,7 @@
 
 		<title><?= getMeta($pageStructure)['page_title'] ?></title>
 		<meta name="description" content="<?= getMeta($pageStructure)['meta_title'] ?>">
-		<link rel="canonical" href="https://relanding.de/<?= $pageStructure['screen_slug'] ?>">
+		<link rel="canonical" href="<?= BASE_URL ?>/<?= $pageStructure['screen_slug'] ?>">
 
 		<style>
 		  :root {

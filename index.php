@@ -1,14 +1,14 @@
 <?php
-define('APP_ROOT', __DIR__);
-// define('BASE_URL', 'https://relanding.de'); // на проде
-define('BASE_URL', '/landing'); // локально
 //session_start();
+
+require_once __DIR__ . '/config/config.php';
+define('APP_ROOT', __DIR__);
+define('BASE_URL', Config::BASE_URL);
 
 // Подключаем конфигурацию и базу данных
 require_once APP_ROOT . '/scripts/landing_nav_creater.php';
 require_once APP_ROOT . '/scripts/functions.php';
 require_once APP_ROOT . '/scripts/Analytics.php';
-require_once APP_ROOT . '/config/config.php';
 require_once APP_ROOT . '/database/database.php';
 
 try {
@@ -16,9 +16,8 @@ try {
   $database->beginTransaction();
 
   // Инициализация параметров
-  $domain = 'relanding.de';
+  $domain = Config::DOMAIN;
   $language = 'de';
-  $deviceType = 'desktop';
 
   // Палитра цветов 32ps
   $colorPalettes = [

@@ -110,6 +110,8 @@ CREATE DATABASE your_db_name CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 mysql -u your_db_user -p your_db_name < database/schema/tables/analytics_events_buffer.sql
 mysql -u your_db_user -p your_db_name < database/schema/tables/web_sessions.sql
 mysql -u your_db_user -p your_db_name < database/schema/tables/local_daily_stats.sql
+
+mysql -u bcai_client -p bcai_page_db
 ```
 
 **4. Запустить через XAMPP**
