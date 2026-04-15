@@ -181,10 +181,10 @@ try {
   //////////////////////////////////////////////////////////////////////////////
   // Получение данных из render_main_cache
   $mainData = $database->fetch(
-        "SELECT socialMedia, legal FROM render_main_cache WHERE domain = ? AND language = ?",
+        "SELECT social_media, legal FROM render_main_cache WHERE domain = ? AND language = ?",
         [$domain, $language]
   );
-  $socialMedia = $mainData ? json_decode($mainData['socialMedia'], true, 512, JSON_THROW_ON_ERROR) : null;
+  $socialMedia = $mainData ? json_decode($mainData['social_media'], true, 512, JSON_THROW_ON_ERROR) : null;
   $legal = $mainData ? json_decode($mainData['legal'], true, 512, JSON_THROW_ON_ERROR) : null;
   
   // Простая подготовка данных для клиента

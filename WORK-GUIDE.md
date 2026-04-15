@@ -29,7 +29,6 @@ git push
 # Hetzner Landing
 cd /var/www/briemchain.ai
 sudo git pull
-sudo chown -R www-data:www-data /var/www/briemchain.ai
 ```
 
 ### ПК (Ubuntu)
