@@ -1,9 +1,9 @@
 <?php
 class Config {
     const SERVERNAME = "localhost";
-    const USERNAME = "bcai_client";
-    const PASSWORD = "2Gx6GdxA9n3KDy6AyKjhhGs";
-    const DBNAME = "bcai_page_db";
+    const USERNAME = "";
+    const PASSWORD = "";
+    const DBNAME = "";
 
     const BASE_URL = 'https://briemchain.ai';
     const DOMAIN = 'briemchain.ai';
