@@ -236,8 +236,8 @@ function createDataHTML($levelObj, $isActScr, $scrObj, $pageStructure) {
     $dataObj = $pageStructure[$dataId] ?? null;
     if (empty($dataObj)) return '';
 
-    $baseUrl = BASE_URL . './public/store/';
-    $url = BASE_URL . './public/store/' . $dataObj['path'];
+    $baseUrl = BASE_URL . '/public/store/';
+    $url = BASE_URL . '/public/store/' . $dataObj['path'];
     $isImage = $dataObj['type'] === 'image';
 
     if ($isImage) {
@@ -261,7 +261,7 @@ function createDataHTML($levelObj, $isActScr, $scrObj, $pageStructure) {
 }
 
 function createHtmlBgData($dataType, $path) {
-    $path = "./public/store/" . $path;
+    $path = BASE_URL . "/public/store/" . $path;
     return "<div class='mini-data' data-type='{$dataType}' style='background-image: url({$path});'></div>";
 }
 

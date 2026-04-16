@@ -16,7 +16,7 @@
 				<span>
 				  ©
 				  <span id="currentYear"></span> 
-				  <span id='footer-page-name'><?= !empty($pageStructure['footerBrand']) ? $pageStructure['f_brand'] : 'Firma' ?></span>
+				  <span id='footer-page-name'><?= !empty($pageStructure['footerBrand']) ? $pageStructure['footerBrand'] : 'Firma' ?></span>
 				</span>
 			</span>
 

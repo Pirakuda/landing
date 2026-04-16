@@ -2,7 +2,6 @@
 //session_start();
 
 require_once __DIR__ . '/config/config.php';
-
 define('APP_ROOT', __DIR__);
 define('BASE_URL', Config::BASE_URL);
 
@@ -19,6 +18,7 @@ try {
   // Инициализация параметров
   $domain = Config::DOMAIN;
   $language = 'de';
+  $deviceType = 'desktop';
 
   // Палитра цветов 32ps
   $colorPalettes = [
@@ -105,7 +105,7 @@ try {
   }
 
   // test-variant
-  $screenSlug = 'ki-oekosystem-mittelstand';
+  if (Config::ENV === 'local') $screenSlug = 'ki-oekosystem-mittelstand';
 
   // Валидация
   if ($screenSlug && !preg_match('/^[a-z0-9-]+$/', $screenSlug)) $screenSlug = null;
@@ -127,27 +127,25 @@ try {
     // PAGE 404
     $pageStructure = [
        'data' => json_encode([
-           "domain" => "relanding.ru",
-           "deviceType" => "",
-           "pageSlug" => "404",
+           "domain" => Config::DOMAIN,
+           "pageSlug" => "PAGE 404",
            "type" => "landing",
-           "brand" => "BriemChainAI",
-           "slogan" => "Сложные технологии - простые решения",
+           "brand" => Config::DOMAIN,
+           "slogan" => "",
            "developerName" => "",
            "developerLink" => "",
-           "phone" => ["+7 988 153 15 36"],
+           "phone" => [],
            "activeLevel" => 0,
            "levels" => [
                [
-                   "title" => "404 - Страница не найдена",
+                   "title" => "PAGE 404",
                    "activeScreen" => "0",
                    "scrFull" => "full",
                    "screens" => [
                        [
-                           "slug" => "obzor",
-                           "rating" => "true",
-                           "imgPos" => "center",
-                           "textPos" => "center",
+                           "slug" => "PAGE 404",
+                           "imgPos" => "",
+                           "textPos" => "",
                            "dataIds" => ["1001"],
                            "textId" => "101",
                            "styleId" => ""
@@ -157,27 +155,24 @@ try {
            ],
            "1001" => 
              ["type" => "image", 
-               "path" => "ai-ekosistema-nedvizhimost-sayt-lendingi-avtomatizatsiya.webp",
-               "mobilePath" => "ai-ekosistema-nedvizhimost-sayt-lendingi-avtomatizatsiya-mobile.webp",
-               "name" => "AI-экосистема BriemChainAI для Краснодара - интегрированное решение с умным сайтом, персонализированными лендингами, полной автоматизацией продаж и продвижением"],
+               "path" => "PAGE-404.webp",
+               "mobilePath" => "PAGE-404-mobile.webp",
+               "name" => "PAGE 404"],
            "101" => [
-               "type" => "text",
-               "pageTitle" => "404 - Страница не найдена",
-               "metaTitle" => "Страница не найдена. Вернитесь на главную или воспользуйтесь меню.",
-               "title" => "Страница не найдена!"
+               "pageTitle" => "PAGE 404",
+               "metaTitle" => "PAGE 404",
+               "title" => "PAGE 404"
            ]
        ], JSON_THROW_ON_ERROR)
     ];
   }
 
-  //////////////////////////////////////////////////////////////////////////////
-  // Получение данных из render_theme_cache
-//   $themeData = $database->fetch(
-//       "SELECT theme FROM render_theme_cache WHERE domain = ? AND language = ?",
-//       [$domain, $language]
-//   );
-//  $theme = $themeData ? json_decode($themeData['theme'], true, 512, JSON_THROW_ON_ERROR) : null;
-
+  // Передаем цветовую палитру
+  $paletteName = $pageStructure['palette'] ?? 'edtech-yellow-dark';
+  $p = $colorPalettes[$paletteName];
+  $rgbBg = $p[2];
+  $pageStructure['rgbBg'] = $rgbBg;
+  
   //////////////////////////////////////////////////////////////////////////////
   // Получение данных из render_main_cache
   $mainData = $database->fetch(
@@ -197,12 +192,6 @@ try {
     'is_anonymous' => !$cookiesAccepted
   ];
   $pageStructure['analytics'] = $analyticsData;
-
-  // Передаем цветовую палитру
-  $paletteName = $pageStructure['paletteName'] ?? 'edtech-yellow-dark';
-  $p = $colorPalettes[$paletteName];
-  $rgbBg = $p[2];
-  $pageStructure['rgbBg'] = $rgbBg;
 
   // test raiting & phone data
   // $pageStructure['levels'][0]['screens'][0]['rating'] = 'true';
@@ -236,13 +225,6 @@ try {
 } finally {
     $database->close();
 }
-
-$pageStructure = $pageStructure ?? [];
-$navStructure = $navStructure ?? [];
-$socialMedia = $socialMedia ?? [];
-$legal = $legal ?? [];
-$p = $p ?? ['#eee','#bbb','164,164,164','#111','#222','#333','#eee','#555','#DDA63D','#222','#fb5a69','#DDA63D'];
-$themes = $themes ?? ['canvasType' => 'hexagon', 'bgUrl' => ''];
 
 require_once APP_ROOT . '/views/head.view.php';
 require_once APP_ROOT . '/views/main.view.php';

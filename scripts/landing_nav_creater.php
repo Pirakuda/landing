@@ -33,6 +33,7 @@ function generateLevelItem($level, $levelIndex, $actLevIndex, $baseUrl, $pageStr
     $isActive = $levelIndex === $actLevIndex ? true : false;
     $hasSubmenu = count($level['screens']) > 1;
     $class = 'act-elem link' . ($hasSubmenu ? ' nav-level-1' : '') . ($isActive ? ' cur' : '');
+    echo '<!-- DBG level: ' . json_encode($level, JSON_UNESCAPED_UNICODE) . ' -->';
     $levelName = htmlspecialchars($level['navTitle'], ENT_QUOTES, 'UTF-8');
     $html = sprintf('<li class="%s">', $class) . PHP_EOL;
     

@@ -95,7 +95,7 @@
 				<div class="nav-box-wrap">
 					<ul id='nav-top-list' class="nav-box nav-burger" aria-label="Seitennavigation">
 						<?php
-							if (!empty($pageStructure['type']) && $pageStructure['type'] == 'landing') {
+							if (!empty($pageStructure['type']) && $pageStructure['type'] == 'site') {
 								echo renderNavBurgerList($pageStructure, $navStructure);
 							} else {
 								echo generateNavigationMenu($pageStructure);

@@ -29,6 +29,9 @@ git push
 # Hetzner Landing
 cd /var/www/briemchain.ai
 sudo git pull
+
+# config edit
+sudo nano /var/www/briemchain.ai/config/config.php
 ```
 
 ### ПК (Ubuntu)
