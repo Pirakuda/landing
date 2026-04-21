@@ -356,11 +356,13 @@ function noiseDraw(color) {
 
 function createMainBG(pageStructure) {
 
+	if (isPortraitOrient()) return; // для портретных гаджетов не работаем
+
 	const canvasType = pageStructure.canvasType || 'triangles';
 	const rgbBg = pageStructure.rgbBg;
 	const mainColor = `rgba(${rgbBg}, 0.6)`;
 
-	console.log('canvasType:', canvasType)
+	// console.log('canvasType:', canvasType)
 
 	switch (canvasType) {
 	  // Оригинальные

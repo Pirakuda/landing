@@ -1,6 +1,6 @@
 
 
-@media (min-width: 768px) and (max-width: 1366px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
+@media (min-width: 700px) and (max-width: 1366px) and (orientation: portrait) and (hover: none) and (pointer: coarse) {
 	.text-scroll-wrap{
 	overscroll-behavior: none;
   	touch-action: pan-y;
@@ -55,7 +55,7 @@ header{
 }
 .header{
     display: flex;
-    padding: 14px 0 14px 18px;
+    padding: 16px 0 14px 18px;
 	align-items: center;
 }
 .logo-wrap{
@@ -74,10 +74,11 @@ header{
 	display: flex;
 	align-items: baseline;
     margin-left: 14px;
+	flex-direction: column;
 }
 .page-name,
 .concept-name{
-	font-size: 24px;
+	font-size:18px;
 }
 
 /* nav & popup *****************************/
@@ -666,6 +667,7 @@ header{
 	width:100%;/*660px/11,94*/
 	bottom: 20%;
     height: calc(80% - 72px);
+	border: none;
 }
 
 /* LAWANDTECH interactive HOME ACT LINKS*/
@@ -679,13 +681,13 @@ header{
 	right:0;
 	transition: width .5s, height .5s, top .5s, bottom .5s, left .5s, right .5s;
 	display:flex;
-            align-items:center;
+    align-items:center;
 }
 .data{
 	position:absolute;
 	height:100%;
 	width:100%;
-	   object-fit:cover;
+	object-fit:cover;
 	color:transparent;
 	opacity:1;
 	z-index:2;
@@ -702,59 +704,78 @@ header{
     align-items: center;
 	width:100%;
 	height:100%;
-	background: var(--text-bg);
-	color: var(--text-color);
 	background-size: cover;
 	background-position: center;
 }
 
-/* figure *****************************************************************/
+/* figure slider wrap *******************************/
 .figure-slider-wrap{
-	right:14%;
-	bottom:12.730318vh;/*152px/11,94*/
-	z-index:10;
 	position:absolute;
-	z-index:11;
 	display: flex;
-            align-items: center;
+	flex-direction: column;
+    align-items: center;
+	left: 2%;
+    right: auto;
+    top: 42%;
+    height: auto;
+    transform: translateY(-50%);
+	z-index:11;
 }
 .figure-slider-container{
 	overflow:hidden;
+	max-height:352px;
 }
 .figure-slider-list{
-	visibility:hidden;
-	width:0;
+	display: grid;
+    grid-auto-flow: row;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    place-items: center;
+    visibility: visible;
+    width: auto;
+    max-height: 352px;
+}
+.figure-slider-item {
+    width: 60px;
+    height: 60px;
+    margin: 6px;
+    border-width: 8px;
+    border-radius: 8px;
+}
+.main-wrap.pos-abs .figure-slider-item {
+    padding:0;
+}
+.figure-slider-item.cur, 
+.figure-slider-item:hover, 
+.figure-slider-item.cur:hover {
+    border-width: 8px;
 }
 .figure-slider-btn{
 	font-size: 1.4em;
-	height: 52px;
-	line-height: 52px;
-	width:40px;
-	margin: 4px;
-	border-radius: 6px;
-	border:none;
-	outline:none;
-	visibility:visible;
+    height: 76px;
+    line-height: 76px;
+    width: 42px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    visibility: visible;
+    transform: rotate(90deg);
 }
 .figure-slider-btn.hid{
 	visibility:hidden;
 }
-.figure-slider-counter{
-	font-size: 20px;
-	height: 52px;
-	line-height: 52px;
-	margin:4px;
-	padding-left: 8px;
-	padding-right: 8px;
-	visibility:visible;
-	width:auto;
-	border-radius:6px;
-	transition:width .8s,margin .8s;
-	background:var(--abstract-color);
+.scr-wrap.full .figure-slider-counter {
+    visibility: hidden;
+    width: 0;
+	height: 0;
+    margin: 0;
+    padding: 0;
 }
 .mini-data{
 	font-size:20px;
-	border-radius:6px;
+	border-radius:2px;
 }
 
 /* slide text *************************************/
@@ -1144,6 +1165,7 @@ header{
 	opacity:0;
 	background:var(--text-bg);
 	z-index: -1;
+	bottom: auto;
 }
 .ticker-wrap.show{
     visibility: visible;
@@ -1176,20 +1198,50 @@ header{
   animation-play-state: paused !important;
 }
 
+/* RATING ****************************/
 .page-rating-container{
-	right: 4%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	right: 2%;
     top: 11vh;
+	width: 64px;
+    height: 64px;
+    border-radius: 50%;
+	background: var(--page-bg);
+	border: 1px solid var(--page-border-color);
+	transform: translateX(30px);
+  	opacity: 0;
 }
+.phone-wrap.show,
+.page-rating-container.show{
+	opacity:0.7;
+}
+.page-rating-heading{display: none;}
+
 .page-rating-wrap{
-	margin-top: 6px;
+	display: flex;
+    flex-direction: column;
 }
 .page-rating-stars{
-	font-size:42px;
-	margin-right:20px;
+	font-size: 24px;
+    margin-top: -4px;
 }
 .page-rating-counter{
-	font-size:26px;
-	margin-top:5px;
+	font-size: 16px;
+    margin-top: 4px;
+}
+	
+/* popup rating stars ******************************/
+.popup-stars-wrap{
+	color:var(--text-color);
+	text-align: right;
+}
+.rating-star{
+	font-size:28px;
+}
+.comment-stars-wrap{
+	font-size:16px;
 }
 	
 /* popup rating stars ******************************/
@@ -1204,11 +1256,24 @@ header{
 }
 
 .phone-wrap{
-	left: 4%;
+	left: 2%;
     top: 11vh;
+	padding: 8px 16px;
+    border-radius: 25px;
+    background: var(--page-bg);
+    border: 1px solid var(--page-border-color);
 }
 .phone-wrap .phone-icon{
 	margin-right: 6px;
+}
+.phone-anchor{
+	align-items: center;
+}
+.phone-wrap .phone-icon {
+    margin-right: 6px;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
 }
 
 }

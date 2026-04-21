@@ -110,6 +110,8 @@ function delayedAction(callback, delay = 800) {
 }
 
 function arrowHandle(pageStructure) {
+	if (isPortraitOrient()) return; // для портретных гаджетов не работаем
+
     const curLevIndex = parseInt(pageStructure.activeLevel);
     const scrCount = pageStructure.levels[curLevIndex].screens.length;
     const shouldShowArrows = scrCount !== 1;
@@ -127,8 +129,8 @@ function arrowHandle(pageStructure) {
 // ── Raiting & Phone ──
 
 function showHidRating(pageStructure) {
-	const rating = getCurScrObj(pageStructure).rating;
-	ratingContainer.classList.toggle('show', Boolean(rating));
+  const rating = getCurScrObj(pageStructure).rating;
+  ratingContainer.classList.toggle('show', Boolean(rating));
 }
 
 function showHidPhone(pageStructure) {
@@ -717,10 +719,10 @@ function handleInactiveLink(link, pageStructure) {
 function setupNavEventListeners() {
 
 	// первый запуск рэйтинга и телефона
+	arrowHandle(pageStructure);
 	showHidPhone(pageStructure);
 	showHidRating(pageStructure);
-	// Первичный запуск тикера
-  	showHidBenefits(pageStructure);
+	showHidBenefits(pageStructure);
 
 	const anchor = navTopList.querySelectorAll('a.act-anchor[aria-haspopup="true"]');
 

@@ -95,20 +95,19 @@ function createVideo(isLastElem, dataObj, preloader) {
 /* galery slider handle */
 // оработка клика мыши по стрелкам в широком формате
 function updateSliderArrows(sliderList, sliderWrap, direction, scrollAmount) {
-    const scrollLeftBtn = sliderWrap.children[0];
-    const scrollRightBtn = sliderWrap.children[3];
+    const scrollTopBtn = sliderWrap.children[0];
+    const scrollBottomBtn = sliderWrap.children[3];
 
-    const scrollLeft = sliderList.scrollLeft;
-    const scrollWidth = sliderList.scrollWidth;
-    const clientWidth = sliderList.clientWidth;
+    const scrollTop = sliderList.scrollTop;
+    const scrollHeight = sliderList.scrollHeight;
+    const clientHeight = sliderList.clientHeight;
 
     if (direction === 1) {
-        if (scrollLeft === 0) scrollLeftBtn.classList.remove('hid');
-        //if (scrollLeft * 2 + scrollAmount >= scrollWidth) scrollRightBtn.classList.add('hid');
-        scrollRightBtn.classList.add('hid');
+        if (scrollTop === 0) scrollTopBtn.classList.remove('hid');
+        scrollBottomBtn.classList.add('hid');
     } else {
-        if (scrollLeft <= clientWidth) scrollLeftBtn.classList.add('hid');
-        if (scrollLeft + clientWidth === scrollWidth) scrollRightBtn.classList.remove('hid');
+        if (scrollTop <= clientHeight) scrollTopBtn.classList.add('hid');
+        if (scrollTop + clientHeight === scrollHeight) scrollBottomBtn.classList.remove('hid');
     }
 }
 
@@ -163,25 +162,27 @@ function sliderArrowsHandler(btn, direction, pageStructure) {
     const textObj = pageStructure[textId] || {};
     const figcaptions = textObj.figcaptions || [];
 
-    //console.log('textId', textId)
-
-    if (isPortraitOrient()) {
-        // оработка клика мыши по стрелкам для мобильного устройства
+    if (isPhonePortrait()) {
+        // телефон — упрощённый вариант со счётчиком
         updateSliderArrowsAndImg(sliderWrap, sliderList, direction, figcaptions, pageStructure);
+
+    } else if (isTabletPortrait() || !scrWrap.classList.contains('full')) {
+        // планшет в портрете ИЛИ узкий экран — вертикальная лента лента (десктоп-логика)
+        const scrollAmount = sliderList.clientHeight;
+        sliderList.scrollBy({
+            top: direction * scrollAmount,
+            behavior: 'smooth'
+        });
+        updateSliderArrows(sliderList, sliderWrap, direction, scrollAmount);
+
     } else {
-        if (scrWrap.classList.contains('full')) {
-            // оработка клика мыши по стрелкам в широком формате
-            const scrollAmount = sliderList.clientWidth; // /4
-            sliderList.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
-            
-            updateSliderArrows(sliderList, sliderWrap, direction, scrollAmount);
-        } else {
-            // оработка клика мыши по стрелкам в узком формате
-            updateSliderArrowsAndImg(sliderWrap, sliderList, direction, figcaptions, pageStructure);
-        }
+        // десктоп, full-экран
+        const scrollAmount = sliderList.clientHeight;
+        sliderList.scrollBy({
+            top: direction * scrollAmount,
+            behavior: 'smooth'
+        });
+        updateSliderArrows(sliderList, sliderWrap, direction, scrollAmount);
     }
 }
 

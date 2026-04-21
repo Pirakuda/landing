@@ -57,7 +57,7 @@
 		<link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/public/css/styles-atomic.css">
 
 		<!-- Общие стили для мобильных устройств и планшетов в портретной ориентации -->
-		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-mobile.css" media="(max-width:767px) and (orientation: portrait)">
+		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-mobile.css" media="(max-width:699px) and (orientation: portrait)">
 
 		<!-- Стили для планшетов в горизонтальном положении -->
 		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-tablet.css" media="(max-width: 1023px) and (orientation: landscape)">
@@ -70,7 +70,7 @@
 		<!-- десктопные стили, активные элементы -->
 		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-action-elem-desktop.css" media="(min-width: 1024px)">
 
-		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-tablet-ipad-mobile.css" media="(min-width: 768px) and (max-width: 1366px) and (orientation: portrait) and (hover: none) and (pointer: coarse)">
+		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-tablet-ipad-mobile.css" media="(min-width: 700px) and (max-width: 1366px) and (orientation: portrait) and (hover: none) and (pointer: coarse)">
 		<link rel="stylesheet" href="<?= BASE_URL ?>/public/css/styles-tablet-ipad-desktop.css" media="(min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) and (pointer: coarse)">
   	
 		<script>const BASE_URL = '<?= BASE_URL ?>';</script>

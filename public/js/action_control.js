@@ -54,6 +54,7 @@
   
       const pageRatingStars = document.getElementById("page-rating-stars");
       const pageRatingCounter = document.getElementById("page-rating-counter");
+
       const loadMoreBtn = document.getElementById("load-more-comments-btn");
       const commentsContainer = document.getElementById("comments-container");
       const ratingPopup = document.getElementById('rating-popup-wrap');
@@ -74,7 +75,8 @@
           const avgRating = data.avg_rating;
   
           // Обновляем отображение рейтинга
-          pageRatingStars.innerHTML = "&#9733;".repeat(Math.floor(avgRating)) + "&#9734;".repeat(5 - Math.floor(avgRating));
+          // pageRatingStars.innerHTML = "&#9733;".repeat(Math.floor(avgRating)) + "&#9734;".repeat(5 - Math.floor(avgRating));
+          pageRatingStars.innerHTML = "&#9733;";
           // pageRatingCounter.innerHTML = `${totalReviews}/${avgRating}`;
           pageRatingCounter.innerHTML = `${avgRating}`;
       })

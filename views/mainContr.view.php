@@ -87,11 +87,11 @@
     </ul>
   </div>
 
-  <div class="pos-abs arrow-wrap L <?=$hidArrowClass?>">
+  <div class="pos-abs arrow-wrap L hid">
     <button id="arrow-L" class='arrow-btn act-elem' aria-label="Перейти к предыдущему экрану"><span>&#10094;</span></button>
   </div>
 
-  <div class="pos-abs arrow-wrap R <?=$hidArrowClass?>">
+  <div class="pos-abs arrow-wrap R hid">
   	<button id="arrow-R" class='arrow-btn act-elem' aria-label="Перейти к следующему экрану"><span>&#10095;</span></button>
   </div>
 </div>

@@ -438,6 +438,19 @@ function isPortraitOrient() {
 	return window.innerHeight > window.innerWidth;
 }
 
+// телефон в портретной ориентации (< 700px)
+function isPhonePortrait() {
+    return window.innerWidth < 700 && window.matchMedia('(orientation: portrait)').matches;
+}
+
+// планшет в портретной ориентации (700-1366px, touch-устройство)
+function isTabletPortrait() {
+    return window.innerWidth >= 700
+        && window.innerWidth <= 1366
+        && window.matchMedia('(orientation: portrait)').matches
+        && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
 	pageBg = document.getElementById('page-bg');

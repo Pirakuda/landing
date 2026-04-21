@@ -81,6 +81,8 @@
 }
 
 /* top hpone ***************************************/
+.phone-wrap.show:hover,
+.page-rating-container.show:hover,
 .popup-btn:hover,
 .popup-close-btn:hover,
 .cookie-banner-actions .act-elem:hover,
