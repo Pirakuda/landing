@@ -128,8 +128,8 @@ try {
   //////////////////////////////////////////////////////////////////////////////
   // Получение данных из render_cache
   $pageData = $database->fetch(
-      "SELECT data FROM render_cache WHERE domain = ? AND language = ? AND device_type = ? LIMIT 1",
-      [$domain, $language, $deviceType]
+    "SELECT data FROM render_cache WHERE domain = ? AND language = ? LIMIT 1",
+    [$domain, $language]
   );
   
   if ($pageData) {
