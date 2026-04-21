@@ -16,10 +16,17 @@ try {
   $database->beginTransaction();
 
   // Инициализация параметров
-  $domain = 'briemchain.ai';
+  // test-variant
+  if (Config::ENV === 'local') {
+    $domain = Config::DOMAIN;
+  } else {
+    $host = $_SERVER['HTTP_HOST'] ?? Config::DOMAIN;
+    $host = preg_replace('/^www\./', '', strtolower($host));
+    $domain = $host;
+  }
+  
   $language = 'de';
   $deviceType = 'desktop';
-  $paletteName = 'edtech-navy-dark';
 
   // Палитра цветов 32ps
   $colorPalettes = [
@@ -50,8 +57,8 @@ try {
     'commerce-mocha-dark'   => ['#eee','#eee','217,208,188','#584637','#443223','#301e0f','#d9d0bc','#584637','#eee','#443223','#DDA63D'],
 
     // Образование / EdTech / Контент
-    'edtech-yellow-dark'    => ['#eee','#bbb','164,164,164','#333','#222','#111','#DDA63D','#555','#DDA63D','#222','#fb5a69'],
-    'edtech-navy-dark'      => ['#eee','#bbb','186,182,224','#151325','#1f1d2f','#333143','#eee','#333143','#eee','#24204a','#DDA63D'],
+    'edtech-yellow-dark'    => ['#eee','#bbb','164,164,164','#111','#222','#333','#eee','#555','#DDA63D','#222','#fb5a69','#DDA63D'],
+    'edtech-navy-dark'      => ['#eee','#bbb','186,182,224','#151325','#1f1d2f','#333143','#eee','#333143','#eee','#24204a','#DDA63D','#eee'],
     'edtech-midnight-dark'  => ['#eee','#bbb','186,182,224','#38345e','#2e2a54','#1A1640','#eee','#38345e','#eee','#2e2a54','#DDA63D'],
     'edtech-sky-dark'       => ['#eee','#eee','56,189,248','#164475','#0c3a6b','#002657','#a2d0ff','#164475','#eee','#0c3a6b','#DDA63D'],
     'edtech-lime-dark'      => ['#eee','#eee','166,198,148','#2e4e1c','#1a3a08','#062600','#a6c694','#2e4e1c','#eee','#1a3a08','#DDA63D'],
@@ -77,7 +84,8 @@ try {
     'commerce-peach-light'  => ['#c2410c','#ea5b0c','234,91,12','#fffaf7','#fff0e6','#fdcba4','#c2410c','#fdcba4','#c2410c','#fffaf7','#DDA63D'],
 
     // Образование / EdTech / Контент
-    'edtech-sky-light'      => ['#0369a1','#0284c7','2,132,199','#f4ffff','#e0f2fe','#91e7ff','#004b83','#91e7ff','#0369a1','#f4ffff','#DDA63D'],
+    'edtech-parliament-light'      => ['#444','#01699d','2,132,199','#fff','#ccc','#eee','#022e50','#bbb','#022e50','#f4ffff','#DDA63D','#022e50'],
+    'edtech-sky-light'      => ['#0369a1','#0284c7','2,132,199','#f4ffff','#e0f2fe','#91e7ff','#004b83','#91e7ff','#0369a1','#f4ffff','#DDA63D','#004b83'],
     'edtech-lime-light'     => ['#4d7c0f','#4d7c0f','101,163,13','#f9feee','#f1fccb','#cbf36a','#4d7c0f','#cbf36a','#4d7c0f','#f9feee','#DDA63D'],
   ];
 
@@ -104,9 +112,9 @@ try {
       $language = $parts[0];   // Первая часть - язык
       $screenSlug = $parts[1]; // Вторая часть - screenSlug (например, landing.ru/en/screenSlug)
   }
-
+  
   // test-variant
-  $screenSlug = 'ki-oekosystem-mittelstand';
+  if (Config::ENV === 'local') $screenSlug = 'ki-oekosystem-mittelstand';
 
   // Валидация
   if ($screenSlug && !preg_match('/^[a-z0-9-]+$/', $screenSlug)) $screenSlug = null;
@@ -170,8 +178,10 @@ try {
     ];
   }
 
+  $paletteName = $pageStructure['palette'] ?? 'edtech-yellow-dark';
   $p = $colorPalettes[$paletteName];
   $rgbBg = $p[2];
+  $pageStructure['rgbBg'] = $rgbBg;
 
   //////////////////////////////////////////////////////////////////////////////
   // Получение данных из render_main_cache
@@ -179,7 +189,7 @@ try {
         "SELECT social_media, legal FROM render_main_cache WHERE domain = ? AND language = ?",
         [$domain, $language]
   );
-  $socialMedia = $mainData ? json_decode($mainData['socialMedia'], true, 512, JSON_THROW_ON_ERROR) : null;
+  $socialMedia = $mainData ? json_decode($mainData['social_media'], true, 512, JSON_THROW_ON_ERROR) : null;
   $legal = $mainData ? json_decode($mainData['legal'], true, 512, JSON_THROW_ON_ERROR) : null;
   
   // Простая подготовка данных для клиента
@@ -193,9 +203,6 @@ try {
   ];
   $pageStructure['analytics'] = $analyticsData;
 
-  // Передаем цветовую палитру
-  $pageStructure['rgbBg'] = $rgbBg;
-
   // $pageStructure['screen_slug'] = $screenSlug ?? 'ai-ekosistema-nedvizhimosti';
   createActLevScrNum($pageStructure, $screenSlug);
 
@@ -205,7 +212,7 @@ try {
   // Редиректы на канонические URL
   // Обработка корневого URL
   if (empty($screenSlug)) {
-    header('Location: /ki-oekosystem-mittelstand', true, 301);
+    header('Location: /' . $pageStructure['levels'][0]['screens'][0]['slug'], true, 301);
     exit();
   }
 
