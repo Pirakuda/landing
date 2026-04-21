@@ -16,7 +16,7 @@ try {
   $database->beginTransaction();
 
   // Инициализация параметров
-  $domain = 'relanding.de';
+  $domain = 'briemchain.ai';
   $language = 'de';
   $deviceType = 'desktop';
   $paletteName = 'edtech-navy-dark';
