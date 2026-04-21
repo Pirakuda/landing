@@ -32,6 +32,7 @@ sudo git pull
 
 # config edit
 sudo nano /var/www/briemchain.ai/config/config.php
+mysql -u bcai_client -p bcai_page_db
 ```
 
 ### ПК (Ubuntu)
@@ -66,7 +67,7 @@ http://localhost/landing/ # открыть в браузере
 ### ПК (Ubuntu) — через терминал
 
 ```bash
-mysql -u admin -p'z2hD!8XFAfUzJHAEgN1BPfjs' bcai_page_db
+mysql -u bcai_client -p bcai_page_db
 ```
 
 ### ПК (Ubuntu) — через phpMyAdmin (если установлен)
