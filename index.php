@@ -1,9 +1,6 @@
 <?php
 //session_start();
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 require_once __DIR__ . '/config/config.php';
 define('APP_ROOT', __DIR__);
 define('BASE_URL', Config::BASE_URL);
@@ -121,7 +118,7 @@ try {
   }
 
   // test-variant
-  if (Config::ENV === 'local') $screenSlug = 'fintech-arctic-light';
+  if (Config::ENV === 'local') $screenSlug = 'ki-oekosystem-mittelstand';
 
   // Валидация
   if ($screenSlug && !preg_match('/^[a-z0-9-]+$/', $screenSlug)) $screenSlug = null;
