@@ -39,18 +39,21 @@ function getCurObj(array $pageStructure): ?array {
     return $pageStructure[$scrObj['textId']];
 }
 
-function getMeta(array $pageStructure): ?array {
+function getMeta(array $pageStructure): array {
     $activeLevel = (int)($pageStructure['activeLevel'] ?? 0);
-    $levelObj = $pageStructure['levels'][$activeLevel];
-    $scrFull = $levelObj['scrFull'] ?? false;
+    $levelObj = $pageStructure['levels'][$activeLevel] ?? null;
+    if (!$levelObj) return [];
 
-    if ($scrFull) {
+    // scrFull='full' — мета из screen.textId активного экрана
+    if (($levelObj['scrFull'] ?? '') === 'full') {
         $activeScreen = (int)($levelObj['activeScreen'] ?? 0);
-        $scrObj = $levelObj['screens'][$activeScreen];
+        $scrObj = $levelObj['screens'][$activeScreen] ?? null;
+        if (!$scrObj) return [];
         return $pageStructure[$scrObj['textId']] ?? [];
-    } else {
-        return $levelObj ?? [];
     }
+
+    // Карусель — мета из level.textId
+    return $pageStructure[$levelObj['textId']] ?? [];
 }
 
 function createDefaultScrSlug(array &$pageStructure, ?string $curScrSlug): void {
@@ -72,16 +75,19 @@ function createDefaultScrSlug(array &$pageStructure, ?string $curScrSlug): void 
 // определение активного уровня и экрана и передача в структуру
 function createActLevScrNum(array &$pageStructure, ?string $curScrSlug): void {
 
-    if (!$curScrSlug) createDefaultScrSlug($pageStructure, $curScrSlug);
+    if (!$curScrSlug) {
+        createDefaultScrSlug($pageStructure, $curScrSlug);
+        return;
+    }
 
     $isDefined = false;
 
     foreach ($pageStructure['levels'] as $levelIndex => &$level) {
-        // Check if level has scrFull set to "full"
-        if ($level['scrFull'] === 'full') {
-            // For scrFull levels, check screens' slug
+        if (($level['scrFull'] ?? '') === 'full') {
+            // scrFull=full — slug индивидуальный у каждого screen в screen.textId
             foreach ($level['screens'] as $screenIndex => $screen) {
-                if ($screen['slug'] === $curScrSlug) {
+                $screenContent = $pageStructure[$screen['textId']] ?? [];
+                if (($screenContent['slug'] ?? '') === $curScrSlug) {
                     $pageStructure['activeLevel'] = $levelIndex;
                     $level['activeScreen'] = $screenIndex;
                     $pageStructure['screenSlug'] = $curScrSlug;
@@ -90,16 +96,18 @@ function createActLevScrNum(array &$pageStructure, ?string $curScrSlug): void {
                 }
             }
         } else {
-            // For non-scrFull levels, check level's slug
-            if ($level['slug'] === $curScrSlug) {
+            // Карусель — общий slug в level.textId
+            $levelContent = $pageStructure[$level['textId']] ?? [];
+            if (($levelContent['slug'] ?? '') === $curScrSlug) {
                 $pageStructure['activeLevel'] = $levelIndex;
-                $level['activeScreen'] = 0; // Default to first screen
+                $level['activeScreen'] = 0;
                 $pageStructure['screenSlug'] = $curScrSlug;
                 $isDefined = true;
                 return;
             }
         }
     }
+    unset($level);
 
     if (!$isDefined) createDefaultScrSlug($pageStructure, $curScrSlug);
 }
@@ -480,7 +488,8 @@ function createLev($levIndex, $levClass, $pageStructure) {
         $scrContainer .= renderScr($isActScr, $levObj, $i, $curScrClass, $scrFull, $pageStructure);
     }
 
-    $header = $levObj['title'] ?? 'Ebene';
+    $header = $levObj['title'] ?? 'Ebene';$levelContent = $pageStructure[$levObj['textId']] ?? [];
+    $header = htmlspecialchars($levelContent['levelTitle'] ?? 'Ebene', ENT_QUOTES, 'UTF-8');
 
     return "<section data-index=\"$levIndex\" class=\"$levClass\" aria-labelledby=\"section-title-$levIndex\">
                 <h2 id=\"section-title-$levIndex\" class=\"level-title\">$header</h2>

@@ -16,8 +16,8 @@ function returnNavBlock(btnType) {
 
 function getLevName(levelIndex, pageStructure) {
 	const level = pageStructure.levels[levelIndex];
-	const name = level?.name || 'Ebene';
-  	return name;
+	const levelContent = getContent(pageStructure, level?.textId);
+	return levelContent.navTitle || levelContent.levelTitle || 'Ebene';
 }
 
 function сreateNavBtn(btnType, index, actNum, i, pageStructure) {
@@ -238,9 +238,8 @@ function stopTicker() {
 function showHidBenefits(pageStructure) {
   const levObj = pageStructure.levels[pageStructure.activeLevel];
   const scrObj = getCurScrObj(pageStructure);
-  const textId = scrObj?.textId ?? null;
-  const textObj = textId ? pageStructure[textId] : null;
-  const benefits = textObj?.benefits ?? '';
+  const screenContent = getContent(pageStructure, scrObj?.textId);
+  const benefits = screenContent.benefits ?? '';
 
   const showBenefits = levObj?.scrFull === 'full' && Boolean(benefits.trim());
   const wasVisible = benefitsWrap.classList.contains('show');
@@ -463,16 +462,23 @@ async function nextScreen(newScrNum) {
 
 function queueUpdateScreenMeta(isLevAct, pageStructure) {
     if (metaUpdatePending) return;
-
     metaUpdatePending = true;
 
-    requestIdleCallback?.(() => {
-        updateScreenMeta(isLevAct, pageStructure);
-        metaUpdatePending = false;
-    }) || setTimeout(() => {
-        updateScreenMeta(isLevAct, pageStructure);
-        metaUpdatePending = false;
-    }, 100);
+    const run = () => {
+        try {
+            updateScreenMeta(isLevAct, pageStructure);
+        } catch (e) {
+            console.error('updateScreenMeta failed:', e);
+        } finally {
+            metaUpdatePending = false;
+        }
+    };
+
+    if (typeof requestIdleCallback === 'function') {
+        requestIdleCallback(run, { timeout: 300 });
+    } else {
+        setTimeout(run, 100);
+    }
 }
 
 function updateScreenMeta(isLevAct, pageStructure) {
@@ -496,26 +502,29 @@ function updateScreenMeta(isLevAct, pageStructure) {
 		}
 	}
 
-	// Обновление по уровню (если scrFull выключен)
-	if (!levObj.scrFull) {
+	// Карусельный режим (scrFull != 'full') — мета из level.textId
+	if (levObj.scrFull !== 'full') {
 		if (!isLevAct) return;
-		const levSlug = levObj.slug;
-		const title = levObj.title ?? '';
-		const desc = levObj.meta_title ?? '';
-		setMeta(title, levSlug, desc);
+		const levelContent = getContent(pageStructure, levObj.textId);
+		setMeta(
+			levelContent.pageTitle ?? '',
+			levelContent.slug ?? '',
+			levelContent.metaTitle ?? ''
+		);
 		return;
 	}
 
-	// Обновление по активному экрану
+	// Full-режим — мета из screen.textId активного экрана
 	const actScr = parseInt(levObj.activeScreen || 0);
 	const scrObj = levObj.screens[actScr];
 	if (!scrObj) return;
 
-	const scrSlug = scrObj.slug;
-	const textObj = pageStructure[scrObj.textId] || {};
-	const title = textObj.page_title ?? '';
-	const desc = textObj.meta_title ?? '';
-	setMeta(title, scrSlug, desc);
+	const screenContent = getContent(pageStructure, scrObj.textId);
+	setMeta(
+		screenContent.pageTitle ?? '',
+		screenContent.slug ?? '',
+		screenContent.metaTitle ?? ''
+	);
 }
 
 function updateMenuActItem(levIndex, scrIndex) {

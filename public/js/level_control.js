@@ -8,16 +8,18 @@ function createHtmlBgData(dataType, dataUrl) {
 	}
 }
 
-function createImg(isActScr, scrObj, pageStructure) {
-	const dataId = scrObj?.dataIds[0] ?? null;
+function createImg(isActScr, scrObj, scrFull, pageStructure) {
+	const dataId = scrObj?.dataIds?.[0] ?? null;
 	if (!dataId) return '';
-    
-	const dataObj = pageStructure[dataId];
-	const alt = (dataObj.name || 'Image');
-    const baseUrl = './public/store/';
-	const lazyAttrs = scrObj.scrFull === 'full' && !isActScr ? 'loading="lazy" decoding="async"' : '';
 
-    return `
+	const dataObj = pageStructure[dataId];
+	if (!dataObj) return '';
+
+	const alt = dataObj.name || 'Image';
+	const baseUrl = './public/store/';
+	const lazyAttrs = scrFull === 'full' && !isActScr ? 'loading="lazy" decoding="async"' : '';
+
+	return `
 		<picture class="data-wrap">
 		  <source media="(orientation: landscape)" srcset="${baseUrl}${dataObj.path}">
 		  <img src="${baseUrl}${dataObj.mobilePath}" alt="${alt}" ${lazyAttrs} class="data" draggable="false">
@@ -173,7 +175,7 @@ function renderScr(levelObj, scrIndex, curScrClass, scrFull, pageStructure) {
 	const slider = (scrObj.dataIds.length > 1) ? createHtmlSlider(scrObj, pageStructure) : '';
 	
 	const textObj = pageStructure[scrObj.textId] || {};
-	const { figcaptions, secCost, cost, promo, title, text, delivery, pageActLinkPath, pageSecActBtn, pageActBtn } = textObj;
+	const { figcaption, secCost, cost, promo, title, text, delivery, pageActLinkPath, pageSecActBtn, pageActBtn } = textObj;
 
 	const wrapHidClass = (!text && (title || pageActBtn)) ? 'hid' : '';
 	const textHidClass = text ? '' : 'hid';
@@ -183,9 +185,9 @@ function renderScr(levelObj, scrIndex, curScrClass, scrFull, pageStructure) {
 	return `<article data-index="${scrIndex}" class="screen ${curScrClass}" style="${scrStyles}">
 
 				<figure class="sl slide-img ${slideImgPos}">
-				  ${createImg(isActScr, scrObj, pageStructure)}
+				  ${createImg(isActScr, scrObj, scrFull, pageStructure)}
 				  ${slider}
-				  ${createFigcaption(figcaptions)}
+				  ${createFigcaption(figcaption)}
 				</figure>
 
 				<div class="sl slide-text ${slideTextPos}">
@@ -240,7 +242,9 @@ function createLev(levIndex, levClass, pageStructure) {
 	level.setAttribute('data-index', levIndex);
 	level.setAttribute('aria-labelledby', `section-title-${levIndex}`);
 	level.className = levClass;
-	const header = levObj.title || 'Ebene';
+
+	const levelContent = pageStructure[levObj.textId] ?? {};
+	const header = levelContent.levelTitle || 'Ebene';
 
 	level.innerHTML = `<h2 id="section-title-${levIndex}" class="level-title">${header}</h2>
 					   <div class="scr-wrap ${scrFullClass}">

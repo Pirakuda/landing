@@ -12,72 +12,73 @@
   "activeLevel":0,
   "levels": [
     {
-      "title": "Level title",
-      "navTitle": "Nav-title",
-      "slug": "",
-      "metaTitle": "",
+      "displayOrder": 0,
+      "textId": "100",
       "scrFull": "full",
-      "activeScreen":0,
+      "activeScreen": 0,
       "screens": [
         {
-          "slug": "scr-slug-lev-0-scr-0",
-          "navTitle": "Nav-title",
+          "displayOrder": 0,
+          "textId": "101",
+          "dataIds": ["1"],
           "rating": "true",
           "phone": "true",
           "imgPos": "center",
           "textPos": "",
-          "dataIds": ["1"],
-          "textId": "101",
-          "styleId": "",
-          "displayOrder":"0"
+          "styleId": ""
         }
       ]
     },
     {
-      "title": "Level title",
-      "navTitle": "Nav title",
-      "slug": "level-slug-lev-1",
-      "metaTitle": "meta-description",
-      "scrFull":"",
-      "activeScreen":0,
+      "displayOrder": 1,
+      "textId": "200",
+      "scrFull": "",
+      "activeScreen": 0,
       "screens": [
         {
-          "slug": "",
-          "navTitle": "Nav-title",
+          "displayOrder": 0,
+          "textId": "201",
+          "dataIds": ["21"],
           "rating": "",
           "phone": "",
           "imgPos": "",
           "textPos": "",
-          "dataIds": ["21"],
-          "textId": "201",
-          "styleId": "",
-          "displayOrder":"0"
+          "styleId": ""
         },
         {
-          "slug": "",
-          "navTitle": "Nav-title",
+          "displayOrder": 1,
+          "textId": "202",
+          "dataIds": ["22"],
           "rating": "",
           "phone": "",
           "imgPos": "",
           "textPos": "",
-          "dataIds": ["22"],
-          "textId": "202",
-          "styleId": "",
-          "displayOrder":"1"
+          "styleId": ""
         }
       ]
     }
   ],
   
+  "100": {
+    "levelTitle": "Level title 1",
+    "pageTitle": "",
+    "metaTitle": "",
+    "slug": "",
+    "navTitle": "Главная"
+  },
   "1": {
-    "type": "image", 
+    "type": "image",
+    "source": "placeholder",
     "path": "image-path-lev-0-scr-0.webp", 
-    "mobilePath": "image-path-mobile-lev-0-scr-0.webp", 
-    "name": "Image description"
+    "mobilePath": "image-path-lev-0-scr-0-mobile.webp", 
+    "name": "Image description",
+    "imgPrompt": "Elegant beauty salon interior, soft warm lighting..."
   },
   "101": {
-    "pageTitle": "Page title",
+    "pageTitle": "Browser title",
     "metaTitle": "Meta description",
+    "slug": "slug-1",
+    "navTitle": "",
     "figcaption": [""],
     "cost": "",
     "secCost": "",
@@ -90,24 +91,38 @@
     "pageActLinkPath": "",
     "pageSecActBtn": "",
     "secBtnService": "",
-    "pageActBtn": "Call-to-action-btn-name",
+    "pageActBtn": "Call to action btn name",
     "btnService": "chat"
+  },
+  "200": {
+    "levelTitle": "Level title 2",
+    "pageTitle": "Browser title",
+    "metaTitle": "Meta description",
+    "slug": "slug-level-2",
+    "navTitle": "Карусель"
   },
   "21": {
     "type": "image", 
+    "source": "placeholder",
     "path": "image-path-lev-0-scr-0.webp", 
-    "mobilePath": "image-path-mobile-lev-0-scr-0.webp",
-    "name": "Image description"
+    "mobilePath": "image-path-lev-0-scr-0-mobile.webp",
+    "name": "Image description",
+    "imgPrompt": "Elegant beauty salon interior, soft warm lighting..."
   },
   "22": {
     "type": "image", 
+    "source": "placeholder",
     "path": "image-path-lev-0-scr-0.webp", 
-    "mobilePath": "image-path-mobile-lev-0-scr-0.webp",
-    "name": "Image description"
+    "mobilePath": "image-path-lev-0-scr-0-mobile.webp",
+    "name": "Image description",
+    "imgPrompt": "Elegant beauty salon interior, soft warm lighting..."
   },
-    "201": {
+  "201": {
     "pageTitle": "",
     "metaTitle": "",
+    "slug": "",
+    "navTitle": "Nav title",
+    "figcaption": [""],
     "cost": "",
     "secCost": "",
     "promo": "",
@@ -120,11 +135,14 @@
     "pageSecActBtn": "",
     "secBtnService": "",
     "pageActBtn": "",
-    "serviceName": ""
+    "btnService": ""
   },
   "202": {
     "pageTitle": "",
     "metaTitle": "",
+    "slug": "",
+    "navTitle": "Nav title",
+    "figcaption": [""],
     "cost": "",
     "secCost": "",
     "promo": "",
@@ -137,6 +155,6 @@
     "pageSecActBtn": "",
     "secBtnService": "",
     "pageActBtn": "",
-    "serviceName": ""
+    "btnService": ""
   }
 }

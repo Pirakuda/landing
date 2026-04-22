@@ -1,6 +1,19 @@
 <?php
 
 /**
+ * Извлекает контент-объект по textId из pageStructure.
+ * Единая точка доступа к мультиязычным текстовым данным level/screen.
+ * 
+ * @param array $pageStructure - полная структура страницы
+ * @param string|int|null $textId - идентификатор контент-объекта
+ * @return array контент-объект или пустой массив, если textId отсутствует
+ */
+function getContent($pageStructure, $textId) {
+    if ($textId === null || $textId === '') return [];
+    return $pageStructure[(string)$textId] ?? [];
+}
+
+/**
  * Генерирует HTML навигационное меню на основе структуры levels
  * 
  * @param array $levels - массив уровней навигации
@@ -33,12 +46,15 @@ function generateLevelItem($level, $levelIndex, $actLevIndex, $baseUrl, $pageStr
     $isActive = $levelIndex === $actLevIndex ? true : false;
     $hasSubmenu = count($level['screens']) > 1;
     $class = 'act-elem link' . ($hasSubmenu ? ' nav-level-1' : '') . ($isActive ? ' cur' : '');
-    echo '<!-- DBG level: ' . json_encode($level, JSON_UNESCAPED_UNICODE) . ' -->';
-    $levelName = htmlspecialchars($level['navTitle'], ENT_QUOTES, 'UTF-8');
+    
+    // Контент уровня — navTitle из level.textId
+    $levelContent = getContent($pageStructure, $level['textId'] ?? null);
+    $levelName = htmlspecialchars($levelContent['navTitle'] ?? '', ENT_QUOTES, 'UTF-8');
+    
     $html = sprintf('<li class="%s">', $class) . PHP_EOL;
     
     // Определяем основную ссылку уровня
-    $mainHref = getMainLevelHref($level, $baseUrl);
+    $mainHref = getMainLevelHref($level, $baseUrl, $pageStructure);
     
     // Основная ссылка уровня с условными ARIA атрибутами
     if ($hasSubmenu) {
@@ -76,15 +92,21 @@ function generateLevelItem($level, $levelIndex, $actLevIndex, $baseUrl, $pageStr
  * @param string $baseUrl - базовый URL
  * @return string ссылка
  */
-function getMainLevelHref($level, $baseUrl) {
-    // Если есть slug уровня, используем его
-    if (!empty($level['slug'])) {
-        return $baseUrl . $level['slug'];
+function getMainLevelHref($level, $baseUrl, $pageStructure) {
+    // Контент уровня
+    $levelContent = getContent($pageStructure, $level['textId'] ?? null);
+    
+    // Если есть slug уровня (карусельный режим) — используем его
+    if (!empty($levelContent['slug'])) {
+        return $baseUrl . $levelContent['slug'];
     }
     
-    // Если нет slug уровня, но есть slug первого экрана
-    if (!empty($level['screens'][0]['slug'])) {
-        return $baseUrl . $level['screens'][0]['slug'];
+    // Если slug уровня нет — берём slug первого экрана (scrFull режим)
+    if (!empty($level['screens'][0])) {
+        $firstScreenContent = getContent($pageStructure, $level['screens'][0]['textId'] ?? null);
+        if (!empty($firstScreenContent['slug'])) {
+            return $baseUrl . $firstScreenContent['slug'];
+        }
     }
     
     // Если ничего нет, возвращаем пустую ссылку
@@ -116,7 +138,8 @@ function generateSubmenu($level, $levelIndex, $baseUrl, $isLevelActive, $pageStr
             $screen, 
             $screenIndex, 
             $baseUrl, 
-            $isScreenActive
+            $isScreenActive,
+            $pageStructure
         );
     }
     
@@ -134,18 +157,24 @@ function generateSubmenu($level, $levelIndex, $baseUrl, $isLevelActive, $pageStr
  * @param string $baseUrl - базовый URL
  * @return string HTML код элемента экрана
  */
-function generateScreenItem($level, $levelIndex, $screen, $screenIndex, $baseUrl, $isActive) {
+function generateScreenItem($level, $levelIndex, $screen, $screenIndex, $baseUrl, $isActive, $pageStructure) {
     $classCurrent = $isActive ? 'cur' : '';
     $html = '<li class="act-elem link nav-level-2 ' . $classCurrent . '">' . PHP_EOL;
     
     // Определяем ссылку для экрана
-    $screenHref = getScreenHref($level, $screen, $screenIndex, $baseUrl);
+    $screenHref = getScreenHref($level, $screen, $screenIndex, $baseUrl, $pageStructure);
 
     // Определяем значение для aria-current
     $ariaCurrent = $isActive ? 'location' : 'false';
     
-    // Определяем текст ссылки
-    $linkText = htmlspecialchars($screen['navTitle'] ?? $level['navTitle'], ENT_QUOTES, 'UTF-8');
+    // Контент экрана и fallback на контент уровня
+    $screenContent = getContent($pageStructure, $screen['textId'] ?? null);
+    $levelContent = getContent($pageStructure, $level['textId'] ?? null);
+    $linkText = htmlspecialchars(
+        $screenContent['navTitle'] ?? $levelContent['navTitle'] ?? '',
+        ENT_QUOTES, 
+        'UTF-8'
+    );
 
     $html .= sprintf(
             '<a href="%s" aria-current="%s" data-level="%d" data-screen="%d" class="act-anchor">%s</a>',
@@ -170,27 +199,30 @@ function generateScreenItem($level, $levelIndex, $screen, $screenIndex, $baseUrl
  * @param string $baseUrl - базовый URL
  * @return string ссылка
  */
-function getScreenHref($level, $screen, $screenIndex, $baseUrl) {
-    // Если scrFull = "full", каждый экран имеет свой slug
-    if ($level['scrFull'] === 'full' && !empty($screen['slug'])) {
-        return $baseUrl . $screen['slug'];
+function getScreenHref($level, $screen, $screenIndex, $baseUrl, $pageStructure) {
+    $levelContent = getContent($pageStructure, $level['textId'] ?? null);
+    $screenContent = getContent($pageStructure, $screen['textId'] ?? null);
+    
+    // Если scrFull = "full" — URL каждого экрана свой (из screen.textId)
+    if (($level['scrFull'] ?? '') === 'full' && !empty($screenContent['slug'])) {
+        return $baseUrl . $screenContent['slug'];
     }
     
-    // Если scrFull = "", все экраны используют slug уровня
-    if ($level['scrFull'] === '' && !empty($level['slug'])) {
-        return $baseUrl . $level['slug'];
+    // Если scrFull != "full" (карусель) — URL общий для уровня
+    if (($level['scrFull'] ?? '') === '' && !empty($levelContent['slug'])) {
+        return $baseUrl . $levelContent['slug'];
     }
     
-    // Если есть slug экрана, используем его
-    if (!empty($screen['slug'])) {
-        return $baseUrl . $screen['slug'];
+    // Fallback: сначала пробуем screen.slug
+    if (!empty($screenContent['slug'])) {
+        return $baseUrl . $screenContent['slug'];
     }
     
-    // Если есть slug уровня, используем его
-    if (!empty($level['slug'])) {
-        return $baseUrl . $level['slug'];
+    // Затем level.slug
+    if (!empty($levelContent['slug'])) {
+        return $baseUrl . $levelContent['slug'];
     }
     
-    // Возвращаем пустую ссылку
+    // Если ничего нет, возвращаем пустую ссылку
     return '';
 }

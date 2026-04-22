@@ -58,6 +58,18 @@ let faqPopup;
 
 let manageAnalysisBtn;
 
+/**
+ * Извлекает контент-объект по textId из pageStructure.
+ * Единая точка доступа к мультиязычным текстовым данным level/screen.
+ * @param {object} pageStructure - полная структура страницы
+ * @param {string|number|null|undefined} textId - идентификатор контент-объекта
+ * @returns {object} контент-объект или пустой объект, если textId отсутствует
+ */
+function getContent(pageStructure, textId) {
+  if (textId === null || textId === undefined || textId === '') return {};
+  return pageStructure[String(textId)] ?? {};
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 // функция для совместимости с nav_control.js
 function trackSectionTransition(pageStructure) {

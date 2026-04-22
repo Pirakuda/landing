@@ -112,7 +112,7 @@ function updateSliderArrows(sliderList, sliderWrap, direction, scrollAmount) {
 }
 
 // оработка клика мыши по стрелкам в узком формате
-function updateSliderArrowsAndImg(sliderWrap, sliderList, direction, figcaptions, pageStructure) {
+function updateSliderArrowsAndImg(sliderWrap, sliderList, direction, figcaption, pageStructure) {
     const scrollLeftBtn = sliderWrap.children[0];
     const scrollRightBtn = sliderWrap.children[3];
     const counterWrap = sliderWrap.children[2];
@@ -139,14 +139,14 @@ function updateSliderArrowsAndImg(sliderWrap, sliderList, direction, figcaptions
     // получаем и передаем картинку на большой экран
     createMainData(nextElemWrap, pageStructure);
 
-    // console.log('figcaption', figcaptions.length)
+    // console.log('figcaption', figcaption.length)
 
     // обновляем figcaption
-    if (figcaptions.length > 0) {
+    if (figcaption.length > 0) {
         const figcaption = sliderWrap.nextElementSibling;
         // console.log("nextIndex",nextIndex)
         if (figcaption) {
-            const text = figcaptions[nextIndex - 1];
+            const text = figcaption[nextIndex - 1];
             if (text) figcaption.innerHTML = text;
         }
     }
@@ -160,11 +160,11 @@ function sliderArrowsHandler(btn, direction, pageStructure) {
 
     const textId = getCurScrObj(pageStructure)?.['textId'];
     const textObj = pageStructure[textId] || {};
-    const figcaptions = textObj.figcaptions || [];
+    const figcaption = textObj.figcaption || [];
 
     if (isPhonePortrait()) {
         // телефон — упрощённый вариант со счётчиком
-        updateSliderArrowsAndImg(sliderWrap, sliderList, direction, figcaptions, pageStructure);
+        updateSliderArrowsAndImg(sliderWrap, sliderList, direction, figcaption, pageStructure);
 
     } else if (isTabletPortrait() || !scrWrap.classList.contains('full')) {
         // планшет в портрете ИЛИ узкий экран — вертикальная лента лента (десктоп-логика)
