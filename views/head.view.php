@@ -7,7 +7,7 @@
 		<title><?= getMeta($pageStructure)['pageTitle'] ?></title>
 		<meta name="description" content="<?= getMeta($pageStructure)['metaTitle'] ?>">
 		<link rel="canonical" href="<?= BASE_URL ?>/<?= $pageStructure['screenSlug'] ?>">
-		<meta name="briemchain-site-verification" content="bc_verify_046989bf3d2b1d90fe7c268ad01d86e8">
+		<meta name="briemchain-site-verification" content="bc_verify_7cf10c09a20c62e606d2a6e09d3bba1c">
 
 		<style>
 		  :root {
