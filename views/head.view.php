@@ -7,7 +7,8 @@
 		<title><?= getMeta($pageStructure)['pageTitle'] ?></title>
 		<meta name="description" content="<?= getMeta($pageStructure)['metaTitle'] ?>">
 		<link rel="canonical" href="<?= BASE_URL ?>/<?= $pageStructure['screenSlug'] ?>">
-
+		<meta name="briemchain-site-verification" content="bc_verify_abb0d242152fdd8e9eedc8171302f367">
+		
 		<style>
 		  :root {
 			--page-bg: <?= $p[3] ?>;
