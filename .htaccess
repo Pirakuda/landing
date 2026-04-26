@@ -4,6 +4,11 @@ RewriteEngine On
 # Устанавливаем базовый путь
 RewriteBase /
 
+# 🔹 **Rewrite внутренних API endpoints (HMAC-защищённые)**
+# Должно идти ПЕРВЫМ — до правил блокировки директорий
+# URL: /internal/render-cache → /scripts/internal/render-cache.php
+RewriteRule ^internal/([a-z0-9\-]+)$ /scripts/internal/$1.php [L]
+
 # 🔹 **Запрещаем прямой доступ к критическим файлам и папкам**
 # Из папки /modules/ блокируем всё, кроме /modules/public и /modules/api/website/
 RewriteCond %{REQUEST_URI} ^/modules/(?!public/|api/website/) [OR]
@@ -39,13 +44,7 @@ RewriteRule ^(css|js|images|fonts)/(.*)$ public/$1/$2 [L]
 # 🔹 **Защита от просмотра содержимого папок**
 Options -Indexes
 
-# 🔹 **Перенаправляем все остальные запросы на `index.php` (если нет файла или папки)**
+# 🔹 **Перенаправляем все остальные запросы на `index.php`**
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [L]
-
-# 🔹 **Отключаем модуль безопасности, если он блокирует POST-запросы**
-#<IfModule mod_security.c>
-    #SecFilterEngine Off
-    #SecFilterScanPOST Off
-#</IfModule>

@@ -56,20 +56,39 @@ function getMeta(array $pageStructure): array {
     return $pageStructure[$levelObj['textId']] ?? [];
 }
 
-function createDefaultScrSlug(array &$pageStructure, ?string $curScrSlug): void {
-    if (!isset($pageStructure['levels'][0])) return; // Если уровни отсутствуют, завершаем выполнение
+function createDefaultScrSlug(array &$pageStructure, ?string $curScrSlug): void
+{
+    if (!isset($pageStructure['levels'][0]) || !is_array($pageStructure['levels'][0])) {
+        return;
+    }
+
+    if (!empty($curScrSlug)) {
+        $pageStructure['screenSlug'] = $curScrSlug;
+        return;
+    }
 
     $level = $pageStructure['levels'][0];
-        
-    if ($level['scrFull'] === 'full') {
-        if (!isset($level['screens'][0])) return; // Если экраны отсутствуют, завершаем выполнение
-        
+
+    if (($level['scrFull'] ?? '') === 'full') {
+        if (!isset($level['screens'][0]) || !is_array($level['screens'][0])) {
+            return;
+        }
+
         $screen = $level['screens'][0];
-        $pageStructure['screenSlug'] = $screen['slug'];
-    } else {
-        $pageStructure['screenSlug'] = $level['slug'];
+        $screenContent = getContent($pageStructure, $screen['textId'] ?? null);
+
+        if (!empty($screenContent['slug'])) {
+            $pageStructure['screenSlug'] = $screenContent['slug'];
+        }
+
+        return;
     }
-    return;
+
+    $levelContent = getContent($pageStructure, $level['textId'] ?? null);
+
+    if (!empty($levelContent['slug'])) {
+        $pageStructure['screenSlug'] = $levelContent['slug'];
+    }
 }
 
 // определение активного уровня и экрана и передача в структуру

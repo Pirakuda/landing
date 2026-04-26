@@ -137,44 +137,68 @@ try {
   } else {
     // PAGE 404
     $pageStructure = [
-       'data' => json_encode([
-           "domain" => Config::DOMAIN,
-           "pageSlug" => "PAGE 404",
-           "type" => "landing",
-           "brand" => Config::DOMAIN,
-           "slogan" => "",
-           "developerName" => "",
-           "developerLink" => "",
-           "phone" => [],
-           "activeLevel" => 0,
-           "levels" => [
-               [
-                   "title" => "PAGE 404",
-                   "activeScreen" => "0",
-                   "scrFull" => "full",
-                   "screens" => [
-                       [
-                           "slug" => "PAGE 404",
-                           "imgPos" => "",
-                           "textPos" => "",
-                           "dataIds" => ["1001"],
-                           "textId" => "101",
-                           "styleId" => ""
-                       ]
-                   ]
-               ]
-           ],
-           "1001" => 
-             ["type" => "image", 
-               "path" => "PAGE-404.webp",
-               "mobilePath" => "PAGE-404-mobile.webp",
-               "name" => "PAGE 404"],
-           "101" => [
-               "pageTitle" => "PAGE 404",
-               "metaTitle" => "PAGE 404",
-               "title" => "PAGE 404"
-           ]
-       ], JSON_THROW_ON_ERROR)
+      'data' => json_encode([
+        "domain" => Config::DOMAIN,
+        "pageSlug" => "PAGE 404",
+        "type" => "landing",
+        "brand" => Config::DOMAIN,
+        "slogan" => "",
+        "developerName" => "",
+        "developerLink" => "",
+        "phone" => [],
+        "activeLevel" => 0,
+        "levels" => [
+          [
+            "displayOrder" => 0,
+            "textId" => "100",
+            "scrFull" => "full",
+            "activeScreen" => 0,
+            "screens" => [
+              [
+                "displayOrder" => 0,
+                "textId" => "101",
+                "dataIds" => ["1001"],
+                "rating" => "",
+                "phone" => "",
+                "imgPos" => "center",
+                "textPos" => "",
+                "styleId" => ""
+              ]
+            ]
+          ]
+        ],
+        "100" => [
+          "levelTitle" => "PAGE 404",
+          "navTitle" => "404",
+          "pageTitle" => "",
+          "metaTitle" => "",
+          "slug" => ""
+        ],
+        "101" => [
+          "pageTitle" => "PAGE 404",
+          "metaTitle" => "Page not found",
+          "navTitle" => "404",
+          "slug" => "404",
+          "title" => "Страница не найдена",
+          "promo" => "",
+          "benefits" => "",
+          "text" => "<p>К сожалению, запрошенная страница не существует.</p>",
+          "cost" => "",
+          "delivery" => "",
+          "figcaption" => [],
+          "pageActLinkTitle" => "",
+          "pageActLinkPath" => "",
+          "pageActBtn" => "",
+          "btnService" => ""
+        ],
+        "1001" => [
+          "type" => "image",
+          "source" => "placeholder",
+          "path" => "PAGE-404.webp",
+          "mobilePath" => "PAGE-404-mobile.webp",
+          "name" => "Page not found"
+        ]
+      ], JSON_THROW_ON_ERROR)
     ];
   }
 
@@ -203,16 +227,15 @@ try {
   ];
   $pageStructure['analytics'] = $analyticsData;
 
-  // $pageStructure['screen_slug'] = $screenSlug ?? 'ai-ekosistema-nedvizhimosti';
   createActLevScrNum($pageStructure, $screenSlug);
 
   // Логирование просмотра страницы
-  // $analytics->logPageView($session, $pageSlug, $screenSlug);
+  // $analytics->logPageView($session, $pageSlug, $screenSlug ?? $pageStructure['screenSlug']);
 
   // Редиректы на канонические URL
   // Обработка корневого URL
   if (empty($screenSlug)) {
-    header('Location: /' . $pageStructure['levels'][0]['screens'][0]['slug'], true, 301);
+    header('Location: /' . $pageStructure['screenSlug']);
     exit();
   }
 
